@@ -7,15 +7,16 @@
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/ic_baseline_mail_outline_24.xml" value="0.2703125" />
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/ic_baseline_person_outline_24.xml" value="0.2703125" />
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/ic_outline_lock_24.xml" value="0.2703125" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/drawable/sp_rectangle_login.xml" value="0.14921875" />
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/sp_rectangle_register.xml" value="0.19375" />
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/sp_rectangle_root.xml" value="0.18958333333333333" />
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/sp_rectangle_root2.xml" value="0.19375" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_splash_screen.xml" value="0.14770723104056438" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-sw600dp/activity_register.xml" value="0.130859375" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-sw600dp/activity_splash_screen.xml" value="0.130859375" />
-        <entry key="..\:/AndoridProjects/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/activity_main.xml" value="0.24139492753623187" />
-        <entry key="..\:/AndoridProjects/app/src/main/res/layout/activity_register.xml" value="0.2" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/layout/activity_register.xml" value="0.264" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/activity_splash_screen.xml" value="0.176" />
       </map>
     </option>
