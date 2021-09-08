@@ -9,7 +9,7 @@
     tools:context=".Register">
 
     <RelativeLayout
-        android:id="@+id/rl_input"
+        android:id="@+id/rl_Registerinput"
         android:layout_marginRight="60dp"
         android:layout_marginLeft="60dp"
         android:background="@drawable/sp_rectangle_root2"
@@ -18,24 +18,43 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/et_username"
+            android:id="@+id/et_Registerfullname"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:backgroundTint="#FFF"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:drawablePadding="20dp"
+            android:hint="Fullname"
+            android:paddingLeft="20dp"
+            android:textSize="20sp" />
+        <View
+            android:id="@+id/v_separator3"
+            android:background="#CFD3CF"
+            android:layout_below="@id/et_Registerfullname"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <EditText
+            android:id="@+id/et_Registerusername"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:backgroundTint="#FFF"
+            android:layout_below="@id/v_separator3"
             android:drawableLeft="@drawable/ic_baseline_person_outline_24"
             android:drawablePadding="20dp"
             android:hint="Username"
             android:paddingLeft="20dp"
             android:textSize="20sp" />
+
         <View
             android:id="@+id/v_separator"
             android:background="#CFD3CF"
-            android:layout_below="@id/et_username"
+            android:layout_below="@id/et_Registerusername"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
         <EditText
-            android:id="@+id/et_password"
+            android:id="@+id/et_Registerpassword"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_below="@id/v_separator"
@@ -43,16 +62,18 @@
             android:drawableLeft="@drawable/ic_outline_lock_24"
             android:drawablePadding="20dp"
             android:hint="Password"
+            android:inputType="textPassword"
             android:paddingLeft="20dp"
             android:textSize="20sp" />
         <View
             android:id="@+id/v_separator2"
             android:background="#CFD3CF"
-            android:layout_below="@id/et_password"
+            android:layout_below="@id/et_Registerpassword"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
         <EditText
+            android:id="@+id/et_Registeremail"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_below="@id/v_separator2"
@@ -66,30 +87,32 @@
     </RelativeLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:id="@+id/f_Registerbtn"
+        android:layout_marginEnd="40dp"
         android:layout_centerVertical="true"
-        android:layout_marginRight="40dp"
+        android:layout_alignParentEnd="true"
         android:backgroundTint="#FF9800"
+        android:clickable="true"
         android:src="@drawable/ic_baseline_arrow_forward_24"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@id/rl_input"
-        android:layout_marginBottom="60dp"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:text="Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <Button
+    <TextView
+        android:id="@+id/tv_Registertitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/tv_title"
+        android:layout_above="@id/rl_Registerinput"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:text="REGISTER"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_Registerlogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv_Registertitle"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="-1dp"
         android:layout_marginBottom="-56dp"
@@ -98,18 +121,18 @@
         android:paddingTop="15dp"
         android:paddingRight="20dp"
         android:paddingBottom="15dp"
-        android:text="Login"
+        android:text="LOGIN"
         android:textAllCaps="false"
         android:textColor="#FF8221"
         android:textSize="20sp" />
 
     <ImageView
-        android:layout_width="479dp"
-        android:layout_height="188dp"
+        android:layout_width="399dp"
+        android:layout_height="139dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="57dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginBottom="18dp"
         android:backgroundTint="#FFFFFF"
         android:src="@drawable/winteqlogo" />
 
@@ -118,8 +141,8 @@
         android:layout_height="206dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="-90dp"
-        android:layout_marginTop="-20dp"
+        android:layout_marginStart="-83dp"
+        android:layout_marginTop="-44dp"
         android:backgroundTint="#FFFFFF"
         android:rotation="90"
         android:src="@drawable/hexagon" />
