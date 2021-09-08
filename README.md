@@ -1,4 +1,4 @@
 # winteq
-Project Winteq
+Project Winteq - Spesifikasi = 
 Mode landscape 
 Emulator Tablet Nexus7
