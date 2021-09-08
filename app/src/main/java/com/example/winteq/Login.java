@@ -48,6 +48,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         btn_register = findViewById(R.id.btn_register);
         btn_register.setOnClickListener(this);
         f_btn = findViewById(R.id.f_btn);
+        //auto login
         if(sp.getBoolean("Logged", false)){
             Intent intent = new Intent(Login.this, Dashboard.class);
             startActivity(intent);
@@ -92,12 +93,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 if(response.body() != null && response.isSuccessful() && response.body().isStatus()){
 
 
-                    Toast.makeText(getApplicationContext(), username,Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), username,Toast.LENGTH_SHORT).show();
 
                     Toast.makeText(Login.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     loginData = new LoginData();
                     loginData.setUserId(et_username.getText().toString());
 
+                    //auto login
                     sp.edit().putBoolean("Logged", true).apply();
 
 

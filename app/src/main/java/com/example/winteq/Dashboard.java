@@ -42,6 +42,7 @@ public class Dashboard extends AppCompatActivity {
         et_username = findViewById(R.id.textView);
         et_fullname = findViewById(R.id.textView2);
         btn_logout = findViewById(R.id.btn_logout);
+        //tombol log out
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
