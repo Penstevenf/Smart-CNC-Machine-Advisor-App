@@ -3,7 +3,6 @@ package com.example.winteq;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.winteq.api.ApiClient;
 import com.example.winteq.api.Api_Interface;
-import com.example.winteq.model.login.LoginData;
+import com.example.winteq.model.user.UserData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import retrofit2.Call;
@@ -29,7 +28,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     //apiinterface biar bs login
     Api_Interface apiInterface;
     SessionManager sessionManager;
-    public LoginData loginData;
+    public UserData userData;
     SharedPreferences sp;
 
     @Override
@@ -61,21 +60,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 Password = et_password.getText().toString();
 
                 login(Username,Password);
-
-
             }
         });
+
+        apiInterface = ApiClient.getClient().create(Api_Interface.class);
 
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.f_btn:
-                Username = et_username.getText().toString();
-                Password = et_password.getText().toString();
-                login(Username, Password);
-                break;
             case R.id.btn_register:
                 Intent intent = new Intent(this, Register.class);
                 startActivity(intent);
@@ -85,19 +79,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private void login(String username, String password) {
 
-        apiInterface = ApiClient.getClient().create(Api_Interface.class);
-        Call<com.example.winteq.model.login.Login> loginCall = apiInterface.loginResponse(username,password);
-        loginCall.enqueue(new Callback<com.example.winteq.model.login.Login>() {
+        Call<UserData> loginDataCall = apiInterface.loginResponse(username,password);
+        loginDataCall.enqueue(new Callback<UserData>() {
             @Override
-            public void onResponse(Call<com.example.winteq.model.login.Login> call, Response<com.example.winteq.model.login.Login> response) {
-                if(response.body() != null && response.isSuccessful() && response.body().isStatus()){
-
+            public void onResponse(Call<UserData> call, Response<UserData> response) {
+                if(response.body() != null && response.body().isStatus()){
 
                     //Toast.makeText(getApplicationContext(), username,Toast.LENGTH_SHORT).show();
 
                     Toast.makeText(Login.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    loginData = new LoginData();
-                    loginData.setUserId(et_username.getText().toString());
+                    userData = response.body();
 
                     //auto login
                     sp.edit().putBoolean("Logged", true).apply();
@@ -112,7 +103,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             }
 
             @Override
-            public void onFailure(Call<com.example.winteq.model.login.Login> call, Throwable t) {
+            public void onFailure(Call<UserData> call, Throwable t) {
                 Toast.makeText(Login.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });

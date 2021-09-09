@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
 
-import com.example.winteq.model.login.LoginData;
+import com.example.winteq.model.user.UserData;
 
 import java.util.HashMap;
 
@@ -27,7 +27,7 @@ public class SessionManager {
         editor = sharedPreferences.edit();
     }
 
-    public void createLoginSession(LoginData user){
+    public void createLoginSession(UserData user){
         editor.putBoolean(IS_LOGGED_IN, true);
         editor.putString(USER_ID, user.getUserId());
         editor.putString(USERNAME, user.getUsername());
@@ -46,13 +46,13 @@ public class SessionManager {
         return user;
     }
 
-    public void logoutSession(){
-        editor.clear();
-        editor.commit();
-    }
-
-    public boolean isLoggedIn(){
-        return sharedPreferences.getBoolean(IS_LOGGED_IN, false);
-    }
+//    public void logoutSession(){
+//        editor.clear();
+//        editor.commit();
+//    }
+//
+//    public boolean isLoggedIn(){
+//        return sharedPreferences.getBoolean(IS_LOGGED_IN, false);
+//    }
 
 }

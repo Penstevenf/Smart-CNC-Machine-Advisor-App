@@ -6,14 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.winteq.model.login.LoginData;
+import com.example.winteq.model.user.UserData;
 
 public class Dashboard extends AppCompatActivity {
-    LoginData loginData;
+    UserData userData;
     Button btn_logout;
     TextView et_username, et_fullname;
     SessionManager sessionManager;
@@ -54,10 +53,10 @@ public class Dashboard extends AppCompatActivity {
 
 //        username = sessionManager.getUserDetail().get("username");
 //        fullname = sessionManager.getUserDetail().get("fullname")
-        loginData = new LoginData();
-        username = loginData.getUserId();
+//        userData = new UserData();
+//        username = userData.getUsername();
 
-        Toast.makeText(getApplicationContext(),username,Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(),username,Toast.LENGTH_SHORT).show();
         et_username.setText(username);
         et_fullname.setText(fullname);
 

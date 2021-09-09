@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.winteq.api.ApiClient;
 import com.example.winteq.api.Api_Interface;
+import com.example.winteq.model.user.UserData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import retrofit2.Call;
@@ -23,6 +24,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     FloatingActionButton f_btn;
     String Fullname, Username, Password, Email;
     Api_Interface apiInterface;
+    public UserData userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         btn_login.setOnClickListener(this);
         f_btn = findViewById(R.id.f_Registerbtn);
         f_btn.setOnClickListener(this);
+
+        apiInterface = ApiClient.getClient().create(Api_Interface.class);
     }
 
     @Override
@@ -63,13 +67,17 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     private void register(String username, String password, String fullname, String email) {
 
-        apiInterface = ApiClient.getClient().create(Api_Interface.class);
-        Call<com.example.winteq.model.register.Register> call = apiInterface.registerResponse(username,password,fullname,email);
-        call.enqueue(new Callback<com.example.winteq.model.register.Register>() {
+
+        Call<UserData> call = apiInterface.registerResponse(username,password,fullname,email);
+        call.enqueue(new Callback<UserData>() {
             @Override
-            public void onResponse(Call<com.example.winteq.model.register.Register> call, Response<com.example.winteq.model.register.Register> response) {
-                if(response.body() != null && response.isSuccessful() && response.body().isStatus()){
+            public void onResponse(Call<UserData> call, Response<UserData> response) {
+                if(response.body() != null && response.body().isStatus()){
+
+                    userData = response.body();
+
                     Toast.makeText(Register.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(Register.this, Login.class);
                     startActivity(intent);
                     finish();
@@ -79,7 +87,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             }
 
             @Override
-            public void onFailure(Call<com.example.winteq.model.register.Register> call, Throwable t) {
+            public void onFailure(Call<UserData> call, Throwable t) {
                 Toast.makeText(Register.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
