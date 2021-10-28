@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:id="@+id/tv_id"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/lines"
+            android:layout_toLeftOf="@+id/area"
+            android:layout_below="@+id/tag"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:text="1"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tagn"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:background="@drawable/lines"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="No Tag"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tag"
+            android:layout_width="100dp"
+            android:layout_height="180dp"
+            android:layout_below="@+id/tagn"
+            android:background="@drawable/lines"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:text="00001"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/daten"
+            android:layout_width="110dp"
+            android:layout_height="20dp"
+            android:layout_toRightOf="@+id/tagn"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="Date"
+            android:textSize="16sp"
+            android:background="@drawable/lines"/>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="110dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/daten"
+            android:layout_toRightOf="@+id/tag"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="2021-09-27"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:background="@drawable/lines"/>
+
+        <TextView
+            android:id="@+id/typen"
+            android:layout_width="110dp"
+            android:layout_height="20dp"
+            android:layout_toRightOf="@+id/daten"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="Type"
+            android:textSize="16sp"
+            android:background="@drawable/lines"/>
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="110dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/typen"
+            android:layout_toRightOf="@+id/date"
+            android:fontFamily="sans-serif"
+            android:text="Glass"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:background="@drawable/lines"/>
+
+        <TextView
+            android:id="@+id/itemnamen"
+            android:layout_width="180dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/date"
+            android:layout_toRightOf="@+id/tag"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="Item Name"
+            android:textSize="16sp"
+            android:background="@drawable/lines"/>
+
+        <TextView
+            android:id="@+id/itemname"
+            android:layout_width="180dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/itemnamen"
+            android:layout_toRightOf="@+id/tag"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Glass Pane"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:background="@drawable/lines"/>
+
+        <TextView
+            android:id="@+id/qtyn"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/type"
+            android:layout_toRightOf="@+id/itemnamen"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="QTY"
+            android:textSize="16sp"
+            android:background="@drawable/lines"/>
+
+        <TextView
+            android:id="@+id/qty"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/qtyn"
+            android:layout_toRightOf="@+id/itemname"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="99"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:background="@drawable/lines"/>
+
+        <TextView
+            android:id="@+id/categoryn"
+            android:layout_width="110dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/itemname"
+            android:layout_toRightOf="@+id/tag"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="Category"
+            android:textSize="16sp"
+            android:background="@drawable/lines"/>
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="110dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/categoryn"
+            android:layout_toRightOf="@+id/tag"
+            android:fontFamily="sans-serif"
+            android:text="Mechanical"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:background="@drawable/lines"/>
+
+        <TextView
+            android:id="@+id/copron"
+            android:layout_width="110dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/itemname"
+            android:layout_toRightOf="@+id/categoryn"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="Date"
+            android:textSize="16sp"
+            android:background="@drawable/lines"/>
+
+        <TextView
+            android:id="@+id/copro"
+            android:layout_width="110dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/copron"
+            android:layout_toRightOf="@+id/category"
+            android:fontFamily="sans-serif"
+            android:text="01010"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:background="@drawable/lines"/>
+
+        <TextView
+            android:id="@+id/arean"
+            android:layout_width="80dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/category"
+            android:layout_toRightOf="@+id/tag"
+            android:background="@drawable/lines"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="Area"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/area"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/arean"
+            android:layout_toRightOf="@+id/tag"
+            android:background="@drawable/lines"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:text="W1"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/cabinetn"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/category"
+            android:layout_toRightOf="@+id/arean"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="Cabinet"
+            android:textSize="16sp"
+            android:background="@drawable/lines"/>
+
+        <TextView
+            android:id="@+id/cabinet"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/cabinetn"
+            android:layout_toRightOf="@+id/area"
+            android:background="@drawable/lines"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:text="01"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/shelfn"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/category"
+            android:layout_toRightOf="@+id/cabinetn"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:text="Shelf"
+            android:textSize="16sp"
+            android:background="@drawable/lines"/>
+
+        <TextView
+            android:id="@+id/shelf"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/shelfn"
+            android:layout_toRightOf="@+id/cabinet"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="01"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:background="@drawable/lines"/>
+
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

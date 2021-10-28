@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HelpElcUpdate"
+    android:id="@+id/help_elc_update"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/main_menu" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/bluebox"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:src="@drawable/custom_rectangle"/>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="#00FFFFFF"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/rsz_menu" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Update Data to Help Electric"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textSize="44sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <TextView
+            android:id="@+id/tv_itemelcupdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item Name"
+            android:textSize="20sp"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="70dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            app:layout_constraintTop_toBottomOf="@+id/bluebox"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <EditText
+            android:id="@+id/et_itemelcupdate"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/sp_rectangle_root"
+            android:textSize="20sp"
+            android:padding="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_itemelcupdate" />
+
+        <TextView
+            android:id="@+id/tv_imageelcupdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Image"
+            android:textSize="20sp"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="70dp"
+            app:layout_constraintTop_toBottomOf="@+id/et_itemelcupdate"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <Button
+            android:id="@+id/btn_elcimageupdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sp_rectangle_login"
+            android:paddingLeft="30dp"
+            android:paddingTop="15dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="15dp"
+            android:text="Choose Image"
+            android:textAllCaps="false"
+            android:textColor="#FF8221"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/btn_elcpdfupdate"
+            app:layout_constraintTop_toBottomOf="@id/tv_imageelcupdate"/>
+
+        <ImageView
+            android:id="@+id/iv_elcimageupdate"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_gravity="center"
+            android:src="@drawable/profile2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/btn_elcpdfupdate"
+            android:layout_margin="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_elcimageupdate"
+            tools:layout_editor_absoluteY="229dp" />
+
+        <TextView
+            android:id="@+id/tv_pdfelcupdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="PDF"
+            android:textSize="20sp"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="70dp"
+            app:layout_constraintTop_toBottomOf="@+id/et_itemelcupdate"
+            app:layout_constraintLeft_toRightOf="@id/tv_imageelcupdate"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <Button
+            android:id="@+id/btn_elcpdfupdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sp_rectangle_login"
+            android:paddingLeft="30dp"
+            android:paddingTop="15dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="15dp"
+            android:text="Choose PDF"
+            android:textAllCaps="false"
+            android:textColor="#FF8221"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@id/btn_elcimageupdate"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_pdfelcupdate" />
+
+        <TextView
+            android:id="@+id/tv_elcpdfupdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sp_rectangle_login"
+            android:paddingLeft="30dp"
+            android:paddingTop="15dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="15dp"
+            android:layout_marginTop="20dp"
+            android:text="No PDF Selected"
+            android:textAllCaps="false"
+            android:textColor="#FF8221"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_elcpdfupdate"
+            app:layout_constraintLeft_toRightOf="@id/btn_elcimageupdate"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <EditText
+            android:id="@+id/et_idelcupdate"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/sp_rectangle_root"
+            android:textSize="20sp"
+            android:visibility="gone"
+            android:padding="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/elc_up" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/elc_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#4b5ea5"
+            app:layout_constraintTop_toBottomOf="@id/iv_elcimageupdate"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/ic_baseline_arrow_forward_24"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

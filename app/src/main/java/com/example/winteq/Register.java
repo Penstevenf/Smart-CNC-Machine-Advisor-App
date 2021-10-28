@@ -19,12 +19,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
-    EditText et_fullname, et_username, et_password, et_email;
+    EditText et_fullname, et_username, et_password, et_email, et_npk;
     Button btn_login;
     FloatingActionButton f_btn;
-    String Fullname, Username, Password, Email;
+    String Fullname, Username, Password, Email, NPK;
     Api_Interface apiInterface;
-    public UserData userData;
+    UserData userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         et_password = findViewById(R.id.et_Registerpassword);
         et_fullname = findViewById(R.id.et_Registerfullname);
         et_email = findViewById(R.id.et_Registeremail);
+        et_npk = findViewById(R.id.et_Registernpk);
         btn_login = findViewById(R.id.btn_Registerlogin);
         btn_login.setOnClickListener(this);
         f_btn = findViewById(R.id.f_Registerbtn);
@@ -51,11 +52,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.f_Registerbtn:
+                NPK = et_npk.getText().toString();
                 Username = et_username.getText().toString();
                 Password = et_password.getText().toString();
                 Fullname = et_fullname.getText().toString();
                 Email = et_email.getText().toString();
-                register(Username, Password, Fullname, Email);
+                register(NPK, Username, Password, Fullname, Email);
                 break;
             case R.id.btn_Registerlogin:
                 Intent intent = new Intent(this, Login.class);
@@ -65,24 +67,33 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
-    private void register(String username, String password, String fullname, String email) {
-
-
-        Call<UserData> call = apiInterface.registerResponse(username,password,fullname,email);
+    private void register(String npk, String username, String password, String fullname, String email) {
+        Call<UserData> call = apiInterface.registerResponse(npk, username,password,fullname,email);
         call.enqueue(new Callback<UserData>() {
             @Override
             public void onResponse(Call<UserData> call, Response<UserData> response) {
+                //sr untuk menampung array message dalam bentuk string
+                //loop isi data dari array message lalu di append ke dalam string sr
+                //if else untuk mencegah mengambil value awal dari string sr ("")
+                String sr = "";
+                for(int i=0 ; i<response.body().getMessage().length ; i++){
+                    if(sr.length() == 0){
+                        sr = response.body().getMessage()[i];
+                    }else{
+                        sr = sr + "\n" + response.body().getMessage()[i];
+                    }
+                }
                 if(response.body() != null && response.body().isStatus()){
 
                     userData = response.body();
 
-                    Toast.makeText(Register.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, sr, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(Register.this, Login.class);
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(Register.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, sr, Toast.LENGTH_SHORT).show();
                 }
             }
 

@@ -6,8 +6,12 @@ import com.google.gson.annotations.SerializedName;
 public class UserData {
 
 	@Expose
-	@SerializedName("user_id")
-	private String userId;
+	@SerializedName("id")
+	private String Id;
+
+	@Expose
+	@SerializedName("npk")
+	private String npk;
 
 	@Expose
 	@SerializedName("fullname")
@@ -18,8 +22,20 @@ public class UserData {
 	private String email;
 
 	@Expose
+	@SerializedName("no_telp")
+	private String no_telp;
+
+	@Expose
 	@SerializedName("username")
 	private String username;
+
+	@Expose
+	@SerializedName("stat")
+	private String stat;
+
+	@Expose
+	@SerializedName("image")
+	private String image;
 
 	@Expose
 	@SerializedName("status")
@@ -27,7 +43,23 @@ public class UserData {
 
 	@Expose
 	@SerializedName("message")
-	private String message;
+	private String[] message;
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getStat() {
+		return stat;
+	}
+
+	public void setStat(String stat) {
+		this.stat = stat;
+	}
 
 	public boolean isStatus() {
 		return status;
@@ -37,20 +69,28 @@ public class UserData {
 		this.status = status;
 	}
 
-	public String getMessage() {
+	public String[] getMessage() {
 		return message;
 	}
 
-	public void setMessage(String message) {
+	public void setMessage(String[] message) {
 		this.message = message;
 	}
 
-	public void setUserId(String userId){
-		this.userId = userId;
+	public String getId() {
+		return Id;
 	}
 
-	public String getUserId(){
-		return userId;
+	public void setId(String id) {
+		Id = id;
+	}
+
+	public String getNo_telp() {
+		return no_telp;
+	}
+
+	public void setNo_telp(String no_telp) {
+		this.no_telp = no_telp;
 	}
 
 	public void setFullname(String fullname){
@@ -75,5 +115,13 @@ public class UserData {
 
 	public String getUsername(){
 		return username;
+	}
+
+	public String getNpk() {
+		return npk;
+	}
+
+	public void setNpk(String npk) {
+		this.npk = npk;
 	}
 }
