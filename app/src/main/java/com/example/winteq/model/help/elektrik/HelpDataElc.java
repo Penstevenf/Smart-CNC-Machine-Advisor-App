@@ -17,16 +17,16 @@ public class HelpDataElc {
     private String item_elc;
 
     @Expose
+    @SerializedName("desc_elc")
+    private String desc_elc;
+
+    @Expose
     @SerializedName("pdf_elc_image")
     private String pdf_elc_image;
 
     @Expose
     @SerializedName("pdf_elc")
     private String pdf_elc;
-
-    @Expose
-    @SerializedName("encodedPDF")
-    private String encodedPDF;
 
     @Expose
     @SerializedName("status")
@@ -60,6 +60,14 @@ public class HelpDataElc {
         this.item_elc = item_elc;
     }
 
+    public String getDesc_elc() {
+        return desc_elc;
+    }
+
+    public void setDesc_elc(String desc_elc) {
+        this.desc_elc = desc_elc;
+    }
+
     public String getPdf_elc_image() {
         return pdf_elc_image;
     }
@@ -74,14 +82,6 @@ public class HelpDataElc {
 
     public void setPdf_elc(String pdf_elc) {
         this.pdf_elc = pdf_elc;
-    }
-
-    public String getEncodedPDF() {
-        return encodedPDF;
-    }
-
-    public void setEncodedPDF(String encodedPDF) {
-        this.encodedPDF = encodedPDF;
     }
 
     public boolean isStatus() {

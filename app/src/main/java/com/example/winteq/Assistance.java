@@ -95,6 +95,8 @@ public class Assistance extends AppCompatActivity implements NavigationView.OnNa
                 break;
 
             case R.id.nav_profile:
+                Intent intent2 = new Intent(Assistance.this, Profile.class);
+                startActivity(intent2);
                 break;
 
             case R.id.nav_logout:

@@ -40,7 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class WMS extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class WMS extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -50,6 +50,7 @@ public class WMS extends AppCompatActivity implements NavigationView.OnNavigatio
     Api_Interface apiInterface;
     SearchView searchView;
     Spinner sp_category;
+    WmsData wmsData;
 
     private ListView lvWms;
     private AdapterData adapter;
@@ -58,6 +59,8 @@ public class WMS extends AppCompatActivity implements NavigationView.OnNavigatio
     private static final String SHARE_PREF_NAME = "mypref";
     private static final String FULLNAME = "fullname";
     private static final String IMAGE = "image";
+    private static final String ELC_TAG = "Elc_tag";
+    private static final String MEC_TAG = "Mec_tag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +68,18 @@ public class WMS extends AppCompatActivity implements NavigationView.OnNavigatio
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_wms);
 
+        sp = getSharedPreferences(SHARE_PREF_NAME, MODE_PRIVATE);
+
         apiInterface = ApiClient.getClient().create(Api_Interface.class);
         drawerLayout = findViewById(R.id.wmsl);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
+
         addwms = findViewById(R.id.wmsadd);
+
         lvWms = findViewById(R.id.listviewWMS);
         adapter = new AdapterData(this);
+
         searchView = findViewById(R.id.search_bar);
         sp_category = findViewById(R.id.sp_category);
         sp_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -87,13 +95,12 @@ public class WMS extends AppCompatActivity implements NavigationView.OnNavigatio
             }
         });
 
-
         retrieveData();
+        retrieveTag();
+
         View header = navigationView.getHeaderView(0);
 
         TextView nama = (TextView) header.findViewById(R.id.fname);
-
-        sp = getSharedPreferences(SHARE_PREF_NAME, MODE_PRIVATE);
 
         navigationView.bringToFront();
         setSupportActionBar(toolbar);
@@ -126,7 +133,6 @@ public class WMS extends AppCompatActivity implements NavigationView.OnNavigatio
         startActivity(intent);
     }
 
-
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -147,6 +153,8 @@ public class WMS extends AppCompatActivity implements NavigationView.OnNavigatio
                 break;
 
             case R.id.nav_profile:
+                Intent intent2 = new Intent(WMS.this, Profile.class);
+                startActivity(intent2);
                 break;
 
             case R.id.nav_logout:
@@ -178,6 +186,45 @@ public class WMS extends AppCompatActivity implements NavigationView.OnNavigatio
         return true;
     }
 
+    public void retrieveTag(){
+        Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
+        Call<WmsData> showTag = aiData.aiWarehouseTag();
+        showTag.enqueue(new Callback<WmsData>() {
+            @Override
+            public void onResponse(Call<WmsData> call, Response<WmsData> response) {
+                //sr untuk menampung array message dalam bentuk string
+                //loop isi data dari array message lalu di append ke dalam string sr
+                //if else untuk mencegah mengambil value awal dari string sr ("")
+                String sr = "";
+                for(int i=0 ; i<response.body().getMessage().length ; i++){
+                    if(sr.length() == 0){
+                        sr = response.body().getMessage()[i];
+                    }else{
+                        sr = sr + "\n" + response.body().getMessage()[i];
+                    }
+                }
+                if(response.body() != null && response.body().isStatus()){
+                    wmsData = response.body();
+
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString(ELC_TAG, response.body().getElc_tag());
+                    editor.putString(MEC_TAG, response.body().getMec_tag());
+                    editor.apply();
+
+                } else {
+                    Toast.makeText(WMS.this, sr, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WmsData> call, Throwable t) {
+                Toast.makeText(WMS.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
     public void retrieveData(){
         Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
         Call<WmsResponseData> showData = aiData.aiWarehouseData();
@@ -188,13 +235,15 @@ public class WMS extends AppCompatActivity implements NavigationView.OnNavigatio
                 boolean status = response.body().isStatus();
                 String message = response.body().getMessage();
 
-                Toast.makeText(WMS.this, "Status: "+status+" | Message: "+message, Toast.LENGTH_SHORT).show();
-
                 listWms = response.body().getData();
 
-                adapter = new AdapterData(WMS.this, listWms);
-                lvWms.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                if(listWms != null) {
+                    adapter = new AdapterData(WMS.this, listWms);
+                    lvWms.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+
+//               Toast.makeText(WMS.this, listWms.get(0).getElc_tag(), Toast.LENGTH_SHORT).show();
 
             }
 
@@ -212,7 +261,9 @@ public class WMS extends AppCompatActivity implements NavigationView.OnNavigatio
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                WMS.this.adapter.getFilter().filter(newText);
+                if(listWms != null) {
+                    WMS.this.adapter.getFilter().filter(newText);
+                }
                 return false;
             }
         });

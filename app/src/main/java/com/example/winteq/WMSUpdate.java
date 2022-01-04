@@ -1,5 +1,6 @@
 package com.example.winteq;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -48,7 +49,8 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
     NavigationView navigationView;
     Toolbar toolbar;
     SharedPreferences sp;
-    EditText et_id, et_type, et_qty, et_item, et_copro, et_area, et_cabinet, et_shelf, et_desc;
+    EditText et_id, et_qty, et_item, et_copro, et_area, et_cabinet, et_shelf, et_desc, et_type, et_lifetime;
+    TextView tv_itemdate, itemtag;
     FloatingActionButton fb_edit;
     WmsData wmsData;
     Api_Interface apiInterface;
@@ -58,7 +60,7 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
     Button btn_wmseditimage;
     Bitmap bitmap;
 
-    private String xId, xTag, xDate, xItem, xQty, xCategory, xCopro, xArea, xCabinet, xShelf, xImage, xDescription;
+    private String xId, xTag, xDate, xItem, xType, xLifetime, xQty, xCategory, xCopro, xArea, xCabinet, xShelf, xImage, xDescription;
     private static final String SHARE_PREF_NAME = "mypref";
     private static final String FULLNAME = "fullname";
     private static final String IMAGE = "image";
@@ -74,6 +76,8 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
         xTag = send.getStringExtra("xTag");
         xDate = send.getStringExtra("xDate");
         xItem = send.getStringExtra("xItem");
+        xType = send.getStringExtra("xType");
+        xLifetime = send.getStringExtra("xLifetime");
         xQty = send.getStringExtra("xQty");
         xCategory = send.getStringExtra("xCategory");
         xCopro = send.getStringExtra("xCopro");
@@ -87,15 +91,23 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
 
+        apiInterface = ApiClient.getClient().create(Api_Interface.class);
+
         fb_edit = findViewById(R.id.fb_edit);
-        et_id = findViewById(R.id.et11);
-        et_qty = findViewById(R.id.et3);
-        et_item = findViewById(R.id.et6);
-        et_copro = findViewById(R.id.et5);
-        et_area = findViewById(R.id.et7);
-        et_cabinet = findViewById(R.id.et8);
-        et_shelf = findViewById(R.id.et9);
-        et_desc = findViewById(R.id.et10);
+        et_id = findViewById(R.id.et_idwmsedit);
+        et_qty = findViewById(R.id.itemqty);
+        et_item = findViewById(R.id.itemnamew);
+        et_copro = findViewById(R.id.itemcopro);
+        et_area = findViewById(R.id.eitemarea);
+        et_cabinet = findViewById(R.id.eitemcabin);
+        et_shelf = findViewById(R.id.eitemshelf);
+        et_desc = findViewById(R.id.itemdesc);
+        et_type = findViewById(R.id.typew);
+        et_lifetime = findViewById(R.id.et_lifetimeview);
+        tv_itemdate = findViewById(R.id.tv_itemdate);
+        tv_itemdate.setText(xDate);
+        itemtag = findViewById(R.id.itemtag);
+        itemtag.setText(xTag);
         radioGroup = findViewById(R.id.rg_update);
         radioElektrik = findViewById(R.id.rb_edit_elektrik);
         radioMekanik = findViewById(R.id.rb_edit_mekanik);
@@ -106,14 +118,16 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
                 choosefile();
             }
         });
-        edit_image = findViewById(R.id.edit_img);
+        edit_image = findViewById(R.id.itempic);
 
         et_id.setText(xId);
         et_qty.setText(xQty);
         et_item.setText(xItem);
+        et_type.setText(xType);
+        et_lifetime.setText(xLifetime);
         String category = xCategory;
 
-        if (category.equals("Elektrik")){
+        if (category.equals("Electrical")){
             radioElektrik.setChecked(true);
             radioMekanik.setChecked(false);
         }
@@ -127,7 +141,6 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
         et_shelf.setText(xShelf);
         et_desc.setText(xDescription);
 
-        apiInterface = ApiClient.getClient().create(Api_Interface.class);
 
         View header = navigationView.getHeaderView(0);
 
@@ -194,6 +207,8 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
                 break;
 
             case R.id.nav_profile:
+                Intent intent2 = new Intent(WMSUpdate.this, Profile.class);
+                startActivity(intent2);
                 break;
 
             case R.id.nav_logout:
@@ -259,7 +274,7 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
             bitmap = ((BitmapDrawable) edit_image.getDrawable()).getBitmap();
         }
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
 
         byte[] imageByteArray = byteArrayOutputStream.toByteArray();
         String encodedImage = Base64.encodeToString(imageByteArray, Base64.DEFAULT);
@@ -275,6 +290,8 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
         String id = et_id.getText().toString();
         String qty = et_qty.getText().toString();
         String item_name = et_item.getText().toString();
+        String type = et_type.getText().toString();
+        String lifetime_wms = et_lifetime.getText().toString();
         String category = radioButton.getText().toString();
         String copro = et_copro.getText().toString();
         String area = et_area.getText().toString();
@@ -282,8 +299,12 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
         String shelf = et_shelf.getText().toString();
         String description = et_desc.getText().toString();
         String image = getStringImage(bitmap);
+        ProgressDialog pd = new ProgressDialog(WMSUpdate.this);
+        pd.setMessage("Loading...");
+        pd.setCancelable(false);
+        pd.show();
 
-        Call<WmsData> WMSUpdatecall = apiInterface.wmsupdateData(id, qty, item_name, category, copro, area, cabinet, shelf, description, image);
+        Call<WmsData> WMSUpdatecall = apiInterface.wmsupdateData(id, qty, item_name, type, lifetime_wms, category, copro, area, cabinet, shelf, description, image);
         WMSUpdatecall.enqueue(new Callback<WmsData>() {
             @Override
             public void onResponse(Call<WmsData> call, Response<WmsData> response) {
@@ -300,22 +321,22 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
                 }
                 if(response.body() != null && response.body().isStatus()){
                     wmsData = response.body();
+                    pd.dismiss();
 
                     Toast.makeText(WMSUpdate.this, sr, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(WMSUpdate.this, WMS.class);
                     startActivity(intent);
                     finish();
-//                    Intent sendImage = new Intent(WMSUpdate.this, WMSEditImage.class);
-//                    sendImage.putExtra("xImage", xImage);
-//                    WMSUpdate.this.startActivity(sendImage);
 
                 } else {
+                    pd.dismiss();
                     Toast.makeText(WMSUpdate.this, sr, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<WmsData> call, Throwable t) {
+                pd.dismiss();
                 Toast.makeText(WMSUpdate.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });

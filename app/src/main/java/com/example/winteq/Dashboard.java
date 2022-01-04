@@ -45,6 +45,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     private static final String TELP = "no_telp";
     private static final String STAT = "stat";
     private static final String IMAGE = "image";
+    private static final String LINE = "asset_line";
+    private static final String STATION = "asset_station";
+    private static final String MACHINE = "machine_name";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,13 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         email = sp.getString(EMAIL, null);
         sp.getString(ID, null);
         sp.getString(TELP, null);
+
+        //Set Sharedpreference asset Management data to Null
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(LINE, null);
+        editor.putString(STATION, null);
+        editor.putString(MACHINE, null);
+        editor.apply();
 
 
 //        Toast.makeText(getApplicationContext(), fullname,Toast.LENGTH_SHORT).show();
@@ -197,6 +207,11 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         return;
 
     }
+
+    //run di background loop
+//    private class onBackgroound extends AsyncTask<String, String, String>{
+//
+//    }
 
     @Override
     public void onBackPressed() {

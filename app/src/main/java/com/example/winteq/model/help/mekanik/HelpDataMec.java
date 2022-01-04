@@ -17,6 +17,10 @@ public class HelpDataMec {
     private String item_mec;
 
     @Expose
+    @SerializedName("desc_mec")
+    private String desc_mec;
+
+    @Expose
     @SerializedName("pdf_mec_image")
     private String pdf_mec_image;
 
@@ -54,6 +58,14 @@ public class HelpDataMec {
 
     public void setItem_mec(String item_mec) {
         this.item_mec = item_mec;
+    }
+
+    public String getDesc_mec() {
+        return desc_mec;
+    }
+
+    public void setDesc_mec(String desc_mec) {
+        this.desc_mec = desc_mec;
     }
 
     public String getPdf_mec_image() {

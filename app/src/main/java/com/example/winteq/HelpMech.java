@@ -44,6 +44,7 @@ public class HelpMech extends AppCompatActivity implements NavigationView.OnNavi
     Toolbar toolbar;
     SharedPreferences sp;
     SearchView searchView;
+    Api_Interface apiInterface;
 
     private GridView gv_HelpMec;
     private AdapterHelpMecData adapter;
@@ -62,9 +63,11 @@ public class HelpMech extends AppCompatActivity implements NavigationView.OnNavi
         drawerLayout = findViewById(R.id.hmech);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
-        gv_HelpMec = findViewById(R.id.gv_HelpMec);
+        gv_HelpMec = findViewById(R.id.gv_Helpmec);
         adapter = new AdapterHelpMecData(HelpMech.this, listHelpMec);
         searchView = findViewById(R.id.search_bar_mec);
+        apiInterface = ApiClient.getClient().create(Api_Interface.class);
+
         retrieveDataMec();
 
         View header = navigationView.getHeaderView(0);
@@ -87,17 +90,18 @@ public class HelpMech extends AppCompatActivity implements NavigationView.OnNavi
 
         String profileS = sp.getString(IMAGE, null);
 
-        if (!(profileS.isEmpty())) {
+        if(!(profileS.isEmpty())) {
             String imageUri = profileS;
             ImageView Image2 = pfph;
             Picasso.get().load(imageUri).into(Image2);
         }
 
-        byte[] bytes = Base64.decode(profileS, Base64.DEFAULT);
+        byte[] bytes = Base64.decode(profileS,Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         if (bitmap != null) {
             pfph.setImageBitmap(bitmap);
         }
+
     }
 
     @Override
@@ -105,7 +109,7 @@ public class HelpMech extends AppCompatActivity implements NavigationView.OnNavi
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            Intent intent = new Intent(HelpMech.this, Help.class);
+            Intent intent = new Intent(HelpMech.this,Help.class);
             startActivity(intent);
         }
     }
@@ -113,13 +117,15 @@ public class HelpMech extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()) {
+        switch (item.getItemId()){
             case R.id.nav_home:
                 Intent intent1 = new Intent(HelpMech.this, Dashboard.class);
                 startActivity(intent1);
                 break;
 
             case R.id.nav_profile:
+                Intent intent2 = new Intent(HelpMech.this, Profile.class);
+                startActivity(intent2);
                 break;
 
             case R.id.nav_logout:
@@ -149,12 +155,12 @@ public class HelpMech extends AppCompatActivity implements NavigationView.OnNavi
         return true;
     }
 
-    public void moveHelpMec(View v) {
+    public void moveHelpMec(View v){
         Intent intent = new Intent(HelpMech.this, HelpMecAdd.class);
         startActivity(intent);
     }
 
-    public void retrieveDataMec() {
+    public void retrieveDataMec(){
         Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
         Call<HelpResponseDataMec> showData = aiData.aiHelpMecData();
 
@@ -164,12 +170,14 @@ public class HelpMech extends AppCompatActivity implements NavigationView.OnNavi
                 boolean status = response.body().isStatus();
                 String message = response.body().getMessage();
 
-                Toast.makeText(HelpMech.this, "Status: " + status + " | Message: " + message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(HelpMech.this, "Status: "+status+" | Message: "+message, Toast.LENGTH_SHORT).show();
 
                 listHelpMec = response.body().getData();
-                adapter = new AdapterHelpMecData(HelpMech.this, listHelpMec);
-                gv_HelpMec.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                if(listHelpMec != null) {
+                    adapter = new AdapterHelpMecData(HelpMech.this, listHelpMec);
+                    gv_HelpMec.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -186,7 +194,9 @@ public class HelpMech extends AppCompatActivity implements NavigationView.OnNavi
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                HelpMech.this.adapter.getFilter().filter(newText);
+                if(listHelpMec != null) {
+                    HelpMech.this.adapter.getFilter().filter(newText);
+                }
                 return false;
             }
         });

@@ -124,6 +124,8 @@ public class HelpElec extends AppCompatActivity implements NavigationView.OnNavi
                 break;
 
             case R.id.nav_profile:
+                Intent intent2 = new Intent(HelpElec.this, Profile.class);
+                startActivity(intent2);
                 break;
 
             case R.id.nav_logout:
@@ -168,13 +170,14 @@ public class HelpElec extends AppCompatActivity implements NavigationView.OnNavi
                 boolean status = response.body().isStatus();
                 String message = response.body().getMessage();
 
-                Toast.makeText(HelpElec.this, "Status: "+status+" | Message: "+message, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(HelpElec.this, "Status: "+status+" | Message: "+message, Toast.LENGTH_SHORT).show();
 
                 listHelpElc = response.body().getData();
-
-                adapter = new AdapterHelpElcData(HelpElec.this, listHelpElc);
-                gv_HelpElc.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                if(listHelpElc != null) {
+                    adapter = new AdapterHelpElcData(HelpElec.this, listHelpElc);
+                    gv_HelpElc.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -191,7 +194,9 @@ public class HelpElec extends AppCompatActivity implements NavigationView.OnNavi
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                HelpElec.this.adapter.getFilter().filter(newText);
+                if(listHelpElc != null) {
+                    HelpElec.this.adapter.getFilter().filter(newText);
+                }
                 return false;
             }
         });

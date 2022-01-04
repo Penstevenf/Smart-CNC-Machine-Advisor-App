@@ -1,4 +1,4 @@
-plugins {
+ plugins {
     id 'com.android.application'
 }
 
@@ -59,7 +59,10 @@ dependencies {
     //permission
     implementation 'com.karumi:dexter:6.2.3'
 
-    //download
+    //download pdf
     implementation 'com.mindorks.android:prdownloader:0.6.0'
+
+    //notification
+    implementation 'com.github.jakebonk:NotifyMe:1.0.0'
 
 }

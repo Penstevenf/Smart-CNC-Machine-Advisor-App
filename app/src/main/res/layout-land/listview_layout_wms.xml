@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
 
         <TextView
             android:id="@+id/category"
-            android:layout_width="110dp"
+            android:layout_width="100dp"
             android:layout_height="30dp"
             android:background="@drawable/lines"
             android:fontFamily="sans-serif"
@@ -26,13 +26,13 @@
 
         <TextView
             android:id="@+id/tag"
-            android:layout_width="80dp"
+            android:layout_width="90dp"
             android:layout_height="30dp"
             android:layout_toRightOf="@+id/category"
             android:background="@drawable/lines"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:text="00001"
+            android:text="ELC-001"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -49,22 +49,10 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/type"
-            android:layout_width="90dp"
+            android:id="@+id/itemname"
+            android:layout_width="150dp"
             android:layout_height="30dp"
             android:layout_toRightOf="@+id/date"
-            android:background="@drawable/lines"
-            android:fontFamily="sans-serif"
-            android:gravity="center"
-            android:text="Glass"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/itemname"
-            android:layout_width="120dp"
-            android:layout_height="30dp"
-            android:layout_toRightOf="@+id/type"
             android:background="@drawable/lines"
             android:fontFamily="sans-serif"
             android:gravity="center"
@@ -73,10 +61,34 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/qty"
+            android:id="@+id/type"
             android:layout_width="70dp"
             android:layout_height="30dp"
             android:layout_toRightOf="@+id/itemname"
+            android:background="@drawable/lines"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="S9+"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/lifetime"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/type"
+            android:background="@drawable/lines"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="1000"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/qty"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/lifetime"
             android:background="@drawable/lines"
             android:fontFamily="sans-serif"
             android:gravity="center"
@@ -84,10 +96,9 @@
             android:textColor="@color/black"
             android:textSize="14sp" />
 
-
         <TextView
             android:id="@+id/copro"
-            android:layout_width="80dp"
+            android:layout_width="70dp"
             android:layout_height="30dp"
             android:layout_toRightOf="@+id/qty"
             android:background="@drawable/lines"
@@ -99,7 +110,7 @@
 
         <TextView
             android:id="@+id/area"
-            android:layout_width="70dp"
+            android:layout_width="60dp"
             android:layout_height="30dp"
             android:layout_toRightOf="@+id/tag"
             android:background="@drawable/lines"
@@ -123,7 +134,7 @@
 
         <TextView
             android:id="@+id/shelf"
-            android:layout_width="70dp"
+            android:layout_width="60dp"
             android:layout_height="30dp"
             android:layout_toRightOf="@+id/cabinet"
             android:background="@drawable/lines"

@@ -25,7 +25,7 @@
         <ImageView
             android:id="@+id/bluebox"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="95dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:src="@drawable/custom_rectangle"/>
@@ -46,136 +46,224 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="Update Data to Help Mechanic"
+            android:text="Help Mechanical Data Update"
+            android:layout_marginBottom="35dp"
             android:textColor="#000000"
             android:gravity="center"
-            android:textSize="44sp"
+            android:textSize="46sp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+            app:layout_constraintBottom_toTopOf="@id/itemnamewsm" />
 
-        <TextView
-            android:id="@+id/tv_itemmecupdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Item Name"
-            android:textSize="20sp"
-            android:layout_marginTop="14dp"
-            android:layout_marginLeft="70dp"
-            android:fontFamily="sans-serif-condensed-medium"
+        <Button
+            android:id="@+id/btn_meceditimage"
+            android:layout_width="280dp"
+            android:layout_height="285dp"
+            android:layout_gravity="center"
+            android:background="#00FFFFFF"
+            app:layout_constraintTop_toTopOf="@id/itempicsm"
+            app:layout_constraintRight_toRightOf="@id/itempicsm"
+            app:layout_constraintLeft_toLeftOf="@id/itempicsm"
+            app:layout_constraintBottom_toBottomOf="@id/itempicsm" />
+
+        <ImageView
+            android:id="@+id/itempicsm"
+            android:layout_width="280dp"
+            android:layout_height="285dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/profile"
             app:layout_constraintTop_toBottomOf="@+id/bluebox"
-            app:layout_constraintLeft_toLeftOf="parent"/>
-
-        <EditText
-            android:id="@+id/et_itemmecupdate"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="70dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/sp_rectangle_root"
-            android:textSize="20sp"
-            android:padding="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_itemmecupdate" />
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="207dp"/>
 
         <TextView
-            android:id="@+id/tv_imagemecupdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:text="Image"
-            android:textSize="20sp"
-            android:layout_marginTop="14dp"
-            android:layout_marginLeft="70dp"
-            app:layout_constraintTop_toBottomOf="@+id/et_itemmecupdate"
-            app:layout_constraintLeft_toLeftOf="parent" />
-
-        <Button
-            android:id="@+id/btn_mecimageupdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/sp_rectangle_login"
-            android:paddingLeft="30dp"
-            android:paddingTop="15dp"
-            android:paddingRight="30dp"
-            android:paddingBottom="15dp"
-            android:text="Choose Image"
-            android:textAllCaps="false"
-            android:textColor="#FF8221"
-            android:textSize="20sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/btn_mecpdfupdate"
-            app:layout_constraintTop_toBottomOf="@id/tv_imagemecupdate"/>
-
-        <ImageView
-            android:id="@+id/iv_mecimageupdate"
+            android:id="@+id/tv_itemdatesm"
             android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_gravity="center"
-            android:src="@drawable/profile2"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/btn_mecpdfupdate"
-            android:layout_margin="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/btn_mecimageupdate"
-            tools:layout_editor_absoluteY="229dp" />
-
-        <TextView
-            android:id="@+id/tv_pdfmecupdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:text="PDF"
+            android:layout_height="60dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="0dp"
+            android:gravity="center"
+            android:text="11-11-2021"
             android:textSize="20sp"
-            android:layout_marginTop="14dp"
-            android:layout_marginLeft="70dp"
-            app:layout_constraintTop_toBottomOf="@+id/et_itemmecupdate"
-            app:layout_constraintLeft_toRightOf="@id/tv_imagemecupdate"
-            app:layout_constraintRight_toRightOf="parent" />
-
-        <Button
-            android:id="@+id/btn_mecpdfupdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/sp_rectangle_login"
-            android:paddingLeft="30dp"
-            android:paddingTop="15dp"
-            android:paddingRight="30dp"
-            android:paddingBottom="15dp"
-            android:text="Choose PDF"
-            android:textAllCaps="false"
-            android:textColor="#FF8221"
-            android:textSize="20sp"
-            app:layout_constraintLeft_toRightOf="@id/btn_mecimageupdate"
+            android:fontFamily="sans-serif"
+            app:layout_constraintTop_toBottomOf="@+id/bluebox"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_pdfmecupdate" />
-
-        <ImageView
-            android:id="@+id/iv_mecpdfupdate"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_gravity="center"
-            android:src="@drawable/profile2"
-            android:layout_margin="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/btn_mecpdfupdate"
-            tools:layout_editor_absoluteY="229dp"
-            app:layout_constraintLeft_toRightOf="@id/btn_mecimageupdate"
-            app:layout_constraintRight_toRightOf="parent"/>
-
+            tools:layout_editor_absoluteX="760dp"
+            tools:layout_editor_absoluteY="136dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/mec_up"
+            android:id="@+id/fb_mecup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="38dp"
+            app:fabSize="auto"
             android:backgroundTint="#4b5ea5"
-            app:layout_constraintTop_toBottomOf="@id/iv_mecpdfupdate"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="0dp"
             android:src="@drawable/ic_baseline_arrow_forward_24"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemdescsm"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tv7m"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:gravity="center_vertical"
+            android:text="Name"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="329dp"
+            tools:layout_editor_absoluteY="218dp"
+            app:layout_constraintLeft_toRightOf="@+id/itempicsm"
+            app:layout_constraintTop_toBottomOf="@+id/bluebox" />
+
+        <EditText
+            android:id="@+id/itemnamewsm"
+            android:padding="5dp"
+            android:layout_width="400dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="0dp"
+            android:background="@drawable/sp_rectangle_root"
+            android:text="Iphone 13"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/bluebox"
+            app:layout_constraintLeft_toRightOf="@+id/tv7m"
+            tools:layout_editor_absoluteX="314dp"
+            tools:layout_editor_absoluteY="239dp" />
+
+        <EditText
+            android:id="@+id/itemdescsm"
+            android:layout_width="500dp"
+            android:layout_height="171dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:padding="5dp"
+            android:background="@drawable/linet"
+            android:gravity="left"
+            android:text="Description"
+            android:justificationMode="inter_word"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            app:layout_constraintTop_toBottomOf="@+id/iv2zzm"
+            app:layout_constraintLeft_toRightOf="@+id/itempicsm"
+            tools:layout_editor_absoluteX="314dp"
+            tools:layout_editor_absoluteY="393dp" />
+
+        <EditText
+            android:id="@+id/et_idmecedit"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="21dp"
+            android:gravity="left"
+            android:background="@drawable/lines"
+            android:fontFamily="sans-serif"
+            android:padding="5dp"
+            android:visibility="gone"
+            android:text="ID"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@+id/itempics"
+            app:layout_constraintTop_toBottomOf="@+id/itemdescsm" />
+
+        <Button
+            android:id="@+id/btn_changepdfmec"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sp_rectangle_login"
+            android:paddingLeft="30dp"
+            android:paddingTop="15dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="Change PDF"
+            android:textAllCaps="false"
+            android:textColor="#FF8221"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/itempicsm"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_maxsize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Max Size 20MB"
+            android:textSize="15sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="115dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_changepdfmec"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_selectedpdfmec"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sp_rectangle_login"
+            android:paddingLeft="30dp"
+            android:paddingTop="15dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="15dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:layout_marginLeft="30dp"
+            android:text="No PDF Selected"
+            android:textAllCaps="false"
+            android:textColor="#FF8221"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/itempicsm"
+            app:layout_constraintLeft_toRightOf="@id/btn_changepdfmec"/>
+
+        <TextView
+            android:id="@+id/tv1zzm"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="30dp"
+            android:gravity="center_vertical"
+            android:text="Category"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="329dp"
+            tools:layout_editor_absoluteY="218dp"
+            app:layout_constraintLeft_toRightOf="@+id/itempicsm"
+            app:layout_constraintTop_toBottomOf="@+id/itemnamewsm"
+            app:layout_constraintRight_toLeftOf="@id/itemcatzzm"/>
+
+        <TextView
+            android:id="@+id/itemcatzzm"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center_vertical"
+            android:text="Electrical"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@+id/tv1zzm"
+            app:layout_constraintTop_toBottomOf="@+id/itemnamewsm" />
+
+        <ImageView
+            android:id="@+id/iv2zzm"
+            android:layout_width="500dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
+            android:src="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/itemcatzzm"
+            app:layout_constraintLeft_toRightOf="@+id/itempicsm"
+            tools:layout_editor_absoluteX="330dp"
+            tools:layout_editor_absoluteY="257dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

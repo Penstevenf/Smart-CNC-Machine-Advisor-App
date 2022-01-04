@@ -52,7 +52,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     Button btn_image;
     FloatingActionButton Update;
     EditText et_fullname, et_email, et_npk, et_username, et_telp, et_id, et_id2, et_id3, et_stat;
-    TextView nama, name;
+    TextView nama;
     Api_Interface apiInterface;
     UserData userData;
     private Bitmap bitmap;
@@ -134,10 +134,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         }
 
         nama = header.findViewById(R.id.fname);
-        name = findViewById(R.id.name);
 
         nama.setText(sp.getString(FULLNAME, null));
-        name.setText(sp.getString(FULLNAME, null));
 
         et_email.setText(sp.getString(EMAIL, null));
         et_npk.setText(sp.getString(NPK, null));
@@ -400,7 +398,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     public String getStringImage(Bitmap bitmap){
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
 
         byte[] imageByteArray = byteArrayOutputStream.toByteArray();
         String encodedImage = Base64.encodeToString(imageByteArray, Base64.DEFAULT);

@@ -95,6 +95,8 @@ public class TechnicalSupport extends AppCompatActivity implements NavigationVie
                 break;
 
             case R.id.nav_profile:
+                Intent intent2 = new Intent(TechnicalSupport.this, Profile.class);
+                startActivity(intent2);
                 break;
 
             case R.id.nav_logout:

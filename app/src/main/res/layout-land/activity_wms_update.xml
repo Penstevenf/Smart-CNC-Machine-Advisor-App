@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WMSUpdate"
+    android:id="@+id/wmsupdate"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/main_menu" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/bluebox"
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:src="@drawable/custom_rectangle"/>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="#00FFFFFF"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/rsz_menu" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Warehouse Update"
+            android:layout_marginBottom="35dp"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textSize="46sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/itemnamew" />
+
+        <Button
+            android:id="@+id/btn_wmseditimage"
+            android:layout_width="280dp"
+            android:layout_height="315dp"
+            android:layout_gravity="center"
+            android:background="#00FFFFFF"
+            app:layout_constraintTop_toTopOf="@id/itempic"
+            app:layout_constraintRight_toRightOf="@id/itempic"
+            app:layout_constraintLeft_toLeftOf="@id/itempic"
+            app:layout_constraintBottom_toBottomOf="@id/itempic" />
+
+        <ImageView
+            android:id="@+id/itempic"
+            android:layout_width="280dp"
+            android:layout_height="315dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/profile"
+            app:layout_constraintTop_toBottomOf="@+id/itemtag"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="207dp" />
+
+        <TextView
+            android:id="@+id/lifetimeview"
+            android:padding="5dp"
+            android:layout_width="130dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:gravity="center_vertical"
+            android:text="Lifetime (D)"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="329dp"
+            tools:layout_editor_absoluteY="218dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itempic" />
+
+        <EditText
+            android:id="@+id/et_lifetimeview"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif"
+            android:background="@drawable/sp_rectangle_root"
+            android:text="100000"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@id/lifetimeview"
+            app:layout_constraintTop_toBottomOf="@+id/itempic" />
+
+        <TextView
+            android:id="@+id/tv8"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="No Tag:"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="329dp"
+            tools:layout_editor_absoluteY="218dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bluebox" />
+
+        <TextView
+            android:id="@+id/itemtag"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="130dp"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/bluebox"
+            app:layout_constraintRight_toLeftOf="@id/tv7"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="136dp" />
+
+        <TextView
+            android:id="@+id/tv1"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:gravity="center_vertical"
+            android:text="Category"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="329dp"
+            tools:layout_editor_absoluteY="218dp"
+            app:layout_constraintLeft_toRightOf="@+id/itempic"
+            app:layout_constraintTop_toBottomOf="@+id/tv7"
+            />
+
+        <RadioGroup
+            android:id="@+id/rg_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="30dp"
+            app:layout_constraintLeft_toRightOf="@+id/itempic"
+            app:layout_constraintTop_toBottomOf="@+id/tv1" >
+
+            <RadioButton
+                android:id="@+id/rb_edit_elektrik"
+                android:layout_width="160dp"
+                android:layout_height="48dp"
+                android:checked="true"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/black"
+                android:text="Electrical"
+                android:padding="8dp" />
+
+            <RadioButton
+                android:id="@+id/rb_edit_mekanik"
+                android:layout_width="160dp"
+                android:layout_height="48dp"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/black"
+                android:text="Mechanical"
+                android:padding="8dp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tv_itemdate"
+            android:layout_width="110dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:text="11-11-2021"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            app:layout_constraintTop_toBottomOf="@+id/bluebox"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_editor_absoluteX="760dp"
+            tools:layout_editor_absoluteY="136dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fb_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="324dp"
+            android:layout_marginRight="38dp"
+            android:backgroundTint="#4b5ea5"
+            android:src="@drawable/ic_baseline_arrow_forward_24"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_itemdate"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tv7"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:gravity="center_vertical"
+            android:text="Name"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="329dp"
+            tools:layout_editor_absoluteY="218dp"
+            app:layout_constraintLeft_toRightOf="@+id/itempic"
+            app:layout_constraintTop_toBottomOf="@+id/bluebox" />
+
+        <EditText
+            android:id="@+id/itemnamew"
+            android:padding="5dp"
+            android:layout_width="170dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="0dp"
+            android:background="@drawable/sp_rectangle_root"
+            android:text="Iphone 13"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/bluebox"
+            app:layout_constraintLeft_toRightOf="@+id/tv7"
+            tools:layout_editor_absoluteX="314dp"
+            tools:layout_editor_absoluteY="239dp" />
+
+        <TextView
+            android:id="@+id/tv_viewtype"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:gravity="center_vertical"
+            android:text="Type"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="329dp"
+            tools:layout_editor_absoluteY="218dp"
+            app:layout_constraintLeft_toRightOf="@+id/itemnamew"
+            app:layout_constraintTop_toBottomOf="@+id/bluebox" />
+
+        <EditText
+            android:id="@+id/typew"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="0dp"
+            android:background="@drawable/sp_rectangle_root"
+            android:text="Iphone 13"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/bluebox"
+            app:layout_constraintLeft_toRightOf="@+id/tv_viewtype"
+            tools:layout_editor_absoluteX="314dp"
+            tools:layout_editor_absoluteY="239dp" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:gravity="center_vertical"
+            android:text="Quantity"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="329dp"
+            tools:layout_editor_absoluteY="218dp"
+            app:layout_constraintLeft_toRightOf="@+id/itempic"
+            app:layout_constraintTop_toBottomOf="@+id/rg_update" />
+
+        <EditText
+            android:id="@+id/itemqty"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="0dp"
+            android:background="@drawable/sp_rectangle_root"
+            android:text="99"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            app:layout_constraintTop_toBottomOf="@+id/rg_update"
+            app:layout_constraintLeft_toRightOf="@+id/tv2"
+            tools:layout_editor_absoluteX="552dp"
+            tools:layout_editor_absoluteY="155dp" />
+
+        <TextView
+            android:id="@+id/tv6"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="140dp"
+            android:gravity="center_vertical"
+            android:text="COPRO"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="329dp"
+            tools:layout_editor_absoluteY="218dp"
+            app:layout_constraintLeft_toRightOf="@+id/rg_update"
+            app:layout_constraintTop_toBottomOf="@+id/itemnamew" />
+
+        <EditText
+            android:id="@+id/itemcopro"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif"
+            android:background="@drawable/sp_rectangle_root"
+            android:text="10000"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@+id/tv6"
+            app:layout_constraintTop_toBottomOf="@+id/itemnamew" />
+
+        <TextView
+            android:id="@+id/tv3"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="140dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center_vertical"
+            android:text="Area"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@+id/rg_update"
+            app:layout_constraintTop_toBottomOf="@+id/tv6"
+            tools:layout_editor_absoluteY="252dp" />
+
+        <EditText
+            android:id="@+id/eitemarea"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif"
+            android:background="@drawable/sp_rectangle_root"
+            android:text="A1"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@+id/tv3"
+            app:layout_constraintTop_toBottomOf="@+id/tv6"
+            tools:layout_editor_absoluteY="252dp" />
+
+        <TextView
+            android:id="@+id/tv4"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="140dp"
+            android:gravity="center_vertical"
+            android:text="Cabinet"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="329dp"
+            tools:layout_editor_absoluteY="218dp"
+            app:layout_constraintLeft_toRightOf="@+id/rg_update"
+            app:layout_constraintTop_toBottomOf="@+id/tv3" />
+
+        <EditText
+            android:id="@+id/eitemcabin"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="0dp"
+            android:background="@drawable/sp_rectangle_root"
+            android:text="01"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            app:layout_constraintTop_toBottomOf="@+id/eitemarea"
+            app:layout_constraintLeft_toRightOf="@+id/tv4"
+            tools:layout_editor_absoluteX="648dp"
+            tools:layout_editor_absoluteY="306dp" />
+
+        <TextView
+            android:id="@+id/tv5"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="140dp"
+            android:gravity="center_vertical"
+            android:text="Shelf"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="329dp"
+            tools:layout_editor_absoluteY="218dp"
+            app:layout_constraintLeft_toRightOf="@+id/rg_update"
+            app:layout_constraintTop_toBottomOf="@+id/tv4" />
+
+        <EditText
+            android:id="@+id/eitemshelf"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="0dp"
+            android:background="@drawable/sp_rectangle_root"
+            android:text="01"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            app:layout_constraintTop_toBottomOf="@+id/eitemcabin"
+            app:layout_constraintLeft_toRightOf="@+id/tv5"
+            tools:layout_editor_absoluteX="759dp"
+            tools:layout_editor_absoluteY="319dp" />
+
+        <EditText
+            android:id="@+id/itemdesc"
+            android:layout_width="500dp"
+            android:layout_height="152dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="left"
+            android:background="@drawable/linet"
+            android:justificationMode="inter_word"
+            android:fontFamily="sans-serif"
+            android:padding="5dp"
+            android:text="Description"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@+id/itempic"
+            app:layout_constraintTop_toBottomOf="@+id/tv5" />
+
+        <EditText
+            android:id="@+id/et_idwmsedit"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="21dp"
+            android:gravity="left"
+            android:background="@drawable/lines"
+            android:fontFamily="sans-serif"
+            android:padding="5dp"
+            android:visibility="gone"
+            android:text="ID"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@+id/itempic"
+            app:layout_constraintTop_toBottomOf="@+id/itemdesc" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

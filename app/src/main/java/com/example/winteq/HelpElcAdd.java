@@ -1,5 +1,6 @@
 package com.example.winteq;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -41,7 +42,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HelpElcAdd extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    EditText et_itemelcadd;
+    EditText et_itemelcadd, et_descelcadd;
     Button btn_elcimageadd, btn_elcpdfadd;
     TextView tv_elcpdfadd;
     FloatingActionButton elc_add;
@@ -76,6 +77,7 @@ public class HelpElcAdd extends AppCompatActivity implements NavigationView.OnNa
         iv_elcimageadd = findViewById(R.id.iv_elcimageadd);
         tv_elcpdfadd = findViewById(R.id.tv_elcpdfadd);
         et_itemelcadd = findViewById(R.id.et_itemelcadd);
+        et_descelcadd = findViewById(R.id.et_descelcadd);
         btn_elcimageadd = findViewById(R.id.btn_elcimageadd);
         btn_elcimageadd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +162,8 @@ public class HelpElcAdd extends AppCompatActivity implements NavigationView.OnNa
                 break;
 
             case R.id.nav_profile:
+                Intent intent2 = new Intent(HelpElcAdd.this, Profile.class);
+                startActivity(intent2);
                 break;
 
             case R.id.nav_logout:
@@ -229,8 +233,6 @@ public class HelpElcAdd extends AppCompatActivity implements NavigationView.OnNa
                         tv_elcpdfadd.setText("Document Selected");
                         btn_elcpdfadd.setText("Change Document");
 
-                        Toast.makeText(this, "Document Selected", Toast.LENGTH_SHORT).show();
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -244,7 +246,7 @@ public class HelpElcAdd extends AppCompatActivity implements NavigationView.OnNa
             bitmap = ((BitmapDrawable) iv_elcimageadd.getDrawable()).getBitmap();
         }
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
 
         byte[] imageByteArray = byteArrayOutputStream.toByteArray();
         String encodedImage = Base64.encodeToString(imageByteArray, Base64.DEFAULT);
@@ -255,10 +257,15 @@ public class HelpElcAdd extends AppCompatActivity implements NavigationView.OnNa
 
     private void elcadd() {
         String item_elc = et_itemelcadd.getText().toString();
+        String desc_elc = et_descelcadd.getText().toString();
         String pdf_elc_image = getStringImage(bitmap);
         String pdf_elc = encodedPDF;
+        ProgressDialog pd = new ProgressDialog(HelpElcAdd.this);
+        pd.setMessage("Uploading...");
+        pd.setCancelable(false);
+        pd.show();
 
-        Call<HelpDataElc> helpelcaddcall = apiInterface.helpelcaddResponse(item_elc, pdf_elc_image, pdf_elc);
+        Call<HelpDataElc> helpelcaddcall = apiInterface.helpelcaddResponse(item_elc, desc_elc, pdf_elc_image, pdf_elc);
         helpelcaddcall.enqueue(new Callback<HelpDataElc>() {
             @Override
             public void onResponse(Call<HelpDataElc> call, Response<HelpDataElc> response) {
@@ -275,18 +282,21 @@ public class HelpElcAdd extends AppCompatActivity implements NavigationView.OnNa
                 }
                 if(response.body() != null && response.body().isStatus()){
                     helpDataElc = response.body();
+                    pd.dismiss();
 
                     Toast.makeText(HelpElcAdd.this, sr, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(HelpElcAdd.this, HelpElec.class);
                     startActivity(intent);
                     finish();
                 } else {
+                    pd.dismiss();
                     Toast.makeText(HelpElcAdd.this, sr, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<HelpDataElc> call, Throwable t) {
+                pd.dismiss();
                 Toast.makeText(HelpElcAdd.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });

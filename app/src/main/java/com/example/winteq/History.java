@@ -94,6 +94,8 @@ public class History extends AppCompatActivity implements NavigationView.OnNavig
                 break;
 
             case R.id.nav_profile:
+                Intent intent2 = new Intent(History.this, Profile.class);
+                startActivity(intent2);
                 break;
 
             case R.id.nav_logout:

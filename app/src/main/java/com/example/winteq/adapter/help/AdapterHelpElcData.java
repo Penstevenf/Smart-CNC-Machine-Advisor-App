@@ -31,8 +31,8 @@ import com.downloader.OnStartOrResumeListener;
 import com.downloader.PRDownloader;
 import com.downloader.Progress;
 import com.example.winteq.HelpElcUpdate;
+import com.example.winteq.HelpElcView;
 import com.example.winteq.HelpElec;
-import com.example.winteq.PDFElektrik;
 import com.example.winteq.R;
 import com.example.winteq.api.ApiClient;
 import com.example.winteq.api.Api_Interface;
@@ -107,10 +107,42 @@ public class AdapterHelpElcData extends BaseAdapter implements Filterable {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, hdElc.getItem_elc(), Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(context, PDFElektrik.class);
-                i.putExtra("PATH", hdElc.getPdf_elc());
-                context.startActivity(i);
+                Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
+                Call<HelpResponseDataElc> getData = aiData.aiElcGetData(hdElc.getHelp_elc_id());
+
+                getData.enqueue(new Callback<HelpResponseDataElc>() {
+                    @Override
+                    public void onResponse(Call<HelpResponseDataElc> call, Response<HelpResponseDataElc> response) {
+
+                        if(response.body() != null && response.body().isStatus()) {
+                            boolean status = response.body().isStatus();
+                            String message = response.body().getMessage();
+                            listHelpElc = response.body().getData();
+
+                            String varIdElc = listHelpElc.get(0).getHelp_elc_id();
+                            String varItemElc = listHelpElc.get(0).getItem_elc();
+                            String varDateElc = listHelpElc.get(0).getElc_date();
+                            String varImageElc = listHelpElc.get(0).getPdf_elc_image();
+                            String varPdfElc = listHelpElc.get(0).getPdf_elc();
+                            String varDescElc = listHelpElc.get(0).getDesc_elc();
+
+//                          Toast.makeText(context, "Data : "+varIdElc+varItemElc, Toast.LENGTH_SHORT).show();
+
+                            Intent sendElc = new Intent(context, HelpElcView.class);
+                            sendElc.putExtra("xIdElc", varIdElc);
+                            sendElc.putExtra("xItemElc", varItemElc);
+                            sendElc.putExtra("xDateElc", varDateElc);
+                            sendElc.putExtra("xPdfElc", varPdfElc);
+                            sendElc.putExtra("xImageElc", varImageElc);
+                            sendElc.putExtra("xDescElc", varDescElc);
+                            context.startActivity(sendElc);
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<HelpResponseDataElc> call, Throwable t) {
+                        Toast.makeText(context, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -119,14 +151,14 @@ public class AdapterHelpElcData extends BaseAdapter implements Filterable {
             public boolean onLongClick(View view) {
                 //untuk menampilkan dialog
                 AlertDialog.Builder messageDialog = new AlertDialog.Builder(context);
-                messageDialog.setMessage("Choose Operation: ");
-                messageDialog.setTitle("Attention");
+                messageDialog.setTitle("Please Choose Operation for "+hdElc.getItem_elc()+" data")
+                        .setMessage("Do you want to Download PDF, Edit Data or Permanently Delete Data, Delete Data cannot be undone.");
                 messageDialog.setIcon(R.mipmap.ic_launcher_round);
                 messageDialog.setCancelable(true);
 
                 idElc = id.getText().toString();
 
-                messageDialog.setPositiveButton("Delete PDF", new DialogInterface.OnClickListener() {
+                messageDialog.setPositiveButton("Delete Data", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deleteData();
@@ -225,6 +257,7 @@ public class AdapterHelpElcData extends BaseAdapter implements Filterable {
                     String varItemElc = listHelpElc.get(0).getItem_elc();
                     String varDateElc = listHelpElc.get(0).getElc_date();
                     String varImageElc = listHelpElc.get(0).getPdf_elc_image();
+                    String varDescElc = listHelpElc.get(0).getDesc_elc();
                     String varPdfElc = listHelpElc.get(0).getPdf_elc();
 
 //                  Toast.makeText(context, "Status: "+status+" | Message: "+message+ " | Data : "+varIdElc+varItemElc, Toast.LENGTH_SHORT).show();
@@ -234,6 +267,7 @@ public class AdapterHelpElcData extends BaseAdapter implements Filterable {
                     sendElc.putExtra("xItemElc", varItemElc);
                     sendElc.putExtra("xDateElc", varDateElc);
                     sendElc.putExtra("xPdfElc", varPdfElc);
+                    sendElc.putExtra("xDescElc", varDescElc);
                     sendElc.putExtra("xImageElc", varImageElc);
                     context.startActivity(sendElc);
                 }
@@ -320,7 +354,7 @@ public class AdapterHelpElcData extends BaseAdapter implements Filterable {
 
 //      File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
-        File myDir = new File(root + "/PDF Electric Documents");
+        File myDir = new File(root + "/PDF Electrical Documents");
 
         if(!myDir.exists()){
             myDir.mkdir();
@@ -367,7 +401,8 @@ public class AdapterHelpElcData extends BaseAdapter implements Filterable {
 
                     @Override
                     public void onError(Error error) {
-                        Toast.makeText(context, "Error: Can't Download PDF", Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                        Toast.makeText(context, "Error: Can't Download PDF, There Might Be No PDF", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

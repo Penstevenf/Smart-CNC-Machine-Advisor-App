@@ -1,5 +1,6 @@
 package com.example.winteq;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -41,10 +42,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HelpElcUpdate extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    EditText et_itemelcupdate, et_idelcupdate;
-    Button btn_elcimageupdate, btn_elcpdfupdate;
-    TextView tv_elcpdfupdate;
-    FloatingActionButton elc_up;
+    EditText et_itemelcupdate, et_idelcupdate, itemdescs;
+    Button btn_changepdf, btn_elceditimage;
+    TextView tv_itemdates, tv_selectedpdf;
+    FloatingActionButton fb_elcup;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
@@ -56,7 +57,7 @@ public class HelpElcUpdate extends AppCompatActivity implements NavigationView.O
 
     private  String encodedPDF;
 
-    private String xIdElc, xItemElc, xDateElc, xPdfElc, xImageElc;
+    private String xIdElc, xItemElc, xDateElc, xPdfElc, xImageElc, xDescElc;
     private static final String SHARE_PREF_NAME = "mypref";
     private static final String FULLNAME = "fullname";
     private static final String IMAGE = "image";
@@ -74,23 +75,31 @@ public class HelpElcUpdate extends AppCompatActivity implements NavigationView.O
         xItemElc = sendElc.getStringExtra("xItemElc");
         xPdfElc = sendElc.getStringExtra("xPdfElc");
         xImageElc = sendElc.getStringExtra("xImageElc");
+        xDateElc = sendElc.getStringExtra("xDateElc");
+        xDescElc = sendElc.getStringExtra("xDescElc");
 
         drawerLayout = findViewById(R.id.help_elc_update);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
-        elc_up = findViewById(R.id.elc_up);
+        fb_elcup = findViewById(R.id.fb_elcup);
+        tv_selectedpdf = findViewById(R.id.tv_selectedpdf);
 
-        iv_elcimageupdate = findViewById(R.id.iv_elcimageupdate);
+        iv_elcimageupdate = findViewById(R.id.itempics);
 
-        tv_elcpdfupdate = findViewById(R.id.tv_elcpdfupdate);
-        et_idelcupdate = findViewById(R.id.et_idelcupdate);
+        tv_itemdates = findViewById(R.id.tv_itemdates);
+        tv_itemdates.setText(xDateElc);
+
+        itemdescs = findViewById(R.id.itemdescs);
+        itemdescs.setText(xDescElc);
+
+        et_idelcupdate = findViewById(R.id.et_idelcedit);
         et_idelcupdate.setText(xIdElc);
 
-        et_itemelcupdate = findViewById(R.id.et_itemelcupdate);
+        et_itemelcupdate = findViewById(R.id.itemnamews);
         et_itemelcupdate.setText(xItemElc);
 
-        btn_elcimageupdate = findViewById(R.id.btn_elcimageupdate);
-        btn_elcimageupdate.setOnClickListener(new View.OnClickListener() {
+        btn_elceditimage = findViewById(R.id.btn_elceditimage);
+        btn_elceditimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -102,8 +111,8 @@ public class HelpElcUpdate extends AppCompatActivity implements NavigationView.O
             }
         });
 
-        btn_elcpdfupdate = findViewById(R.id.btn_elcpdfupdate);
-        btn_elcpdfupdate.setOnClickListener(new View.OnClickListener() {
+        btn_changepdf = findViewById(R.id.btn_changepdf);
+        btn_changepdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -151,7 +160,7 @@ public class HelpElcUpdate extends AppCompatActivity implements NavigationView.O
             pfph.setImageBitmap(bitmap);
         }
 
-        elc_up.setOnClickListener(new View.OnClickListener() {
+        fb_elcup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 elcup();
@@ -179,6 +188,8 @@ public class HelpElcUpdate extends AppCompatActivity implements NavigationView.O
                 break;
 
             case R.id.nav_profile:
+                Intent intent2 = new Intent(HelpElcUpdate.this, Profile.class);
+                startActivity(intent2);
                 break;
 
             case R.id.nav_logout:
@@ -247,8 +258,8 @@ public class HelpElcUpdate extends AppCompatActivity implements NavigationView.O
                         inputStream.read(pdfInBytes);
                         encodedPDF = Base64.encodeToString(pdfInBytes, Base64.DEFAULT);
 
-                        tv_elcpdfupdate.setText("Document Selected");
-                        btn_elcpdfupdate.setText("Change Document");
+                        tv_selectedpdf.setText("Document Selected");
+                        btn_changepdf.setText("Change Document");
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -263,7 +274,7 @@ public class HelpElcUpdate extends AppCompatActivity implements NavigationView.O
             bitmap = ((BitmapDrawable) iv_elcimageupdate.getDrawable()).getBitmap();
         }
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
 
         byte[] imageByteArray = byteArrayOutputStream.toByteArray();
         String encodedImage = Base64.encodeToString(imageByteArray, Base64.DEFAULT);
@@ -275,10 +286,15 @@ public class HelpElcUpdate extends AppCompatActivity implements NavigationView.O
     private void elcup() {
         String help_elc_id =  et_idelcupdate.getText().toString();
         String item_elc = et_itemelcupdate.getText().toString();
+        String desc_elc = itemdescs.getText().toString();
         String pdf_elc_image = getStringImage(bitmap);
         String pdf_elc = encodedPDF;
+        ProgressDialog pd = new ProgressDialog(HelpElcUpdate.this);
+        pd.setMessage("Uploading...");
+        pd.setCancelable(false);
+        pd.show();
 
-        Call<HelpDataElc> HelpElcUpdatecall = apiInterface.helpelcupdateData(help_elc_id, item_elc, pdf_elc_image, pdf_elc);
+        Call<HelpDataElc> HelpElcUpdatecall = apiInterface.helpelcupdateData(help_elc_id, item_elc, desc_elc, pdf_elc_image, pdf_elc);
         HelpElcUpdatecall.enqueue(new Callback<HelpDataElc>() {
             @Override
             public void onResponse(Call<HelpDataElc> call, Response<HelpDataElc> response) {
@@ -295,18 +311,21 @@ public class HelpElcUpdate extends AppCompatActivity implements NavigationView.O
                 }
                 if(response.body() != null && response.body().isStatus()){
                     helpDataElc = response.body();
+                    pd.dismiss();
 
                     Toast.makeText(HelpElcUpdate.this, sr, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(HelpElcUpdate.this, HelpElec.class);
                     startActivity(intent);
                     finish();
                 } else {
+                    pd.dismiss();
                     Toast.makeText(HelpElcUpdate.this, sr, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<HelpDataElc> call, Throwable t) {
+                pd.dismiss();
                 Toast.makeText(HelpElcUpdate.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });

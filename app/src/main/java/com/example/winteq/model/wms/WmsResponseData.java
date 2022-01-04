@@ -30,4 +30,5 @@ public class WmsResponseData {
     public void setData(List<WmsData> data) {
         this.data = data;
     }
+
 }

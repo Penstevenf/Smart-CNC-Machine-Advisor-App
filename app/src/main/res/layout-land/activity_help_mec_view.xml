@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HelpMecView"
+    android:id="@+id/helpmecview"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/main_menu" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/bluebox"
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:src="@drawable/custom_rectangle"/>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="#00FFFFFF"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/rsz_menu" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Help Mechanical Data View"
+            android:textColor="#000000"
+            android:layout_marginBottom="35dp"
+            android:gravity="center"
+            android:textSize="40sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/itemnamewzzm" />
+
+        <ImageView
+            android:id="@+id/itempiczzm"
+            android:layout_width="280dp"
+            android:layout_height="285dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/profile"
+            app:layout_constraintTop_toBottomOf="@+id/bluebox"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="207dp" />
+
+        <EditText
+            android:id="@+id/et_mecid"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="130dp"
+            android:gravity="center_vertical"
+            android:text="ID"
+            android:visibility="gone"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/itempiczzm"
+            app:layout_constraintRight_toLeftOf="@id/itemnamewzzm"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="136dp" />
+
+        <TextView
+            android:id="@+id/tv1zzm"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="30dp"
+            android:gravity="center_vertical"
+            android:text="Category"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="329dp"
+            tools:layout_editor_absoluteY="218dp"
+            app:layout_constraintLeft_toRightOf="@+id/itempiczzm"
+            app:layout_constraintTop_toBottomOf="@+id/itemnamewzzm"
+            app:layout_constraintRight_toLeftOf="@id/itemcatzzm"/>
+
+        <TextView
+            android:id="@+id/itemcatzzm"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center_vertical"
+            android:text="Electrical"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@+id/tv1zzm"
+            app:layout_constraintTop_toBottomOf="@+id/itemnamewzzm" />
+
+        <TextView
+            android:id="@+id/itemdatezzm"
+            android:layout_width="140dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="0dp"
+            android:gravity="center"
+            android:text="11-11-2021"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            app:layout_constraintTop_toBottomOf="@+id/bluebox"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_editor_absoluteX="760dp"
+            tools:layout_editor_absoluteY="136dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/editdatamec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:backgroundTint="#4b5ea5"
+            android:src="@drawable/ic_baseline_edit_24"
+            tools:ignore="SpeakableTextPresentCheck"
+            app:layout_constraintTop_toBottomOf="@+id/itemdatezzm"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/deletedatamec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:backgroundTint="#4b5ea5"
+            android:src="@drawable/ic_baseline_delete_forever_24"
+            tools:ignore="SpeakableTextPresentCheck"
+            app:layout_constraintTop_toBottomOf="@+id/editdatamec"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/itemnamewzzm"
+            android:layout_width="460dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:gravity="center_vertical"
+            android:text="Smartphone"
+            android:textSize="36sp"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/bluebox"
+            app:layout_constraintLeft_toRightOf="@+id/itempiczzm"
+            tools:layout_editor_absoluteX="314dp"
+            tools:layout_editor_absoluteY="239dp" />
+
+        <TextView
+            android:id="@+id/itemdesczzm"
+            android:layout_width="500dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:padding="5dp"
+            android:background="@drawable/linet"
+            android:text="Description"
+            android:justificationMode="inter_word"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            app:layout_constraintTop_toBottomOf="@+id/iv2zzm"
+            app:layout_constraintLeft_toRightOf="@+id/itempiczzm"
+            tools:layout_editor_absoluteX="314dp"
+            tools:layout_editor_absoluteY="393dp" />
+
+        <Button
+            android:id="@+id/btn_viewpdfmec"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sp_rectangle_login"
+            android:paddingLeft="30dp"
+            android:paddingTop="15dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="View PDF"
+            android:textAllCaps="false"
+            android:textColor="#FF8221"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/itempiczzm"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <Button
+            android:id="@+id/btn_downloadpdfmec"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sp_rectangle_login"
+            android:paddingLeft="30dp"
+            android:paddingTop="15dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="Download PDF"
+            android:textAllCaps="false"
+            android:textColor="#FF8221"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/itemdesczzm"
+            app:layout_constraintLeft_toRightOf="@id/btn_viewpdfmec"/>
+
+        <ImageView
+            android:id="@+id/iv2zzm"
+            android:layout_width="500dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
+            android:src="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/itemcatzzm"
+            app:layout_constraintLeft_toRightOf="@+id/itempiczzm"
+            tools:layout_editor_absoluteX="330dp"
+            tools:layout_editor_absoluteY="257dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

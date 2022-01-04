@@ -4,8 +4,55 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string-array name="Category">
         <item>All Category</item>
-        <item>Elektrik</item>
-        <item>Mekanik</item>
+        <item>Electrical</item>
+        <item>Mechanical</item>
     </string-array>
+
+    <string-array name="monline">
+        <item>Line 1</item>
+        <item>Line 2</item>
+        <item>Line 3</item>
+        <item>Line 4</item>
+    </string-array>
+
+    <string-array name="monline2">
+        <item>All Line</item>
+        <item>Line 1</item>
+        <item>Line 2</item>
+        <item>Line 3</item>
+        <item>Line 4</item>
+    </string-array>
+
+    <string-array name="station">
+        <item>All</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="stationmon">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="monstat">
+        <item>None</item>
+    </string-array>
+
 </resources>
 

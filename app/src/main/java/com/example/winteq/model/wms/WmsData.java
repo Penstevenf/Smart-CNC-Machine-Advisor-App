@@ -22,6 +22,14 @@ public class WmsData {
 	private String item_name;
 
 	@Expose
+	@SerializedName("type")
+	private String type;
+
+	@Expose
+	@SerializedName("lifetime_wms")
+	private String lifetime_wms;
+
+	@Expose
 	@SerializedName("qty")
 	private String qty;
 
@@ -52,6 +60,15 @@ public class WmsData {
 	@Expose
 	@SerializedName("description")
 	private String description;
+
+	@Expose
+	@SerializedName("elc_tag")
+	private String elc_tag;
+
+	@Expose
+	@SerializedName("mec_tag")
+	private String mec_tag;
+
 
 	@Expose
 	@SerializedName("status")
@@ -91,6 +108,22 @@ public class WmsData {
 
 	public void setItem_name(String item_name) {
 		this.item_name = item_name;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getLifetime_wms() {
+		return lifetime_wms;
+	}
+
+	public void setLifetime_wms(String lifetime_wms) {
+		this.lifetime_wms = lifetime_wms;
 	}
 
 	public String getQty() {
@@ -155,6 +188,22 @@ public class WmsData {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getElc_tag() {
+		return elc_tag;
+	}
+
+	public void setElc_tag(String elc_tag) {
+		this.elc_tag = elc_tag;
+	}
+
+	public String getMec_tag() {
+		return mec_tag;
+	}
+
+	public void setMec_tag(String mec_tag) {
+		this.mec_tag = mec_tag;
 	}
 
 	public boolean isStatus() {

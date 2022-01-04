@@ -1,9 +1,13 @@
 package com.example.winteq.api;
 
+import com.example.winteq.model.asset.AssetData;
+import com.example.winteq.model.asset.AssetResponseData;
 import com.example.winteq.model.help.elektrik.HelpDataElc;
 import com.example.winteq.model.help.elektrik.HelpResponseDataElc;
 import com.example.winteq.model.help.mekanik.HelpDataMec;
 import com.example.winteq.model.help.mekanik.HelpResponseDataMec;
+import com.example.winteq.model.monitoring.MonData;
+import com.example.winteq.model.monitoring.MonResponseData;
 import com.example.winteq.model.user.UserData;
 import com.example.winteq.model.wms.WmsData;
 import com.example.winteq.model.wms.WmsResponseData;
@@ -96,8 +100,10 @@ public interface Api_Interface {
     Call<WmsData> wmsaddResponse(
             @Field("qty") String qty,
             @Field("item_name") String item_name,
-            @Field("copro") String copro,
+            @Field("type") String type,
+            @Field("lifetime_wms") String lifetime_wms,
             @Field("category") String category,
+            @Field("copro") String copro,
             @Field("area") String area,
             @Field("cabinet") String cabinet,
             @Field("shelf") String shelf,
@@ -111,6 +117,8 @@ public interface Api_Interface {
             @Field("wms_id") String wms_id,
             @Field("qty") String qty,
             @Field("item_name") String item_name,
+            @Field("type") String type,
+            @Field("lifetime_wms") String lifetime_wms,
             @Field("category") String category,
             @Field("copro") String copro,
             @Field("area") String area,
@@ -125,6 +133,7 @@ public interface Api_Interface {
     Call<HelpDataElc> helpelcupdateData(
             @Field("help_elc_id") String help_elc_id,
             @Field("item_elc") String item_elc,
+            @Field("desc_elc") String desc_elc,
             @Field("pdf_elc_image") String pdf_elc_image,
             @Field("pdf_elc") String pdf_elc
     );
@@ -134,6 +143,7 @@ public interface Api_Interface {
     Call<HelpDataMec> helpmecupdateData(
             @Field("help_mec_id") String help_mec_id,
             @Field("item_mec") String item_mec,
+            @Field("desc_mec") String desc_mec,
             @Field("pdf_mec_image") String pdf_mec_image,
             @Field("pdf_mec") String pdf_mec
     );
@@ -142,6 +152,7 @@ public interface Api_Interface {
     @POST("helpelcadd.php")
     Call<HelpDataElc> helpelcaddResponse(
             @Field("item_elc") String item_elc,
+            @Field("desc_elc") String desc_elc,
             @Field("pdf_elc_image") String pdf_elc_image,
             @Field("pdf_elc") String pdf_elc
     );
@@ -150,6 +161,7 @@ public interface Api_Interface {
     @POST("helpmecadd.php")
     Call<HelpDataMec> helpmecaddResponse(
             @Field("item_mec") String item_mec,
+            @Field("desc_mec") String desc_mec,
             @Field("pdf_mec_image") String pdf_mec_image,
             @Field("pdf_mec") String pdf_mec
     );
@@ -164,6 +176,12 @@ public interface Api_Interface {
     @POST("helpelcpdf.php")
     Call<WmsData> helpelcpdfData(
             @Field("help_elc_id") String help_elc_id
+    );
+
+    @FormUrlEncoded
+    @POST("helpmecpdf.php")
+    Call<WmsData> helpmecpdfData(
+            @Field("help_mec_id") String help_mec_id
     );
 
     @FormUrlEncoded
@@ -184,8 +202,76 @@ public interface Api_Interface {
             @Field("help_mec_id") String help_mec_id
     );
 
+    @FormUrlEncoded
+    @POST("monitoringadd.php")
+    Call<MonData> aiMonAddData(
+            @Field("line") String line,
+            @Field("station") String station,
+            @Field("mon_image") String mon_image,
+            @Field("mon_status") String mon_status,
+            @Field("mon_pic") String mon_pic,
+            @Field("mon_desc") String mon_desc
+    );
+
+    @FormUrlEncoded
+    @POST("monitoringupdate.php")
+    Call<MonData> aiMonUpdateData(
+            @Field("mon_id") String mon_id,
+            @Field("mon_desc") String mon_desc,
+            @Field("mon_image") String mon_image
+    );
+
+    @FormUrlEncoded
+    @POST("monitoringdelete.php")
+    Call<MonData> mondeleteData(
+            @Field("mon_id") String mon_id
+    );
+
+    @FormUrlEncoded
+    @POST("monitoringview.php")
+    Call<MonResponseData> monviewData(
+            @Field("mon_id") String mon_id
+    );
+
+    @FormUrlEncoded
+    @POST("assetstation.php")
+    Call<AssetResponseData> aiAssetStationData(
+            @Field("asset_line") String asset_line
+    );
+
+    @FormUrlEncoded
+    @POST("assetmachine.php")
+    Call<AssetResponseData> aiAssetMachineData(
+            @Field("asset_line") String asset_line,
+            @Field("asset_station") String asset_station
+    );
+
+    @FormUrlEncoded
+    @POST("assetview.php")
+    Call<AssetResponseData> aiAssetViewData(
+            @Field("asset_line") String asset_line,
+            @Field("asset_station") String asset_station,
+            @Field("machine_name") String machine_name
+    );
+
+    @FormUrlEncoded
+    @POST("assetadd.php")
+    Call<AssetData> aiAssetAddData(
+            @Field("asset_no") String asset_no,
+            @Field("machine_name") String machine_name,
+            @Field("asset_part") String asset_part,
+            @Field("asset_category") String asset_category,
+            @Field("asset_qty") String asset_qty,
+            @Field("asset_line") String asset_line,
+            @Field("asset_station") String asset_station
+
+    );
+
     @GET("warehouse.php")
     Call<WmsResponseData> aiWarehouseData();
+
+    @GET("warehousetag.php")
+    Call<WmsData> aiWarehouseTag();
 
     @GET("helpelektrik.php")
     Call<HelpResponseDataElc> aiHelpElcData();
@@ -193,5 +279,19 @@ public interface Api_Interface {
     @GET("helpmekanik.php")
     Call<HelpResponseDataMec> aiHelpMecData();
 
+    @GET("monitoring1.php")
+    Call<MonResponseData> aiMon1Data();
+
+    @GET("monitoring2.php")
+    Call<MonResponseData> aiMon2Data();
+
+    @GET("monitoring3.php")
+    Call<MonResponseData> aiMon3Data();
+
+    @GET("monitoring4.php")
+    Call<MonResponseData> aiMon4Data();
+
+    @GET("assetline.php")
+    Call<AssetResponseData> aiAssetData();
 
 }

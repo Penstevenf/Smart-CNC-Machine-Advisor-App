@@ -13,6 +13,8 @@
     <color name="colorPrimaryDark">@color/color_Blue_Deep</color>
     <color name="colorAccent">#04CE9B</color>
 
+    <color name="red">#FF0000</color>
+
     <color name="color_yellow">#D2FE20</color>
     <color name="color_Blue_Deep">#0072D4</color>
     <color name="color_Blue_Light">#20EFFE</color>

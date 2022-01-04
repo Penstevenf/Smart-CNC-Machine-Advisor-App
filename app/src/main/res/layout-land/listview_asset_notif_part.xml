@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:id="@+id/asset_categoryz"
+            android:layout_width="110dp"
+            android:layout_height="30dp"
+            android:background="@drawable/lines"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="Mechanical"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/asset_partz"
+            android:layout_width="160dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/asset_categoryz"
+            android:background="@drawable/lines"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="Glass Pane"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/asset_qtyz"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/asset_partz"
+            android:background="@drawable/lines"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="99"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/lifetimez"
+            android:layout_width="130dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/asset_qtyz"
+            android:background="@drawable/lines"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="365"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/date_regisz"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/lifetimez"
+            android:background="@drawable/lines"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="2021-11-16 19:15:47"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/asset_replacez"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/date_regisz"
+            android:background="@drawable/lines"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="2021-11-16 19:15:47
+"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_assetv_idz"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/asset_replacez"
+            android:background="@drawable/lines"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="1"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

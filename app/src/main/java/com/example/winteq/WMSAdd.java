@@ -1,5 +1,6 @@
 package com.example.winteq;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -48,12 +49,13 @@ public class WMSAdd extends AppCompatActivity implements NavigationView.OnNaviga
     NavigationView navigationView;
     Toolbar toolbar;
     SharedPreferences sp;
-    EditText et_type, et_qty, et_item, et_copro, et_area, et_cabinet, et_shelf, et_desc;
+    EditText et_qty, et_item, et_copro, et_area, et_cabinet, et_shelf, et_desc, et_lifetime, et_type;
+    TextView tv_default, tv_tag;
     FloatingActionButton wmsin;
     WmsData wmsData;
     Api_Interface apiInterface;
     RadioGroup radioGroup;
-    RadioButton radioButton;
+    RadioButton radioButton, rb_elc, rb_mec;
     Bitmap bitmap;
     Button btn_wmsimage;
     ImageView add_image;
@@ -61,7 +63,8 @@ public class WMSAdd extends AppCompatActivity implements NavigationView.OnNaviga
     private static final String SHARE_PREF_NAME = "mypref";
     private static final String FULLNAME = "fullname";
     private static final String IMAGE = "image";
-    private static final String WMSID = "wms_id";
+    private static final String ELC_TAG = "Elc_tag";
+    private static final String MEC_TAG = "Mec_tag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +72,13 @@ public class WMSAdd extends AppCompatActivity implements NavigationView.OnNaviga
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_wmsadd);
 
+        sp = getSharedPreferences(SHARE_PREF_NAME, MODE_PRIVATE);
         drawerLayout = findViewById(R.id.wmsadd);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
         wmsin = findViewById(R.id.wmsup);
 
-        et_type = findViewById(R.id.e4);
+        tv_tag = findViewById(R.id.tv_tag);
         et_qty = findViewById(R.id.e3);
         et_item = findViewById(R.id.e6);
         et_copro = findViewById(R.id.e5);
@@ -82,8 +86,42 @@ public class WMSAdd extends AppCompatActivity implements NavigationView.OnNaviga
         et_cabinet = findViewById(R.id.e8);
         et_shelf = findViewById(R.id.e9);
         et_desc = findViewById(R.id.e10);
+        et_type = findViewById(R.id.et_typewms);
+        et_lifetime = findViewById(R.id.et_lifewms);
+        tv_default = findViewById(R.id.tv_default);
         radioGroup = findViewById(R.id.rg_add);
+        rb_elc = findViewById(R.id.rb_add_elektrik);
+        rb_mec = findViewById(R.id.rb_add_mekanik);
+
+        rb_elc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sp.getString(ELC_TAG, null) == null) {
+                    tv_tag.setText("ELC-001");
+                }
+                else if (sp.getString(ELC_TAG, null) != null) {
+                    tv_tag.setText(sp.getString(ELC_TAG, null));
+                }
+            }
+        });
+
+        rb_elc.performClick();
+
+        rb_mec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sp.getString(MEC_TAG, null) == null) {
+                    tv_tag.setText("MEC-001");
+                }
+                else if (sp.getString(MEC_TAG, null) != null) {
+                    tv_tag.setText(sp.getString(MEC_TAG, null));
+                }
+            }
+        });
+
+
         apiInterface = ApiClient.getClient().create(Api_Interface.class);
+
         btn_wmsimage = findViewById(R.id.btn_wmsimage);
         add_image = findViewById(R.id.add_img);
         btn_wmsimage.setOnClickListener(new View.OnClickListener() {
@@ -96,8 +134,6 @@ public class WMSAdd extends AppCompatActivity implements NavigationView.OnNaviga
         View header = navigationView.getHeaderView(0);
 
         TextView nama = (TextView) header.findViewById(R.id.fname);
-
-        sp = getSharedPreferences(SHARE_PREF_NAME, MODE_PRIVATE);
 
         navigationView.bringToFront();
         setSupportActionBar(toolbar);
@@ -151,6 +187,8 @@ public class WMSAdd extends AppCompatActivity implements NavigationView.OnNaviga
                 break;
 
             case R.id.nav_profile:
+                Intent intent2 = new Intent(WMSAdd.this, Profile.class);
+                startActivity(intent2);
                 break;
 
             case R.id.nav_logout:
@@ -198,6 +236,7 @@ public class WMSAdd extends AppCompatActivity implements NavigationView.OnNaviga
 
             Uri filepath = data.getData();
             InputStream imageStream;
+            tv_default.setText("Image Preview");
 
             try {
                 imageStream = getContentResolver().openInputStream(filepath);
@@ -217,7 +256,7 @@ public class WMSAdd extends AppCompatActivity implements NavigationView.OnNaviga
             bitmap = ((BitmapDrawable) add_image.getDrawable()).getBitmap();
         }
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
 
         byte[] imageByteArray = byteArrayOutputStream.toByteArray();
         String encodedImage = Base64.encodeToString(imageByteArray, Base64.DEFAULT);
@@ -231,6 +270,8 @@ public class WMSAdd extends AppCompatActivity implements NavigationView.OnNaviga
         radioButton = findViewById(radioId);
         String qty = et_qty.getText().toString();
         String item_name = et_item.getText().toString();
+        String type = et_type.getText().toString();
+        String lifetime_wms = et_lifetime.getText().toString();
         String copro = et_copro.getText().toString();
         String category = radioButton.getText().toString();
         String area = et_area.getText().toString();
@@ -238,8 +279,12 @@ public class WMSAdd extends AppCompatActivity implements NavigationView.OnNaviga
         String shelf = et_shelf.getText().toString();
         String description = et_desc.getText().toString();
         String image = getStringImage(bitmap);
+        ProgressDialog pd = new ProgressDialog(WMSAdd.this);
+        pd.setMessage("Loading...");
+        pd.setCancelable(false);
+        pd.show();
 
-        Call<WmsData> wmsaddcall = apiInterface.wmsaddResponse(qty, item_name, category, copro, area, cabinet, shelf, description, image);
+        Call<WmsData> wmsaddcall = apiInterface.wmsaddResponse(qty, item_name, type, lifetime_wms, category, copro, area, cabinet, shelf, description, image);
         wmsaddcall.enqueue(new Callback<WmsData>() {
             @Override
             public void onResponse(Call<WmsData> call, Response<WmsData> response) {
@@ -256,22 +301,21 @@ public class WMSAdd extends AppCompatActivity implements NavigationView.OnNaviga
                 }
                 if(response.body() != null && response.body().isStatus()){
                     wmsData = response.body();
-
-                    SharedPreferences.Editor editor = sp.edit();
-                    editor.putString(WMSID,response.body().getWms_id());
-                    editor.apply();
+                    pd.dismiss();
 
                     Toast.makeText(WMSAdd.this, sr, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(WMSAdd.this, WMS.class);
                     startActivity(intent);
                     finish();
                 } else {
+                    pd.dismiss();
                     Toast.makeText(WMSAdd.this, sr, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<WmsData> call, Throwable t) {
+                pd.dismiss();
                 Toast.makeText(WMSAdd.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });

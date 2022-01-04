@@ -94,6 +94,8 @@ public class Solution extends AppCompatActivity implements NavigationView.OnNavi
                 break;
 
             case R.id.nav_profile:
+                Intent intent2 = new Intent(Solution.this, Profile.class);
+                startActivity(intent2);
                 break;
 
             case R.id.nav_logout:

@@ -97,6 +97,8 @@ public class Graph extends AppCompatActivity implements NavigationView.OnNavigat
                 break;
 
             case R.id.nav_profile:
+                Intent intent2 = new Intent(Graph.this, Profile.class);
+                startActivity(intent2);
                 break;
 
             case R.id.nav_logout:

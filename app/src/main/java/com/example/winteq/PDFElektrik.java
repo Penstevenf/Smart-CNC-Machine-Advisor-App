@@ -1,10 +1,9 @@
 package com.example.winteq;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +20,6 @@ import com.krishna.fileloader.request.FileLoadRequest;
 import java.io.File;
 
 public class PDFElektrik extends AppCompatActivity implements OnLoadCompleteListener, OnPageErrorListener {
-    ProgressBar pdf_elc_pBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +28,10 @@ public class PDFElektrik extends AppCompatActivity implements OnLoadCompleteList
         setContentView(R.layout.activity_pdf_elektrik);
 
         final PDFView pdfView = findViewById(R.id.pdfView_elc);
-        pdf_elc_pBar = findViewById(R.id.pdf_elc_pBar);
-        pdf_elc_pBar.setVisibility(View.VISIBLE);
+        ProgressDialog pd = new ProgressDialog(PDFElektrik.this);
+        pd.setMessage("Loading...");
+        pd.setCancelable(false);
+        pd.show();
 
         //UNPACK DATA FROM INTENT
         Intent i = this.getIntent();
@@ -43,8 +43,8 @@ public class PDFElektrik extends AppCompatActivity implements OnLoadCompleteList
                 .asFile(new FileRequestListener<File>() {
                     @Override
                     public void onLoad(FileLoadRequest request, FileResponse<File> response) {
-                        pdf_elc_pBar.setVisibility(View.GONE);
                         File pdfFile = response.getBody();
+                        pd.dismiss();
                         try {
                             pdfView.fromFile(pdfFile)
                                     .defaultPage(1)
@@ -62,7 +62,7 @@ public class PDFElektrik extends AppCompatActivity implements OnLoadCompleteList
 
                     @Override
                     public void onError(FileLoadRequest request, Throwable t) {
-                        pdf_elc_pBar.setVisibility(View.GONE);
+                        pd.dismiss();
                         Toast.makeText(PDFElektrik.this, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
@@ -71,13 +71,11 @@ public class PDFElektrik extends AppCompatActivity implements OnLoadCompleteList
 
     @Override
     public void loadComplete(int nbPages) {
-        pdf_elc_pBar.setVisibility(View.GONE);
-        Toast.makeText(PDFElektrik.this, String.valueOf(nbPages), Toast.LENGTH_LONG).show();
+        Toast.makeText(PDFElektrik.this, String.valueOf(nbPages)+" Pages", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onPageError(int page, Throwable t) {
-        pdf_elc_pBar.setVisibility(View.GONE);
         Toast.makeText(PDFElektrik.this, t.getMessage(), Toast.LENGTH_LONG).show();
     }
 }
