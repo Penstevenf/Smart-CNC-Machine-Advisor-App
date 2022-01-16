@@ -62,7 +62,14 @@ dependencies {
     //download pdf
     implementation 'com.mindorks.android:prdownloader:0.6.0'
 
-    //notification
-    implementation 'com.github.jakebonk:NotifyMe:1.0.0'
+    //noinspection GradleCompatible
+    implementation "com.android.support:support-compat:28.0.0"
+
+    // Swipe Activity
+    implementation 'com.ebanx:swipe-button:0.8.3'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'me.dm7.barcodescanner:zxing:1.9.13'
+    implementation 'com.facebook.fresco:fresco:2.0.0'
+    implementation 'com.facebook.fresco:animated-gif:2.0.0'
 
 }

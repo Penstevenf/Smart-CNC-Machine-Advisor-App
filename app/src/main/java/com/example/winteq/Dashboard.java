@@ -1,10 +1,17 @@
 package com.example.winteq;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,12 +25,24 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.winteq.api.ApiClient;
+import com.example.winteq.api.Api_Interface;
+import com.example.winteq.model.asset.AssetResponseData;
 import com.example.winteq.model.user.UserData;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     UserData userData;
@@ -48,6 +67,14 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     private static final String LINE = "asset_line";
     private static final String STATION = "asset_station";
     private static final String MACHINE = "machine_name";
+
+    //notif
+    public static final String CHANNEL_1_ID = "channel1";
+    private NotificationManagerCompat notificationManager;
+
+    //loop
+    private Handler mRepeatHandler;
+    private Runnable mRepeatRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +138,22 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
         navigationView.setNavigationItemSelectedListener(this);
 
+        //notif
+        createNotificationChannels();
+        notificationManager = NotificationManagerCompat.from(this);
+
+        mRepeatHandler = new Handler();
+        mRepeatRunnable = new Runnable() {
+            @Override
+            public void run() {
+                (new loading()).execute();
+                mRepeatHandler.postDelayed(mRepeatRunnable, 20000);
+            }
+        };
+        mRepeatHandler.postDelayed(mRepeatRunnable,20000);
+
+
+        //set image
         ImageView pfph = (ImageView) header.findViewById(R.id.pfph);
 
         String profileS = sp.getString(IMAGE, null);
@@ -206,6 +249,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
         return;
 
+
     }
 
     //run di background loop
@@ -263,6 +307,104 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void createNotificationChannels() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(
+                    CHANNEL_1_ID,
+                    "Machine Notification Channel",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+
+            channel1.setDescription("Problem Channel");
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            assert manager != null;
+            manager.createNotificationChannel(channel1);
+        }
+    }
+
+    public void sendOnChannel1() {
+        String title = "ALERT";
+        String message = "Machine Problem Detected";
+        Intent activityIntent = new Intent(this, SwipeProblem.class);
+//        String value = "CNC Machine";
+//        activityIntent.putExtra("key", value);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setFullScreenIntent(contentIntent, true)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setAutoCancel(true)
+                .setStyle(new NotificationCompat.BigTextStyle())
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setOnlyAlertOnce(true)
+                .addAction(R.drawable.ic_launcher_foreground, "Repair", contentIntent)
+                .build();
+
+        notificationManager.notify(1, notification);
+        notification.flags = Notification.FLAG_AUTO_CANCEL;
+
+    }
+
+
+    public class loading extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            retrieveNotifData();
+
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Void unused) {
+            sendOnChannel1();
+            super.onPostExecute(unused);
+        }
+    }
+
+    public void retrieveNotifData(){
+        Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
+        Call<AssetResponseData> showData = aiData.aiAssetNotifData();
+
+        showData.enqueue(new Callback<AssetResponseData>() {
+            @Override
+            public void onResponse(Call<AssetResponseData> call, Response<AssetResponseData> response) {
+                boolean status = response.body().isStatus();
+                String message = response.body().getMessage();
+                String notifdata = response.body().getNotifdata();
+//                listAsset = response.body().getData();
+                ZoneId zoneId = ZoneId.of( "Indonesia" ) ;  // Or ZoneOffset.UTC or ZoneId.systemDefault()
+                LocalDate today = LocalDate.now( zoneId ) ;
+                String output = today.toString();
+                Toast.makeText(Dashboard.this, output, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Dashboard.this, notifdata, Toast.LENGTH_SHORT).show();
+
+                if(output == notifdata && notifdata != "None"){
+                    try {
+                        Thread.sleep(500);
+
+                    } catch (InterruptedException e) {
+                        // We were cancelled; stop sleeping!
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AssetResponseData> call, Throwable t) {
+                Toast.makeText(Dashboard.this, "Failed To Get Data", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 public class AssetResponseData {
     private boolean status;
     private String message;
+    private String notifdata;
     private List<AssetData> data;
 
     public boolean isStatus() {
@@ -21,6 +22,14 @@ public class AssetResponseData {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getNotifdata() {
+        return notifdata;
+    }
+
+    public void setNotifdata(String notifdata) {
+        this.notifdata = notifdata;
     }
 
     public List<AssetData> getData() {

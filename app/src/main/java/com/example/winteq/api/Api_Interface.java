@@ -294,4 +294,10 @@ public interface Api_Interface {
     @GET("assetline.php")
     Call<AssetResponseData> aiAssetData();
 
+    @GET("assetgetnotifdate.php")
+    Call<AssetResponseData> aiAssetNotifData();
+
+    @GET("assetgetpart.php")
+    Call<AssetResponseData> aiAssetPartData();
+
 }

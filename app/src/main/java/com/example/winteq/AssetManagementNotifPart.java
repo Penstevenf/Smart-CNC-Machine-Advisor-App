@@ -142,7 +142,7 @@ public class AssetManagementNotifPart extends AppCompatActivity implements Navig
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            Intent intent = new Intent(AssetManagementNotifPart.this, AssetManagementMachine.class);
+            Intent intent = new Intent(AssetManagementNotifPart.this, Dashboard.class);
             SharedPreferences.Editor editor = sp.edit();
             editor.putString(MACHINE, null);
             editor.apply();
