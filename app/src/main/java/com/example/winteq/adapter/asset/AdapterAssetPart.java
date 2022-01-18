@@ -12,8 +12,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.winteq.AssetManagementNotifPart;
 import com.example.winteq.AssetManagementReplace;
-import com.example.winteq.AssetManagementView;
 import com.example.winteq.R;
 import com.example.winteq.model.asset.AssetData;
 
@@ -33,7 +33,7 @@ public class AdapterAssetPart extends BaseAdapter implements Filterable {
         this.listAssetFiltered = listAsset;
     }
 
-    public AdapterAssetPart(AssetManagementView context) {
+    public AdapterAssetPart(AssetManagementNotifPart context) {
     }
 
     @Override
@@ -117,12 +117,12 @@ public class AdapterAssetPart extends BaseAdapter implements Filterable {
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
-                Spinner sp_category;
+                Spinner sp_categoryz;
                 String Key = charSequence.toString();
                 if(Key.isEmpty()){
                     listAssetFiltered = listAsset;
-                    sp_category = ((AssetManagementView)context).findViewById(R.id.asset_category);
-                    sp_category.setSelection(0);
+                    sp_categoryz = ((AssetManagementNotifPart)context).findViewById(R.id.asset_categoryz);
+                    sp_categoryz.setSelection(0);
                 }else{
                     List<AssetData> listFiltereds = new ArrayList<>();
                     for (AssetData row: listAssetFiltered){
@@ -150,13 +150,13 @@ public class AdapterAssetPart extends BaseAdapter implements Filterable {
         private TextView tv_assetv_id, asset_category, asset_part, asset_qty, lifetime, date_regis, asset_replace;
 
         ViewHolder (View v){
-            tv_assetv_id = v.findViewById(R.id.tv_assetv_id);
-            asset_category = v.findViewById(R.id.asset_category);
-            asset_part = v.findViewById(R.id.asset_part);
-            asset_qty = v.findViewById(R.id.asset_qty);
-            lifetime = v.findViewById(R.id.lifetime);
-            date_regis = v.findViewById(R.id.date_regis);
-            asset_replace = v.findViewById(R.id.asset_replace);
+            tv_assetv_id = v.findViewById(R.id.tv_assetv_idz);
+            asset_category = v.findViewById(R.id.asset_categoryz);
+            asset_part = v.findViewById(R.id.asset_partz);
+            asset_qty = v.findViewById(R.id.asset_qtyz);
+            lifetime = v.findViewById(R.id.lifetimez);
+            date_regis = v.findViewById(R.id.date_regisz);
+            asset_replace = v.findViewById(R.id.asset_replacez);
         }
 
         void bind(AssetData ad){

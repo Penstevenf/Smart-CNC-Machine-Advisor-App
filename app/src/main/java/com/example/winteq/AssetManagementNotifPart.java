@@ -9,6 +9,7 @@ import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -23,15 +24,20 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.winteq.adapter.asset.AdapterAssetView;
+import com.example.winteq.adapter.asset.AdapterAssetPart;
 import com.example.winteq.api.ApiClient;
 import com.example.winteq.api.Api_Interface;
 import com.example.winteq.model.asset.AssetData;
+import com.example.winteq.model.asset.AssetResponseData;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AssetManagementNotifPart extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -45,10 +51,10 @@ public class AssetManagementNotifPart extends AppCompatActivity implements Navig
     TextView machine_name;
 
     private ListView listAssetViewz;
-    private AdapterAssetView adapter;
+    private AdapterAssetPart adapter;
     private List<AssetData> listAsset = new ArrayList<>();
 
-    private String  xMachine;
+    private String xMachine;
 
     private static final String SHARE_PREF_NAME = "mypref";
     private static final String FULLNAME = "fullname";
@@ -72,24 +78,8 @@ public class AssetManagementNotifPart extends AppCompatActivity implements Navig
 
         machine_name = findViewById(R.id.machine_namez);
 
-//        if(sp.getString(MACHINE, null) == null) {
-//            //UNPACK INTENT
-//            Intent nameSendm = getIntent();
-//            xMachine = nameSendm.getStringExtra("xMachine");
-//            machine_name.setText(xMachine);
-//            SharedPreferences.Editor editor = sp.edit();
-//            editor.putString(MACHINE, machine_name.getText().toString());
-//            editor.apply();
-//        }else{
-//            machine_name.setText(sp.getString(MACHINE, null));
-//        }
-//        tv_saveliness = findViewById(R.id.tv_saveliness);
-//        tv_saveliness.setText(sp.getString(LINE, null));
-//        tv_savestations = findViewById(R.id.tv_savestations);
-//        tv_savestations.setText(sp.getString(STATION, null));
-
         listAssetViewz = findViewById(R.id.listAssetViewz);
-//        adapter = new AdapterAssetView(this);
+        adapter = new AdapterAssetPart(this);
 
         search_assetz = findViewById(R.id.search_assetz);
         asset_categoryz = findViewById(R.id.asset_categoryz);
@@ -124,17 +114,19 @@ public class AssetManagementNotifPart extends AppCompatActivity implements Navig
             pfph.setImageBitmap(bitmap);
         }
 
-//        asset_categoryz.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String newItem = asset_category.getSelectedItem().toString();
-//                AssetManagementNotifPart.this.adapter.getFilterCategory().filter(newItem);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//            }
-//        });
+        asset_categoryz.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String newItem = asset_categoryz.getSelectedItem().toString();
+                AssetManagementNotifPart.this.adapter.getFilterCategory().filter(newItem);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        retrieveData();
     }
 
     @Override
@@ -193,4 +185,47 @@ public class AssetManagementNotifPart extends AppCompatActivity implements Navig
         return true;
     }
 
+    public void retrieveData(){
+        Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
+        Call<AssetResponseData> showData = aiData.aiAssetPartData();
+
+        showData.enqueue(new Callback<AssetResponseData>() {
+            @Override
+            public void onResponse(Call<AssetResponseData> call, Response<AssetResponseData> response) {
+                boolean status = response.body().isStatus();
+                String message = response.body().getMessage();
+
+                listAsset = response.body().getData();
+
+                if(listAsset != null) {
+                    adapter = new AdapterAssetPart(AssetManagementNotifPart.this, listAsset);
+                    listAssetViewz.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+
+//               Toast.makeText(AssetManagement.this, listWms.get(0).getElc_tag(), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<AssetResponseData> call, Throwable t) {
+                Toast.makeText(AssetManagementNotifPart.this, "Failed To Display Data", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        search_assetz.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(listAsset != null) {
+                    AssetManagementNotifPart.this.adapter.getFilter().filter(newText);
+                }
+                return false;
+            }
+        });
+    }
 }

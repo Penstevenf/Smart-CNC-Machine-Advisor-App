@@ -1,6 +1,7 @@
 package com.example.winteq;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -16,6 +17,9 @@ public class SplashScreen extends AppCompatActivity {
 
     Animation topAnim;
     ImageView image;
+    SharedPreferences sp;
+    private static final String DONE = "done?";
+    private static final String SHARE_PREF_NAME = "mypref";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,11 @@ public class SplashScreen extends AppCompatActivity {
 //        }
 
         topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
+
+        //reset loading notification
+        sp = getSharedPreferences(SHARE_PREF_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        sp.edit().putString(DONE, null).apply();
 
         image = findViewById(R.id.imageView);
         image.setAnimation(topAnim);

@@ -47,7 +47,7 @@ import retrofit2.Response;
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     UserData userData;
     Button btn_logout;
-    TextView et_username, et_fullname;
+    TextView et_username, et_fullname, tv_ouput, tv_notifdate;
     String username, fullname, npk, email;
     SharedPreferences sp;
     DrawerLayout drawerLayout;
@@ -68,6 +68,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     private static final String STATION = "asset_station";
     private static final String MACHINE = "machine_name";
 
+
     //notif
     public static final String CHANNEL_1_ID = "channel1";
     private NotificationManagerCompat notificationManager;
@@ -75,6 +76,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     //loop
     private Handler mRepeatHandler;
     private Runnable mRepeatRunnable;
+    private static final String DONE = "done?";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +100,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         His = findViewById(R.id.History);
         stats = findViewById(R.id.stat);
         profile = findViewById(R.id.profile);
+
+        tv_ouput = findViewById(R.id.output);
+        tv_notifdate = findViewById(R.id.notifdate);
 
         View header = navigationView.getHeaderView(0);
 
@@ -141,6 +147,11 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         //notif
         createNotificationChannels();
         notificationManager = NotificationManagerCompat.from(this);
+
+        if(sp.getString(DONE, null) == null){
+            (new loading()).execute();
+            sp.edit().putString(DONE, "1").apply();
+        }
 
         mRepeatHandler = new Handler();
         mRepeatRunnable = new Runnable() {
@@ -326,8 +337,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     }
 
     public void sendOnChannel1() {
-        String title = "ALERT";
-        String message = "Machine Problem Detected";
+        String title = "WARNING";
+        String message = "Machine Critical Part Lifetime Runs Out In 7 Days!";
         Intent activityIntent = new Intent(this, SwipeProblem.class);
 //        String value = "CNC Machine";
 //        activityIntent.putExtra("key", value);
@@ -343,7 +354,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setOnlyAlertOnce(true)
-                .addAction(R.drawable.ic_launcher_foreground, "Repair", contentIntent)
+                .addAction(R.drawable.ic_launcher_foreground, "Check", contentIntent)
                 .build();
 
         notificationManager.notify(1, notification);
@@ -357,7 +368,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         @Override
         protected Void doInBackground(Void... voids) {
             retrieveNotifData();
-
             return null;
         }
 
@@ -368,7 +378,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
         @Override
         protected void onPostExecute(Void unused) {
-            sendOnChannel1();
             super.onPostExecute(unused);
         }
     }
@@ -384,19 +393,20 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 String message = response.body().getMessage();
                 String notifdata = response.body().getNotifdata();
 //                listAsset = response.body().getData();
-                ZoneId zoneId = ZoneId.of( "Indonesia" ) ;  // Or ZoneOffset.UTC or ZoneId.systemDefault()
+
+                //get current date and change to string
+                ZoneId zoneId = ZoneId.of( "Asia/Jakarta" ) ;  // Or ZoneOffset.UTC or ZoneId.systemDefault()
                 LocalDate today = LocalDate.now( zoneId ) ;
-                String output = today.toString();
-                Toast.makeText(Dashboard.this, output, Toast.LENGTH_SHORT).show();
-                Toast.makeText(Dashboard.this, notifdata, Toast.LENGTH_SHORT).show();
+                String output = today.toString() ;
 
-                if(output == notifdata && notifdata != "None"){
-                    try {
-                        Thread.sleep(500);
 
-                    } catch (InterruptedException e) {
-                        // We were cancelled; stop sleeping!
-                    }
+//                tv_ouput.setText(output);
+//                tv_notifdate.setText(notifdata);
+
+                if(notifdata.equals(output)){
+                    sendOnChannel1();
+                }if(notifdata.equals("None")){
+                    Toast.makeText(Dashboard.this, "For now there is no critical part whose lifespan is running out", Toast.LENGTH_SHORT).show();
                 }
             }
 

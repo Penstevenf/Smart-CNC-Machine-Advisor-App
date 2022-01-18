@@ -8,7 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 //tempat coding retrofit dan base url
 public class ApiClient {
-    private static final String BASE_URL = "http://192.168.100.12/winteq/";
+//    private static final String BASE_URL = "http://192.168.100.12/winteq/";
+    private static final String BASE_URL = "http://192.168.0.124/winteq/";
 
     private static Retrofit retrofit;
 

@@ -115,7 +115,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         ImageView pfph = (ImageView) header.findViewById(R.id.pfph);
 
         String profileS = sp.getString(IMAGE, null);
-
+        Toast.makeText(Profile.this, profileS, Toast.LENGTH_SHORT).show();
         //untuk menampilkan image setelah login
         if(!(profileS.isEmpty())) {
             String imageUri = profileS;
