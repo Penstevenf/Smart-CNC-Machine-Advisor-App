@@ -1,7 +1,6 @@
 package com.example.winteq.adapter.asset;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.winteq.AssetManagementReplace;
 import com.example.winteq.AssetManagementView;
 import com.example.winteq.R;
 import com.example.winteq.model.asset.AssetData;
@@ -69,8 +67,8 @@ public class AdapterAssetView extends BaseAdapter implements Filterable {
             public void onClick(View v) {
 //                idAsset = id.getText().toString();
                 Toast.makeText(context, ad1.getAsset_part()+" Part Selected", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, AssetManagementReplace.class);
-                context.startActivity(intent);
+//                Intent intent = new Intent(context, AssetManagementReplace.class);
+//                context.startActivity(intent);
             }
         });
 

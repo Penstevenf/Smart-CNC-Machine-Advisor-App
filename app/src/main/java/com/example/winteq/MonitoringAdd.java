@@ -49,6 +49,7 @@ public class MonitoringAdd extends AppCompatActivity implements NavigationView.O
     Toolbar toolbar;
     SharedPreferences sp;
     EditText sstation, et_pic, et_desc;
+    TextView tv_defaultimagemon;
     Button btn_monimageadd;
     ImageView iv_monadd;
     Spinner sline, sstat, sname;
@@ -83,6 +84,7 @@ public class MonitoringAdd extends AppCompatActivity implements NavigationView.O
         btn_monimageadd = findViewById(R.id.btn_monimageadd);
         iv_monadd = findViewById(R.id.iv_monadd);
         monadd = findViewById(R.id.monad);
+        tv_defaultimagemon = findViewById(R.id.tv_defaultimagemon);
 
         //Setup Header
         View header = navigationView.getHeaderView(0);
@@ -148,6 +150,7 @@ public class MonitoringAdd extends AppCompatActivity implements NavigationView.O
                         bitmap = BitmapFactory.decodeStream(imageStream);
                         this.iv_monadd.setImageBitmap(bitmap);
                         View header = navigationView.getHeaderView(0);
+                        tv_defaultimagemon.setText("Preview Image");
 
                     } catch (IOException e){
                         e.printStackTrace();

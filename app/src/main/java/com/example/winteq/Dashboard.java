@@ -405,9 +405,11 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
                 if(notifdata.equals(output)){
                     sendOnChannel1();
-                }if(notifdata.equals("None")){
-                    Toast.makeText(Dashboard.this, "For now there is no critical part whose lifespan is running out", Toast.LENGTH_SHORT).show();
                 }
+
+//                if(notifdata.equals("None")){
+//                    Toast.makeText(Dashboard.this, "For now there is no critical part whose lifespan is running out", Toast.LENGTH_SHORT).show();
+//                }
             }
 
             @Override
