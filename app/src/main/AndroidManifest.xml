@@ -152,6 +152,30 @@
         <activity
             android:name=".Login"
             android:exported="true" />
+        <activity
+            android:name=".HistoryView"
+            android:exported="true" />
+        <activity
+            android:name=".SolutionAdd"
+            android:exported="true" />
+        <activity
+            android:name=".SolutionData"
+            android:exported="true" />
+        <activity
+            android:name=".SupportAdd"
+            android:exported="true" />
+        <activity
+            android:name=".RepairItem"
+            android:exported="true" />
+        <activity
+            android:name=".ReplaceItem"
+            android:exported="true" />
+        <activity
+            android:name=".RequestItem"
+            android:exported="true" />
+        <activity
+            android:name=".OtherProblem"
+            android:exported="true" />
     </application>
 
 </manifest>

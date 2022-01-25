@@ -1,6 +1,7 @@
 package com.example.winteq.adapter.asset;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.winteq.AssetManagementReplace;
 import com.example.winteq.AssetManagementView;
 import com.example.winteq.R;
+import com.example.winteq.api.ApiClient;
+import com.example.winteq.api.Api_Interface;
 import com.example.winteq.model.asset.AssetData;
+import com.example.winteq.model.asset.AssetResponseData;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdapterAssetView extends BaseAdapter implements Filterable {
     private Context context;
@@ -65,10 +74,53 @@ public class AdapterAssetView extends BaseAdapter implements Filterable {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                idAsset = id.getText().toString();
-                Toast.makeText(context, ad1.getAsset_part()+" Part Selected", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(context, AssetManagementReplace.class);
-//                context.startActivity(intent);
+                Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
+                Call<AssetResponseData> getData = aiData.aiAssetReplaceData(ad1.getAsset_id());
+
+                getData.enqueue(new Callback<AssetResponseData>() {
+                    @Override
+                    public void onResponse(Call<AssetResponseData> call, Response<AssetResponseData> response) {
+
+                        if(response.body() != null && response.body().isStatus()) {
+                            boolean status = response.body().isStatus();
+                            String message = response.body().getMessage();
+                            listAsset = response.body().getData();
+
+                            String varId = listAsset.get(0).getAsset_id();
+                            String varCategory = listAsset.get(0).getAsset_category();
+                            String varPart = listAsset.get(0).getAsset_part();
+                            String varLine = listAsset.get(0).getAsset_line();
+                            String varStation = listAsset.get(0).getAsset_station();
+                            String varQty = listAsset.get(0).getAsset_qty();
+                            String varMachine = listAsset.get(0).getMachine_name();
+                            String varLifetime = listAsset.get(0).getLifetime();
+                            String varRegister = listAsset.get(0).getDate_register();
+                            String varReplace = listAsset.get(0).getDate_replace();
+                            String varUpdate = listAsset.get(0).getDate_update();
+
+
+
+                            Intent sendAP = new Intent(context, AssetManagementReplace.class);
+                            sendAP.putExtra("xId", varId);
+                            sendAP.putExtra("xCategory", varCategory);
+                            sendAP.putExtra("xPart", varPart);
+                            sendAP.putExtra("xLine", varLine);
+                            sendAP.putExtra("xStation", varStation);
+                            sendAP.putExtra("xQty", varQty);
+                            sendAP.putExtra("xMachine", varMachine);
+                            sendAP.putExtra("xLifetime", varLifetime);
+                            sendAP.putExtra("xRegister", varRegister);
+                            sendAP.putExtra("xReplace", varReplace);
+                            sendAP.putExtra("xUpdate", varUpdate);
+                            context.startActivity(sendAP);
+                            Toast.makeText(context, varPart, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<AssetResponseData> call, Throwable t) {
+                        Toast.makeText(context, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

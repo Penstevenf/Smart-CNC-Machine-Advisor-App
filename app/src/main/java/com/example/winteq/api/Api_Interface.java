@@ -6,6 +6,8 @@ import com.example.winteq.model.help.elektrik.HelpDataElc;
 import com.example.winteq.model.help.elektrik.HelpResponseDataElc;
 import com.example.winteq.model.help.mekanik.HelpDataMec;
 import com.example.winteq.model.help.mekanik.HelpResponseDataMec;
+import com.example.winteq.model.history.HistoryData;
+import com.example.winteq.model.history.HistoryResponseData;
 import com.example.winteq.model.monitoring.MonData;
 import com.example.winteq.model.monitoring.MonResponseData;
 import com.example.winteq.model.user.UserData;
@@ -264,8 +266,69 @@ public interface Api_Interface {
             @Field("asset_qty") String asset_qty,
             @Field("asset_line") String asset_line,
             @Field("asset_station") String asset_station
-
     );
+
+    @FormUrlEncoded
+    @POST("assetreplace.php")
+    Call<AssetResponseData> aiAssetReplaceData(
+            @Field("asset_id") String asset_id
+    );
+
+    @FormUrlEncoded
+    @POST("assetwarehouse.php")
+    Call<WmsResponseData> aiAssetWarehouseData(
+            @Field("asset_part") String asset_part
+    );
+
+    @FormUrlEncoded
+    @POST("assetcopro.php")
+    Call<AssetData> aiAssetCoproData(
+            @Field("asset_id") String asset_id,
+            @Field("asset_part") String asset_part,
+            @Field("copro") String copro,
+            @Field("asset_qty") String asset_qty
+    );
+
+    @FormUrlEncoded
+    @POST("requestitem.php")
+    Call<HistoryData> aiRequestData(
+            @Field("line_hist") String line_hist,
+            @Field("station_hist") String station_hist,
+            @Field("machine_hist") String machine_hist,
+            @Field("pic_hist") String pic_hist,
+            @Field("part_problem") String part_problem,
+            @Field("qty_problem") String qty_problem,
+            @Field("problem") String problem,
+            @Field("image_problem") String image_problem
+    );
+
+    @FormUrlEncoded
+    @POST("otherproblem.php")
+    Call<HistoryData> aiProblemData(
+            @Field("line_hist") String line_hist,
+            @Field("station_hist") String station_hist,
+            @Field("machine_hist") String machine_hist,
+            @Field("pic_hist") String pic_hist,
+            @Field("problem") String problem,
+            @Field("title") String title,
+            @Field("image_problem") String image_problem
+    );
+
+    @FormUrlEncoded
+    @POST("solution.php")
+    Call<HistoryData> aiSolutionData(
+            @Field("id_hist") String id_hist,
+            @Field("solution") String solution,
+            @Field("title") String title,
+            @Field("image_solution") String image_solution
+    );
+
+    @FormUrlEncoded
+    @POST("problem.php")
+    Call<HistoryResponseData> aiGetProblemData(
+            @Field("id_hist") String id_hist
+    );
+
 
     @GET("warehouse.php")
     Call<WmsResponseData> aiWarehouseData();
@@ -299,5 +362,11 @@ public interface Api_Interface {
 
     @GET("assetgetpart.php")
     Call<AssetResponseData> aiAssetPartData();
+
+    @GET("history.php")
+    Call<HistoryResponseData> aiHistoryData();
+
+    @GET("technical.php")
+    Call<HistoryResponseData> aiTechnicalData();
 
 }

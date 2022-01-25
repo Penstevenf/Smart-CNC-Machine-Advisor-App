@@ -9,50 +9,42 @@ import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.winteq.adapter.history.AdapterHistory;
 import com.example.winteq.api.ApiClient;
 import com.example.winteq.api.Api_Interface;
 import com.example.winteq.model.history.HistoryData;
-import com.example.winteq.model.history.HistoryResponseData;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.List;
+public class SolutionData extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class History extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-
+    //Call Variable
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
     SharedPreferences sp;
 
-    SearchView sv;
-    Spinner line;
+    ImageView ipic;
+    Button up;
+    TextView line,station,machine,pic,part,desc,date,idproblem;
+    FloatingActionButton riad;
+    Api_Interface apiInterface;
+    HistoryData historyData;
+    Bitmap bitmap;
 
-    private ListView lvHis;
-    private AdapterHistory adapter;
-    private List<HistoryData> listHistory = new ArrayList<>();
-
+    private String xId, xLine, xStation, xMachine, xDate, xPic, xTitle, xProblem, xImage;
     private static final String SHARE_PREF_NAME = "mypref";
     private static final String FULLNAME = "fullname";
     private static final String IMAGE = "image";
@@ -60,39 +52,61 @@ public class History extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Remove top
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_history);
+        setContentView(R.layout.activity_solution_data);
 
+        //Get SharedPReference
         sp = getSharedPreferences(SHARE_PREF_NAME, MODE_PRIVATE);
 
-        drawerLayout = findViewById(R.id.hosl);
+        //Find Variable
+        drawerLayout = findViewById(R.id.soldata); //change xml id
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
 
-        adapter = new AdapterHistory(this);
+        //Call ApiInterface
+        apiInterface = ApiClient.getClient().create(Api_Interface.class);
 
-        lvHis = findViewById(R.id.listviewsp);
-        sv = findViewById(R.id.searchsp);
-        line = findViewById(R.id.catfil);
-        line.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String newItem = line.getSelectedItem().toString();
-                History.this.adapter.getFilterLine().filter(newItem);
-            }
+        line = findViewById(R.id.tv1);
+        station = findViewById(R.id.pstation);
+        machine = findViewById(R.id.pmachine);
+        pic = findViewById(R.id.ppic);
+        desc = findViewById(R.id.itemdesc);
+        part = findViewById(R.id.partreq);
+        ipic = findViewById(R.id.itempic);
+        up = findViewById(R.id.upreq);
+        riad = findViewById(R.id.req);
+        date = findViewById(R.id.tvdate);
+        idproblem = findViewById(R.id.idproblem);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                line.setSelection(0);
-            }
-        });
+        //getIntent
+        Intent sendPr = getIntent();
+        xId = sendPr.getStringExtra("xId");
+        xLine = sendPr.getStringExtra("xLine");
+        xStation = sendPr.getStringExtra("xStation");
+        xMachine = sendPr.getStringExtra("xMachine");
+        xDate = sendPr.getStringExtra("xDate");
+        xPic = sendPr.getStringExtra("xPic");
+        xTitle = sendPr.getStringExtra("xTitle");
+        xProblem = sendPr.getStringExtra("xProblem");
+        xImage = sendPr.getStringExtra("xImage");
 
-        retrieveData();
+        //setText
+        line.setText(xLine);
+        station.setText(xStation);
+        machine.setText(xMachine);
+        pic.setText(xPic);
+        desc.setText(xProblem);
+        part.setText(xTitle);
+        date.setText(xDate);
+        idproblem.setText(xId);
 
+        //Setup Header
         View header = navigationView.getHeaderView(0);
 
         TextView nama = (TextView) header.findViewById(R.id.fname);
 
+        //Setup Toolbar
         navigationView.bringToFront();
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -100,6 +114,7 @@ public class History extends AppCompatActivity implements NavigationView.OnNavig
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Input Name and Profile to Drawer
         nama.setText(sp.getString(FULLNAME, null));
 
         ImageView pfph = (ImageView) header.findViewById(R.id.pfph);
@@ -112,12 +127,28 @@ public class History extends AppCompatActivity implements NavigationView.OnNavig
             Picasso.get().load(imageUri).into(Image2);
         }
 
+        if(!(xImage.isEmpty())) {
+            String imageUri = xImage;
+            ImageView Image2 = ipic;
+            Picasso.get().load(imageUri).into(Image2);
+        }
+
         byte[] bytes = Base64.decode(profileS,Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         if (bitmap != null) {
             pfph.setImageBitmap(bitmap);
         }
 
+
+        riad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SolutionData.this, SolutionAdd.class);
+                intent.putExtra("xId", xId);
+                intent.putExtra("xTitle", xTitle);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -125,7 +156,7 @@ public class History extends AppCompatActivity implements NavigationView.OnNavig
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            Intent intent = new Intent(History.this, Dashboard.class);
+            Intent intent = new Intent(SolutionData.this, Solution.class);
             startActivity(intent);
         }
     }
@@ -135,12 +166,12 @@ public class History extends AppCompatActivity implements NavigationView.OnNavig
 
         switch (item.getItemId()){
             case R.id.nav_home:
-                Intent intent1 = new Intent(History.this, Dashboard.class);
+                Intent intent1 = new Intent(SolutionData.this, Dashboard.class);
                 startActivity(intent1);
                 break;
 
             case R.id.nav_profile:
-                Intent intent2 = new Intent(History.this, Profile.class);
+                Intent intent2 = new Intent(SolutionData.this, Profile.class);
                 startActivity(intent2);
                 break;
 
@@ -149,23 +180,23 @@ public class History extends AppCompatActivity implements NavigationView.OnNavig
                 SharedPreferences.Editor editor = sp.edit();
                 editor.clear();
                 editor.commit();
-                Toast.makeText(History.this, "Log out successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(History.this, Login.class);
+                Toast.makeText(SolutionData.this, "Log out successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SolutionData.this, Login.class);
                 startActivity(intent);
                 break;
 
             case R.id.nav_grafik:
-                Intent intent3 = new Intent(History.this, Graph.class);
+                Intent intent3 = new Intent(SolutionData.this, Graph.class);
                 startActivity(intent3);
                 break;
 
             case R.id.nav_contact:
-                Intent intent4 = new Intent(History.this, Contact.class);
+                Intent intent4 = new Intent(SolutionData.this, Contact.class);
                 startActivity(intent4);
                 break;
 
             case R.id.nav_help:
-                Intent intent5 = new Intent(History.this, Help.class);
+                Intent intent5 = new Intent(SolutionData.this, Help.class);
                 startActivity(intent5);
                 break;
         }
@@ -173,49 +204,5 @@ public class History extends AppCompatActivity implements NavigationView.OnNavig
         return true;
     }
 
-    public void retrieveData(){
-        Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
-        Call<HistoryResponseData> showData = aiData.aiHistoryData();
-
-        showData.enqueue(new Callback<HistoryResponseData>() {
-            @Override
-            public void onResponse(Call<HistoryResponseData> call, Response<HistoryResponseData> response) {
-                boolean status = response.body().isStatus();
-                String message = response.body().getMessage();
-
-                listHistory = response.body().getData();
-
-                if(listHistory != null) {
-                    adapter = new AdapterHistory(History.this, listHistory);
-                    lvHis.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                }
-
-//               Toast.makeText(WMS.this, listWms.get(0).getElc_tag(), Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onFailure(Call<HistoryResponseData> call, Throwable t) {
-                Toast.makeText(History.this, "Failed To Display Data", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if(listHistory != null) {
-                    History.this.adapter.getFilter().filter(newText);
-                }
-                return false;
-            }
-        });
-
-    }
 
 }

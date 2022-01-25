@@ -25,7 +25,7 @@
         <ImageView
             android:id="@+id/bluebox"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="110dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:src="@drawable/custom_rectangle"/>
@@ -46,37 +46,65 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="Technical Support"
             android:textColor="#000000"
             android:gravity="center"
-            android:textSize="46sp"
+            android:textSize="40sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <TextView
+        <ListView
+            android:id="@+id/listviewsp"
             android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/bluebox"
+            android:layout_height="320dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_margin="20dp"
+            android:padding="10dp"
+            tools:listitem="@layout/listview_layout_sp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addsp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/bluebox"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:text="Problem Waiting List"
-            android:textSize="28sp"
-            android:gravity="center"
-            android:fontFamily="sans-serif-condensed"/>
+            android:layout_marginRight="20dp"
+            android:backgroundTint="#4b5ea5"
+            android:src="@drawable/ic_baseline_add_24"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/listviewsp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
-        <TextView
-            android:id="@+id/stats"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/bluebox"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchsp"
+            android:layout_width="460dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/listviewsp"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:text="Empty"
-            android:textSize="28sp"
-            android:gravity="center"
-            android:fontFamily="sans-serif-condensed-light"/>
+            app:queryHint="Search"
+            app:iconifiedByDefault="false"
+            android:background="@drawable/linet"/>
+
+        <Spinner
+            android:id="@+id/catfil"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/sp_rectangle_root"
+            android:textSize="20sp"
+            android:padding="8dp"
+            android:entries="@array/monline2"
+            app:layout_constraintLeft_toRightOf="@id/searchsp"
+            app:layout_constraintRight_toLeftOf="@id/addsp"
+            app:layout_constraintTop_toBottomOf="@id/listviewsp" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

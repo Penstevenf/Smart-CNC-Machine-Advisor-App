@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".History"
-    android:id="@+id/hosl"
+    tools:context=".SupportAdd"
+    android:id="@+id/techadd"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
@@ -48,49 +48,58 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="History"
+            android:text="Technical Support"
             android:textColor="#000000"
             android:gravity="center"
             android:textSize="40sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <ListView
-            android:id="@+id/listviewsp"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/request"
+            android:layout_width="500dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="50dp"
+            android:text="REQUEST ITEM"
+            android:textSize="26sp"
             app:layout_constraintTop_toBottomOf="@id/bluebox"
-            android:layout_height="320dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_margin="20dp"
-            android:padding="10dp"
-            tools:listitem="@layout/listview_layout_hs"/>
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchsp"
-            android:layout_width="460dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/listviewsp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:queryHint="Search"
-            app:iconifiedByDefault="false"
-            android:background="@drawable/linet"/>
-
-        <Spinner
-            android:id="@+id/catfil"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/sp_rectangle_root"
-            android:textSize="20sp"
-            android:padding="8dp"
-            android:entries="@array/monline2"
-            app:layout_constraintLeft_toRightOf="@id/searchsp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/listviewsp" />
+            android:gravity="center" />
+        <Button
+            android:id="@+id/replace"
+            android:layout_width="500dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:text="REPLACE ITEM"
+            android:textSize="26sp"
+            app:layout_constraintTop_toBottomOf="@id/request"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:gravity="center" />
+        <Button
+            android:id="@+id/repair"
+            android:layout_width="500dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:text="REPAIR ITEM"
+            android:textSize="26sp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/replace"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:gravity="center" />
+        <Button
+            android:id="@+id/other"
+            android:layout_width="500dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:text="OTHER PROBLEM"
+            android:textSize="26sp"
+            app:layout_constraintTop_toBottomOf="@id/repair"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:gravity="center" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

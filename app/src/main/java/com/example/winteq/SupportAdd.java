@@ -9,7 +9,7 @@ import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,62 +21,38 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.winteq.api.ApiClient;
-import com.example.winteq.api.Api_Interface;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
-public class AssetManagementCopro extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class SupportAdd extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
     SharedPreferences sp;
-    FloatingActionButton fabentercopro;
-    Api_Interface apiInterface;
-    EditText et_entercopro;
-    FloatingActionButton fbtn_cancelcopro;
 
-    private String  xMachine;
+    Button request,replace,repair,other;
 
     private static final String SHARE_PREF_NAME = "mypref";
     private static final String FULLNAME = "fullname";
     private static final String IMAGE = "image";
-    private static final String LINE = "asset_line";
-    private static final String STATION = "asset_station";
-    private static final String MACHINE = "machine_name";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_asset_management_copro);
+        setContentView(R.layout.activity_support_add);
 
         sp = getSharedPreferences(SHARE_PREF_NAME, MODE_PRIVATE);
 
-        apiInterface = ApiClient.getClient().create(Api_Interface.class);
-        drawerLayout = findViewById(R.id.amcopro);
+        drawerLayout = findViewById(R.id.techadd);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
 
-        et_entercopro = findViewById(R.id.et_entercopro);
-        fabentercopro = findViewById(R.id.fabentercopro);
-        fabentercopro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        fbtn_cancelcopro = findViewById(R.id.fabentercopro);
-        fbtn_cancelcopro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AssetManagementCopro.this, AssetManagementReplace.class);
-                startActivity(intent);
-            }
-        });
+        request = findViewById(R.id.request);
+        replace = findViewById(R.id.replace);
+        repair = findViewById(R.id.repair);
+        other = findViewById(R.id.other);
 
         View header = navigationView.getHeaderView(0);
 
@@ -107,15 +83,45 @@ public class AssetManagementCopro extends AppCompatActivity implements Navigatio
             pfph.setImageBitmap(bitmap);
         }
 
-    }
+        request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SupportAdd.this, RequestItem.class);
+                startActivity(intent);
+            }
+        });
 
+        replace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SupportAdd.this, AssetManagementNotifPart.class);
+                startActivity(intent);
+            }
+        });
+
+        repair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SupportAdd.this, RepairItem.class);
+                startActivity(intent);
+            }
+        });
+
+        other.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SupportAdd.this, OtherProblem.class);
+                startActivity(intent);
+            }
+        });
+    }
 
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            Intent intent = new Intent(AssetManagementCopro.this, AssetManagementReplace.class);
+            Intent intent = new Intent(SupportAdd.this, Dashboard.class);
             startActivity(intent);
         }
     }
@@ -125,12 +131,12 @@ public class AssetManagementCopro extends AppCompatActivity implements Navigatio
 
         switch (item.getItemId()){
             case R.id.nav_home:
-                Intent intent1 = new Intent(AssetManagementCopro.this, Dashboard.class);
+                Intent intent1 = new Intent(SupportAdd.this, Dashboard.class);
                 startActivity(intent1);
                 break;
 
             case R.id.nav_profile:
-                Intent intent2 = new Intent(AssetManagementCopro.this, Profile.class);
+                Intent intent2 = new Intent(SupportAdd.this, Profile.class);
                 startActivity(intent2);
                 break;
 
@@ -139,28 +145,27 @@ public class AssetManagementCopro extends AppCompatActivity implements Navigatio
                 SharedPreferences.Editor editor = sp.edit();
                 editor.clear();
                 editor.commit();
-                Toast.makeText(AssetManagementCopro.this, "Log out successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(AssetManagementCopro.this, Login.class);
+                Toast.makeText(SupportAdd.this, "Log out successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SupportAdd.this, Login.class);
                 startActivity(intent);
                 break;
 
             case R.id.nav_grafik:
-                Intent intent3 = new Intent(AssetManagementCopro.this, Graph.class);
+                Intent intent3 = new Intent(SupportAdd.this, Graph.class);
                 startActivity(intent3);
                 break;
 
             case R.id.nav_contact:
-                Intent intent4 = new Intent(AssetManagementCopro.this, Contact.class);
+                Intent intent4 = new Intent(SupportAdd.this, Contact.class);
                 startActivity(intent4);
                 break;
 
             case R.id.nav_help:
-                Intent intent5 = new Intent(AssetManagementCopro.this, Help.class);
+                Intent intent5 = new Intent(SupportAdd.this, Help.class);
                 startActivity(intent5);
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }
