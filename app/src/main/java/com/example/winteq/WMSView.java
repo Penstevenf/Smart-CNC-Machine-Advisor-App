@@ -44,14 +44,14 @@ public class WMSView extends AppCompatActivity implements NavigationView.OnNavig
     Toolbar toolbar;
     SharedPreferences sp;
     EditText et_id;
-    TextView tv_itemdate, itemtag, tv_qty, tv_item, tv_copro, tv_area, tv_cabinet, tv_shelf, tv_desc, tv_category, tv_type, tv_lifetime;
+    TextView tv_itemdate, itemtag, tv_qty, tv_item, tv_unit, tv_area, tv_cabinet, tv_shelf, tv_desc, tv_category, tv_type, tv_lifetime;
     FloatingActionButton editdatawms, deletedatawms;
     WmsData wmsData;
     Api_Interface apiInterface;
     ImageView itempic;
     private List<WmsData> listGetWms;
 
-    private String xId, xTag, xDate, xItem, xType, xLifetime, xQty, xCategory, xCopro, xArea, xCabinet, xShelf, xImage, xDescription;
+    private String xId, xTag, xDate, xItem, xType, xLifetime, xQty, xCategory, xUnit, xArea, xCabinet, xShelf, xImage, xDescription;
     private static final String SHARE_PREF_NAME = "mypref";
     private static final String FULLNAME = "fullname";
     private static final String IMAGE = "image";
@@ -73,7 +73,7 @@ public class WMSView extends AppCompatActivity implements NavigationView.OnNavig
         xLifetime = send.getStringExtra("xLifetime");
         xQty = send.getStringExtra("xQty");
         xCategory = send.getStringExtra("xCategory");
-        xCopro = send.getStringExtra("xCopro");
+        xUnit = send.getStringExtra("xUnit");
         xArea = send.getStringExtra("xArea");
         xCabinet = send.getStringExtra("xCabinet");
         xShelf = send.getStringExtra("xShelf");
@@ -90,7 +90,7 @@ public class WMSView extends AppCompatActivity implements NavigationView.OnNavig
         et_id = findViewById(R.id.et_wmsid);
         tv_qty = findViewById(R.id.itemqtyz);
         tv_item = findViewById(R.id.itemnamewz);
-        tv_copro = findViewById(R.id.itemcoproz);
+        tv_unit = findViewById(R.id.itemcoproz);
         tv_area = findViewById(R.id.itemareaz);
         tv_cabinet = findViewById(R.id.itemcabinz);
         tv_shelf = findViewById(R.id.itemshelfz);
@@ -107,7 +107,7 @@ public class WMSView extends AppCompatActivity implements NavigationView.OnNavig
         tv_qty.setText(xQty);
         tv_item.setText(xItem);
         tv_itemdate.setText(xDate);
-        tv_copro.setText(xCopro);
+        tv_unit.setText(xUnit);
         tv_area.setText(xArea);
         tv_cabinet.setText(xCabinet);
         tv_shelf.setText(xShelf);
@@ -192,7 +192,7 @@ public class WMSView extends AppCompatActivity implements NavigationView.OnNavig
                             send.putExtra("xLifetime", varLifetime);
                             send.putExtra("xQty", varQty);
                             send.putExtra("xCategory", varCategory);
-                            send.putExtra("xCopro", varUnit);
+                            send.putExtra("xUnit", varUnit);
                             send.putExtra("xArea", varArea);
                             send.putExtra("xCabinet", varCabinet);
                             send.putExtra("xShelf", varShelf);

@@ -49,7 +49,7 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
     NavigationView navigationView;
     Toolbar toolbar;
     SharedPreferences sp;
-    EditText et_id, et_qty, et_item, et_copro, et_area, et_cabinet, et_shelf, et_desc, et_type, et_lifetime;
+    EditText et_id, et_qty, et_item, et_unit, et_area, et_cabinet, et_shelf, et_desc, et_type, et_lifetime;
     TextView tv_itemdate, itemtag;
     FloatingActionButton fb_edit;
     WmsData wmsData;
@@ -60,7 +60,7 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
     Button btn_wmseditimage;
     Bitmap bitmap;
 
-    private String xId, xTag, xDate, xItem, xType, xLifetime, xQty, xCategory, xCopro, xArea, xCabinet, xShelf, xImage, xDescription;
+    private String xId, xTag, xDate, xItem, xType, xLifetime, xQty, xCategory, xUnit, xArea, xCabinet, xShelf, xImage, xDescription;
     private static final String SHARE_PREF_NAME = "mypref";
     private static final String FULLNAME = "fullname";
     private static final String IMAGE = "image";
@@ -80,7 +80,7 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
         xLifetime = send.getStringExtra("xLifetime");
         xQty = send.getStringExtra("xQty");
         xCategory = send.getStringExtra("xCategory");
-        xCopro = send.getStringExtra("xCopro");
+        xUnit = send.getStringExtra("xUnit");
         xArea = send.getStringExtra("xArea");
         xCabinet = send.getStringExtra("xCabinet");
         xShelf = send.getStringExtra("xShelf");
@@ -97,7 +97,7 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
         et_id = findViewById(R.id.et_idwmsedit);
         et_qty = findViewById(R.id.itemqty);
         et_item = findViewById(R.id.itemnamew);
-        et_copro = findViewById(R.id.itemcopro);
+        et_unit = findViewById(R.id.itemcopro);
         et_area = findViewById(R.id.eitemarea);
         et_cabinet = findViewById(R.id.eitemcabin);
         et_shelf = findViewById(R.id.eitemshelf);
@@ -135,7 +135,7 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
             radioMekanik.setChecked(true);
             radioElektrik.setChecked(false);
         }
-        et_copro.setText(xCopro);
+        et_unit.setText(xUnit);
         et_area.setText(xArea);
         et_cabinet.setText(xCabinet);
         et_shelf.setText(xShelf);
@@ -293,7 +293,7 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
         String type = et_type.getText().toString();
         String lifetime_wms = et_lifetime.getText().toString();
         String category = radioButton.getText().toString();
-        String copro = et_copro.getText().toString();
+        String unit = et_unit.getText().toString();
         String area = et_area.getText().toString();
         String cabinet = et_cabinet.getText().toString();
         String shelf = et_shelf.getText().toString();
@@ -304,7 +304,7 @@ public class WMSUpdate extends AppCompatActivity implements NavigationView.OnNav
         pd.setCancelable(false);
         pd.show();
 
-        Call<WmsData> WMSUpdatecall = apiInterface.wmsupdateData(id, qty, item_name, type, lifetime_wms, category, copro, area, cabinet, shelf, description, image);
+        Call<WmsData> WMSUpdatecall = apiInterface.wmsupdateData(id, qty, item_name, type, lifetime_wms, category, unit, area, cabinet, shelf, description, image);
         WMSUpdatecall.enqueue(new Callback<WmsData>() {
             @Override
             public void onResponse(Call<WmsData> call, Response<WmsData> response) {

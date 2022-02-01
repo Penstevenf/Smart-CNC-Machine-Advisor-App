@@ -49,7 +49,7 @@ public class WMSAdd extends AppCompatActivity implements NavigationView.OnNaviga
     NavigationView navigationView;
     Toolbar toolbar;
     SharedPreferences sp;
-    EditText et_qty, et_item, et_copro, et_area, et_cabinet, et_shelf, et_desc, et_lifetime, et_type;
+    EditText et_qty, et_item, et_unit, et_area, et_cabinet, et_shelf, et_desc, et_lifetime, et_type;
     TextView tv_default, tv_tag;
     FloatingActionButton wmsin;
     WmsData wmsData;
@@ -81,7 +81,7 @@ public class WMSAdd extends AppCompatActivity implements NavigationView.OnNaviga
         tv_tag = findViewById(R.id.tv_tag);
         et_qty = findViewById(R.id.e3);
         et_item = findViewById(R.id.e6);
-        et_copro = findViewById(R.id.e5);
+        et_unit = findViewById(R.id.e5);
         et_area = findViewById(R.id.e7);
         et_cabinet = findViewById(R.id.e8);
         et_shelf = findViewById(R.id.e9);
@@ -272,7 +272,7 @@ public class WMSAdd extends AppCompatActivity implements NavigationView.OnNaviga
         String item_name = et_item.getText().toString();
         String type = et_type.getText().toString();
         String lifetime_wms = et_lifetime.getText().toString();
-        String copro = et_copro.getText().toString();
+        String unit = et_unit.getText().toString();
         String category = radioButton.getText().toString();
         String area = et_area.getText().toString();
         String cabinet = et_cabinet.getText().toString();
@@ -284,7 +284,7 @@ public class WMSAdd extends AppCompatActivity implements NavigationView.OnNaviga
         pd.setCancelable(false);
         pd.show();
 
-        Call<WmsData> wmsaddcall = apiInterface.wmsaddResponse(qty, item_name, type, lifetime_wms, category, copro, area, cabinet, shelf, description, image);
+        Call<WmsData> wmsaddcall = apiInterface.wmsaddResponse(qty, item_name, type, lifetime_wms, category, unit, area, cabinet, shelf, description, image);
         wmsaddcall.enqueue(new Callback<WmsData>() {
             @Override
             public void onResponse(Call<WmsData> call, Response<WmsData> response) {

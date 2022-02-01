@@ -255,7 +255,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="250dp"
             android:gravity="center_vertical"
-            android:text="COPRO"
+            android:text="Unit"
             android:textSize="20sp"
             android:fontFamily="sans-serif"
             android:textColor="@color/black"

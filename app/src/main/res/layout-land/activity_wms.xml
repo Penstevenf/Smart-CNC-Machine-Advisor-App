@@ -124,7 +124,7 @@
                 android:background="@drawable/lines"
                 android:fontFamily="sans-serif-black"
                 android:gravity="center"
-                android:text="Copro"
+                android:text="Unit"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 

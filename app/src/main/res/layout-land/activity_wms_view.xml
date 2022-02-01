@@ -255,7 +255,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="30dp"
             android:gravity="center_vertical"
-            android:text="COPRO"
+            android:text="Unit"
+            android:visibility="invisible"
             android:textSize="20sp"
             android:fontFamily="sans-serif"
             android:textColor="@color/black"
@@ -266,16 +267,15 @@
 
         <TextView
             android:id="@+id/itemcoproz"
-            android:layout_width="160dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
             android:fontFamily="sans-serif"
             android:gravity="center_vertical"
-            android:text="10000"
+            android:text="Unit"
+            android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintLeft_toRightOf="@+id/tv6z"
-            app:layout_constraintTop_toBottomOf="@+id/iv2z" />
+            app:layout_constraintLeft_toRightOf="@+id/itemqtyz"
+            app:layout_constraintTop_toBottomOf="@+id/itemnamewz" />
 
         <TextView
             android:id="@+id/tv3z"

@@ -104,7 +104,7 @@
             android:background="@drawable/lines"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:text="01010"
+            android:text="unit"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
