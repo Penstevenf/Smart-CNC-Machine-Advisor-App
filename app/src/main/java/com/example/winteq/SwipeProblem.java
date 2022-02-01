@@ -24,7 +24,7 @@ public class SwipeProblem extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.swipe_problem);
 
-        Bundle extras = getIntent().getExtras();
+//        Bundle extras = getIntent().getExtras();
 //        if (extras != null) {
 //            String value = extras.getString("key");
 //            //The key argument here must match that used in the other activity

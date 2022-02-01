@@ -124,7 +124,7 @@
                     android:layout_height="75dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
-                    app:srcCompat="@drawable/camera_blue" />
+                    app:srcCompat="@drawable/camera" />
 
             </androidx.cardview.widget.CardView>
 
@@ -290,7 +290,7 @@
                     android:layout_height="75dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
-                    app:srcCompat="@drawable/headsetb" />
+                    app:srcCompat="@drawable/headset" />
 
             </androidx.cardview.widget.CardView>
 

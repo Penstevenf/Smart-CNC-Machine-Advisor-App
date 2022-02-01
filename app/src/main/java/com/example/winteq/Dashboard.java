@@ -148,11 +148,13 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         createNotificationChannels();
         notificationManager = NotificationManagerCompat.from(this);
 
+        //run once only
         if(sp.getString(DONE, null) == null){
             (new loading()).execute();
             sp.edit().putString(DONE, "1").apply();
         }
 
+        //repeat notification every 20 sec
         mRepeatHandler = new Handler();
         mRepeatRunnable = new Runnable() {
             @Override

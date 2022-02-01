@@ -224,7 +224,7 @@ public class MonitoringView extends AppCompatActivity implements NavigationView.
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
-                                Call<MonData> deleteData = aiData.mondeleteData(Xid);
+                                Call<MonData> deleteData = aiData.mondeleteData(Xid, Xline, Xstation);
 
                                 deleteData.enqueue(new Callback<MonData>() {
                                     public void onResponse(Call<MonData> call, Response<MonData> response) {

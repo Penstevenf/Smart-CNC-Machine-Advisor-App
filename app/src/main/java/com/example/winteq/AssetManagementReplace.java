@@ -121,7 +121,7 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
         }
 
         viewData();
-        Toast.makeText(AssetManagementReplace.this, xMachine, Toast.LENGTH_SHORT).show();
+
 
         //warehouse part data id
         tv_item = findViewById(R.id.itemnamewzg);
@@ -244,7 +244,7 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
                     listGetWms = response.body().getData();
 
                     tv_item.setText(listGetWms.get(0).getItem_name());
-                    tv_copro.setText(listGetWms.get(0).getCopro());
+                    tv_copro.setText(listGetWms.get(0).getUnit());
                     tv_type.setText(listGetWms.get(0).getType());
                     tv_category.setText(listGetWms.get(0).getCategory());
                     tv_qty.setText(listGetWms.get(0).getQty());

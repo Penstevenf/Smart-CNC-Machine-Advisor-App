@@ -38,8 +38,8 @@ public class WmsData {
 	private String category;
 
 	@Expose
-	@SerializedName("copro")
-	private String copro;
+	@SerializedName("unit")
+	private String unit;
 
 	@Expose
 	@SerializedName("area")
@@ -142,12 +142,12 @@ public class WmsData {
 		this.category = category;
 	}
 
-	public String getCopro() {
-		return copro;
+	public String getUnit() {
+		return unit;
 	}
 
-	public void setCopro(String copro) {
-		this.copro = copro;
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 
 	public String getArea() {

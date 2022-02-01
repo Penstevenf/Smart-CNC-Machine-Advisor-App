@@ -145,7 +145,7 @@ public class AdapterMonitoring2 extends BaseAdapter {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
-                                                Call<MonData> deleteData = aiData.mondeleteData(idMon2);
+                                                Call<MonData> deleteData = aiData.mondeleteData(idMon2, md2.getStation(), md2.getLine());
 
                                                 deleteData.enqueue(new Callback<MonData>() {
                                                     public void onResponse(Call<MonData> call, Response<MonData> response) {
@@ -222,40 +222,6 @@ public class AdapterMonitoring2 extends BaseAdapter {
             station2.setText(md.getStation());
             tv_mon2_id.setText(md.getMon_id());
         }
-    }
-
-    private void deleteData(){
-        Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
-        Call<MonData> deleteData = aiData.mondeleteData(idMon2);
-
-        deleteData.enqueue(new Callback<MonData>() {
-            public void onResponse(Call<MonData> call, Response<MonData> response) {
-                //sr untuk menampung array message dalam bentuk string
-                //loop isi data dari array message lalu di append ke dalam string sr
-                //if else untuk mencegah mengambil value awal dari string sr ("")
-                String sr = "";
-                for(int i=0 ; i<response.body().getMessage().length ; i++){
-                    if(sr.length() == 0){
-                        sr = response.body().getMessage()[i];
-                    }else{
-                        sr = sr + "\n" + response.body().getMessage()[i];
-                    }
-                }
-                if(response.body() != null && response.body().isStatus()){
-
-                    monData = response.body();
-                    Toast.makeText(context, sr, Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Toast.makeText(context, sr, Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MonData> call, Throwable t) {
-                Toast.makeText(context, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     private void viewData(){

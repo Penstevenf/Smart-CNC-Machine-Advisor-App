@@ -599,7 +599,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="30dp"
             android:gravity="center_vertical"
-            android:text="COPRO"
+            android:text="Detail:"
             android:textSize="20sp"
             android:fontFamily="sans-serif"
             android:textColor="@color/black"
@@ -616,6 +616,7 @@
             android:fontFamily="sans-serif"
             android:gravity="center_vertical"
             android:text="31425"
+            android:visibility="invisible"
             android:textSize="20sp"
             app:layout_constraintLeft_toRightOf="@+id/tv6zg"
             app:layout_constraintTop_toBottomOf="@+id/iv2zg" />

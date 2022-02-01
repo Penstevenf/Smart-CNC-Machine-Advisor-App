@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
-        android:layout_width="300dp"
+        android:id="@+id/rly"
+        android:layout_width="800dp"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
         android:background="@drawable/lines"
@@ -16,10 +17,11 @@
 
         <TextView
             android:id="@+id/sptitle"
-            android:layout_width="300dp"
+            android:layout_width="800dp"
             android:layout_height="40dp"
             android:fontFamily="sans-serif-black"
-            android:gravity="center"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
             android:text="Replace Item"
             android:textColor="@color/black"
             android:textSize="20sp" />
@@ -31,25 +33,26 @@
             android:layout_below="@+id/sptitle"
             android:fontFamily="sans-serif"
             android:paddingLeft="5dp"
-            android:text="Line"
+            android:text="Line 5"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/spline"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="30dp"-->
-<!--            android:layout_below="@+id/sptitle"-->
-<!--            android:layout_toRightOf="@id/tv1"-->
-<!--            android:fontFamily="sans-serif"-->
-<!--            android:paddingLeft="5dp"-->
-<!--            android:text="1"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="20sp" />-->
+        <TextView
+            android:id="@+id/tv1id"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/sptitle"
+            android:layout_toRightOf="@id/tv1"
+            android:fontFamily="sans-serif"
+            android:paddingLeft="5dp"
+            android:visibility="gone"
+            android:text="1"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv2"
-            android:layout_width="100dp"
+            android:layout_width="70dp"
             android:layout_height="30dp"
             android:layout_below="@+id/tv1"
             android:fontFamily="sans-serif"
@@ -66,24 +69,24 @@
             android:layout_toRightOf="@id/tv2"
             android:fontFamily="sans-serif"
             android:paddingLeft="5dp"
-            android:text="Manufacture"
+            android:text="1"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv3"
-            android:paddingLeft="5dp"
-            android:layout_width="100dp"
+            android:layout_width="85dp"
             android:layout_height="30dp"
             android:layout_below="@+id/tv2"
             android:fontFamily="sans-serif"
+            android:paddingLeft="5dp"
             android:text="Machine"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/spmachine"
-            android:layout_width="200dp"
+            android:layout_width="250dp"
             android:layout_height="30dp"
             android:layout_below="@+id/tv2"
             android:layout_toRightOf="@id/tv3"
@@ -95,84 +98,83 @@
 
         <TextView
             android:id="@+id/tv4"
-            android:paddingLeft="5dp"
             android:layout_width="100dp"
             android:layout_height="30dp"
-            android:layout_below="@+id/tv3"
+            android:layout_below="@+id/sptitle"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="0dp"
             android:fontFamily="sans-serif"
+            android:gravity="right"
+            android:paddingRight="10dp"
             android:text="PIC"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/sppic"
-            android:layout_width="200dp"
+            android:layout_width="250dp"
             android:layout_height="30dp"
-            android:layout_below="@+id/tv3"
-            android:layout_toRightOf="@id/tv4"
+            android:layout_below="@+id/sptitle"
+            android:layout_toLeftOf="@id/tv4"
             android:fontFamily="sans-serif"
-            android:paddingLeft="5dp"
+            android:gravity="right"
+            android:paddingRight="5dp"
             android:text="Puji"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv5"
-            android:paddingLeft="5dp"
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:layout_below="@+id/tv4"
+            android:layout_alignParentRight="true"
             android:fontFamily="sans-serif"
+            android:gravity="right"
+            android:paddingRight="10dp"
             android:text="Date"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/spdate"
-            android:layout_width="150dp"
+            android:layout_width="250dp"
             android:layout_height="30dp"
             android:layout_below="@+id/tv4"
-            android:layout_toRightOf="@id/tv5"
+            android:layout_toLeftOf="@id/tv5"
             android:fontFamily="sans-serif"
-            android:paddingLeft="5dp"
+            android:gravity="right"
+            android:paddingRight="5dp"
             android:text="2020-12-12"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv6"
-            android:paddingLeft="5dp"
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:layout_below="@+id/tv5"
+            android:layout_alignParentRight="true"
             android:fontFamily="sans-serif"
+            android:gravity="right"
+            android:paddingRight="10dp"
             android:text="Problem"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/sptype"
-            android:layout_width="200dp"
+            android:layout_width="250dp"
             android:layout_height="30dp"
             android:layout_below="@+id/tv5"
-            android:layout_toRightOf="@id/tv6"
+            android:layout_toLeftOf="@id/tv6"
             android:fontFamily="sans-serif"
-            android:paddingLeft="5dp"
+            android:gravity="right"
+            android:paddingRight="5dp"
             android:text="Replace Item"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/tv1id"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_below="@+id/sptitle"
-            android:fontFamily="sans-serif"
-            android:paddingLeft="5dp"
-            android:visibility="gone"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="20sp" />
 
     </RelativeLayout>
 

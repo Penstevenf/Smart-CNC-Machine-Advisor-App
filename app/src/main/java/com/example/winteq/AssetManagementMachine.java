@@ -28,6 +28,7 @@ import com.example.winteq.api.ApiClient;
 import com.example.winteq.api.Api_Interface;
 import com.example.winteq.model.asset.AssetData;
 import com.example.winteq.model.asset.AssetResponseData;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
@@ -49,6 +50,7 @@ public class AssetManagementMachine extends AppCompatActivity implements Navigat
     Spinner statsp;
     AssetData assetData;
     TextView tv_savestation, tv_savelines;
+    FloatingActionButton AddMacAsset;
 
     private GridView gridviewAMSM;
     private AdapterAssetMachine adapter;
@@ -77,6 +79,7 @@ public class AssetManagementMachine extends AppCompatActivity implements Navigat
         sp = getSharedPreferences(SHARE_PREF_NAME, MODE_PRIVATE);
 
         tv_savestation = findViewById(R.id.tv_savestation);
+        AddMacAsset = findViewById(R.id.AddMacAsset);
 
         if(sp.getString(STATION, null) == null) {
             //UNPACK INTENT
@@ -130,6 +133,11 @@ public class AssetManagementMachine extends AppCompatActivity implements Navigat
         if (bitmap != null) {
             pfph.setImageBitmap(bitmap);
         }
+    }
+
+    public void addmacasset(View v){
+        Intent assetNo = new Intent(AssetManagementMachine.this, AssetAddMachine.class);
+        startActivity(assetNo);
     }
 
     @Override

@@ -146,7 +146,7 @@ public class AdapterMonitoring1 extends BaseAdapter {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
-                                                Call<MonData> deleteData = aiData.mondeleteData(idMon1);
+                                                Call<MonData> deleteData = aiData.mondeleteData(idMon1, md1.getStation(), md1.getLine());
 
                                                 deleteData.enqueue(new Callback<MonData>() {
                                                     public void onResponse(Call<MonData> call, Response<MonData> response) {
@@ -223,10 +223,6 @@ public class AdapterMonitoring1 extends BaseAdapter {
             station1.setText(md.getStation());
             tv_mon1_id.setText(md.getMon_id());
         }
-    }
-
-    private void deleteData(){
-
     }
 
     private void viewData(){

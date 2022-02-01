@@ -149,7 +149,7 @@ public class SolutionAdd extends AppCompatActivity implements NavigationView.OnN
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            Intent intent = new Intent(SolutionAdd.this, SolutionData.class);
+            Intent intent = new Intent(SolutionAdd.this, Solution.class);
             startActivity(intent);
         }
     }

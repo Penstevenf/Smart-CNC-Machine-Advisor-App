@@ -218,7 +218,7 @@ public class AdapterData extends BaseAdapter implements Filterable {
                     String varLifetime = listGetWms.get(0).getLifetime_wms();
                     String varQty = listGetWms.get(0).getQty();
                     String varCategory = listGetWms.get(0).getCategory();
-                    String varCopro = listGetWms.get(0).getCopro();
+                    String varUnit = listGetWms.get(0).getUnit();
                     String varArea = listGetWms.get(0).getArea();
                     String varCabinet = listGetWms.get(0).getCabinet();
                     String varShelf = listGetWms.get(0).getShelf();
@@ -234,7 +234,7 @@ public class AdapterData extends BaseAdapter implements Filterable {
                     send.putExtra("xLifetime", varLifetime);
                     send.putExtra("xQty", varQty);
                     send.putExtra("xCategory", varCategory);
-                    send.putExtra("xCopro", varCopro);
+                    send.putExtra("xUnit", varUnit);
                     send.putExtra("xArea", varArea);
                     send.putExtra("xCabinet", varCabinet);
                     send.putExtra("xShelf", varShelf);
@@ -343,7 +343,7 @@ public class AdapterData extends BaseAdapter implements Filterable {
                     String varLifetime = listGetWms.get(0).getLifetime_wms();
                     String varQty = listGetWms.get(0).getQty();
                     String varCategory = listGetWms.get(0).getCategory();
-                    String varCopro = listGetWms.get(0).getCopro();
+                    String varUnit = listGetWms.get(0).getUnit();
                     String varArea = listGetWms.get(0).getArea();
                     String varCabinet = listGetWms.get(0).getCabinet();
                     String varShelf = listGetWms.get(0).getShelf();
@@ -359,7 +359,7 @@ public class AdapterData extends BaseAdapter implements Filterable {
                     send.putExtra("xLifetime", varLifetime);
                     send.putExtra("xQty", varQty);
                     send.putExtra("xCategory", varCategory);
-                    send.putExtra("xCopro", varCopro);
+                    send.putExtra("xUnit", varUnit);
                     send.putExtra("xArea", varArea);
                     send.putExtra("xCabinet", varCabinet);
                     send.putExtra("xShelf", varShelf);
@@ -428,7 +428,7 @@ public class AdapterData extends BaseAdapter implements Filterable {
                                 row.getType().toLowerCase().contains(Key.toLowerCase()) ||
                                 row.getNo_tag().toLowerCase().contains(Key.toLowerCase()) ||
                                 row.getArea().toLowerCase().contains(Key.toLowerCase()) ||
-                                row.getCopro().toLowerCase().contains(Key.toLowerCase()) ||
+                                row.getUnit().toLowerCase().contains(Key.toLowerCase()) ||
                                 row.getCabinet().toLowerCase().contains(Key.toLowerCase()) ||
                                 row.getShelf().toLowerCase().contains(Key.toLowerCase())){
                             listFiltereds.add(row);
@@ -452,7 +452,7 @@ public class AdapterData extends BaseAdapter implements Filterable {
     }
 
     private class ViewHolder {
-        private TextView id, tag, date, itemname, type, lifetime, qty, category,copro,area,cabinet,shelf;
+        private TextView id, tag, date, itemname, type, lifetime, qty, category,unit,area,cabinet,shelf;
 
         ViewHolder (View v){
             id = v.findViewById(R.id.tv_id);
@@ -463,7 +463,7 @@ public class AdapterData extends BaseAdapter implements Filterable {
             lifetime = v.findViewById(R.id.lifetime);
             qty = v.findViewById(R.id.qty);
             category = v.findViewById(R.id.category);
-            copro = v.findViewById(R.id.copro);
+            unit = v.findViewById(R.id.copro);
             area = v.findViewById(R.id.area);
             cabinet = v.findViewById(R.id.cabinet);
             shelf = v.findViewById(R.id.shelf);
@@ -478,7 +478,7 @@ public class AdapterData extends BaseAdapter implements Filterable {
             lifetime.setText(wd.getLifetime_wms());
             qty.setText(wd.getQty());
             category.setText(wd.getCategory());
-            copro.setText(wd.getCopro());
+            unit.setText(wd.getUnit());
             area.setText(wd.getArea());
             cabinet.setText(wd.getCabinet());
             shelf.setText(wd.getShelf());

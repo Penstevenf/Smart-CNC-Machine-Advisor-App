@@ -51,7 +51,7 @@
     </string-array>
 
     <string-array name="monstat">
-        <item>None</item>
+        <item>Working</item>
     </string-array>
 
 </resources>

@@ -10,14 +10,22 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.winteq.History;
 import com.example.winteq.HistoryView;
 import com.example.winteq.R;
+import com.example.winteq.api.ApiClient;
+import com.example.winteq.api.Api_Interface;
 import com.example.winteq.model.history.HistoryData;
+import com.example.winteq.model.history.HistoryResponseData;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AdapterHistory extends BaseAdapter implements Filterable {
 
@@ -67,10 +75,69 @@ public class AdapterHistory extends BaseAdapter implements Filterable {
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-//                Toast.makeText(context, line+" Selected", Toast.LENGTH_SHORT).show();
-                Intent nameSend = new Intent(context, HistoryView.class);
-                context.startActivity(nameSend);
+            public void onClick(View view) {
+                Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
+                Call<HistoryResponseData> showData = aiData.aiHistoryData();
+
+                showData.enqueue(new Callback<HistoryResponseData>() {
+                    @Override
+                    public void onResponse(Call<HistoryResponseData> call, Response<HistoryResponseData> response) {
+                        boolean status = response.body().isStatus();
+                        String message = response.body().getMessage();
+
+                        listHistory = response.body().getData();
+
+                        if(response.body() != null && response.body().isStatus()) {
+
+                            String varId = listHistory.get(0).getId_hist();
+                            String varLine = listHistory.get(0).getLine_hist();
+                            String varStation = listHistory.get(0).getStation_hist();
+                            String varMachine = listHistory.get(0).getMachine_hist();
+                            String varDatep = listHistory.get(0).getDate_problem();
+                            String varPic = listHistory.get(0).getPic_hist();
+                            String varDateSol = listHistory.get(0).getDate_solution();
+                            String varPro = listHistory.get(0).getProblem();
+                            String varImgp = listHistory.get(0).getImage_problem();
+                            String varImgs = listHistory.get(0).getImage_solution();
+                            String varPartp = listHistory.get(0).getPart_problem();
+                            String varParts = listHistory.get(0).getPart_solution();
+                            String varSol = listHistory.get(0).getSolution();
+                            String varQtyp = listHistory.get(0).getQty_problem();
+                            String varQtys = listHistory.get(0).getQty_solution();
+                            String varStatus = listHistory.get(0).getStatus_hist();
+                            String varType = listHistory.get(0).getType_hist();
+                            String varTitle = listHistory.get(0).getTitle();
+
+//                          Toast.makeText(context, "Data : "+varIdMec+varItemMec, Toast.LENGTH_SHORT).show();
+
+                            Intent sendHV = new Intent(context, HistoryView.class);
+                            sendHV.putExtra("xId", varId);
+                            sendHV.putExtra("xLine", varLine);
+                            sendHV.putExtra("xStation", varStation);
+                            sendHV.putExtra("xMachine", varMachine);
+                            sendHV.putExtra("xDatep", varDatep);
+                            sendHV.putExtra("xPic", varPic);
+                            sendHV.putExtra("xDates", varDateSol);
+                            sendHV.putExtra("xPro", varPro);
+                            sendHV.putExtra("xImgp", varImgp);
+                            sendHV.putExtra("xImgs", varImgs);
+                            sendHV.putExtra("xPartp", varPartp);
+                            sendHV.putExtra("xParts", varParts);
+                            sendHV.putExtra("xSol", varSol);
+                            sendHV.putExtra("xQtyp", varQtyp);
+                            sendHV.putExtra("xQtys", varQtys);
+                            sendHV.putExtra("xStatus", varStatus);
+                            sendHV.putExtra("xType", varType);
+                            sendHV.putExtra("xTitle", varTitle);
+                            context.startActivity(sendHV);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<HistoryResponseData> call, Throwable t) {
+                        Toast.makeText(context, "Failed To Display Data", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

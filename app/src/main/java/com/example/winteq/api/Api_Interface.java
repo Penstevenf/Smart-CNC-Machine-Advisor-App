@@ -226,7 +226,9 @@ public interface Api_Interface {
     @FormUrlEncoded
     @POST("monitoringdelete.php")
     Call<MonData> mondeleteData(
-            @Field("mon_id") String mon_id
+            @Field("mon_id") String mon_id,
+            @Field("line") String line,
+            @Field("station") String station
     );
 
     @FormUrlEncoded
@@ -266,6 +268,14 @@ public interface Api_Interface {
             @Field("asset_qty") String asset_qty,
             @Field("asset_line") String asset_line,
             @Field("asset_station") String asset_station
+    );
+
+    @FormUrlEncoded
+    @POST("assetaddmachine.php")
+    Call<AssetData> aiAssetAddMachineData(
+            @Field("asset_line") String asset_line,
+            @Field("asset_station") String asset_station,
+            @Field("machine_name") String machine_name
     );
 
     @FormUrlEncoded

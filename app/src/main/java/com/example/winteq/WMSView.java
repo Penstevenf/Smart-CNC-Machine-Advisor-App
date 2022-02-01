@@ -176,7 +176,7 @@ public class WMSView extends AppCompatActivity implements NavigationView.OnNavig
                             String varLifetime = listGetWms.get(0).getLifetime_wms();
                             String varQty = listGetWms.get(0).getQty();
                             String varCategory = listGetWms.get(0).getCategory();
-                            String varCopro = listGetWms.get(0).getCopro();
+                            String varUnit= listGetWms.get(0).getUnit();
                             String varArea = listGetWms.get(0).getArea();
                             String varCabinet = listGetWms.get(0).getCabinet();
                             String varShelf = listGetWms.get(0).getShelf();
@@ -192,7 +192,7 @@ public class WMSView extends AppCompatActivity implements NavigationView.OnNavig
                             send.putExtra("xLifetime", varLifetime);
                             send.putExtra("xQty", varQty);
                             send.putExtra("xCategory", varCategory);
-                            send.putExtra("xCopro", varCopro);
+                            send.putExtra("xCopro", varUnit);
                             send.putExtra("xArea", varArea);
                             send.putExtra("xCabinet", varCabinet);
                             send.putExtra("xShelf", varShelf);
