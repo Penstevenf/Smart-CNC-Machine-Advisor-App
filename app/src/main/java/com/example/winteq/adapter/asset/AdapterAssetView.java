@@ -97,7 +97,7 @@ public class AdapterAssetView extends BaseAdapter implements Filterable {
                             String varRegister = listAsset.get(0).getDate_register();
                             String varReplace = listAsset.get(0).getDate_replace();
                             String varUpdate = listAsset.get(0).getDate_update();
-
+                            String varUnit = listAsset.get(0).getAsset_unit();
 
 
                             Intent sendAP = new Intent(context, AssetManagementReplace.class);
@@ -112,6 +112,7 @@ public class AdapterAssetView extends BaseAdapter implements Filterable {
                             sendAP.putExtra("xRegister", varRegister);
                             sendAP.putExtra("xReplace", varReplace);
                             sendAP.putExtra("xUpdate", varUpdate);
+                            sendAP.putExtra("xUnit", varUnit);
                             context.startActivity(sendAP);
                             Toast.makeText(context, varPart, Toast.LENGTH_SHORT).show();
                         }

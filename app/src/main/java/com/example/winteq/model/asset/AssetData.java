@@ -41,6 +41,10 @@ public class AssetData {
     private String asset_qty;
 
     @Expose
+    @SerializedName("asset_unit")
+    private String asset_unit;
+
+    @Expose
     @SerializedName("lifetime")
     private String lifetime;
 
@@ -138,6 +142,14 @@ public class AssetData {
 
     public void setAsset_qty(String asset_qty) {
         this.asset_qty = asset_qty;
+    }
+
+    public String getAsset_unit() {
+        return asset_unit;
+    }
+
+    public void setAsset_unit(String asset_unit) {
+        this.asset_unit = asset_unit;
     }
 
     public String getLifetime() {

@@ -44,7 +44,7 @@ public class AssetManagementAdd extends AppCompatActivity implements NavigationV
     Api_Interface apiInterface;
     RadioGroup radioGroup;
     RadioButton radioButton, rb_elc, rb_mec;
-    EditText et_qty, et_part;
+    EditText et_qty, et_part, et_assetunit;
     TextView tv_machine, machine_no_add;
     AssetData assetData;
     FloatingActionButton fb_assetadd;
@@ -81,6 +81,7 @@ public class AssetManagementAdd extends AppCompatActivity implements NavigationV
         rb_elc = findViewById(R.id.rb_add_elektrik_asset);
         rb_mec = findViewById(R.id.rb_add_mekanik_asset);
         fb_assetadd = findViewById(R.id.fb_assetadd);
+        et_assetunit = findViewById(R.id.et_assetunit);
 
         apiInterface = ApiClient.getClient().create(Api_Interface.class);
         drawerLayout = findViewById(R.id.amadd);
@@ -135,12 +136,13 @@ public class AssetManagementAdd extends AppCompatActivity implements NavigationV
         String asset_qty = et_qty.getText().toString();
         String asset_line = sp.getString(LINE, null);
         String asset_station = sp.getString(STATION, null);
+        String asset_unit = et_assetunit.getText().toString();
         ProgressDialog pd = new ProgressDialog(AssetManagementAdd.this);
         pd.setMessage("Loading...");
         pd.setCancelable(false);
         pd.show();
 
-        Call<AssetData> amAddCall = apiInterface.aiAssetAddData(assetNo, machine_name, asset_part, asset_category, asset_qty, asset_line, asset_station);
+        Call<AssetData> amAddCall = apiInterface.aiAssetAddData(assetNo, machine_name, asset_part, asset_category, asset_qty, asset_line, asset_station, asset_unit);
         amAddCall.enqueue(new Callback<AssetData>() {
             @Override
             public void onResponse(Call<AssetData> call, Response<AssetData> response) {

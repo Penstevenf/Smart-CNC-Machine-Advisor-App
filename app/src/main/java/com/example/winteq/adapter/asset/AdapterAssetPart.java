@@ -97,6 +97,7 @@ public class AdapterAssetPart extends BaseAdapter implements Filterable {
                             String varRegister = listAsset.get(0).getDate_register();
                             String varReplace = listAsset.get(0).getDate_replace();
                             String varUpdate = listAsset.get(0).getDate_update();
+                            String varUnit = listAsset.get(0).getAsset_unit();
 
 //                          Toast.makeText(context, "Data : "+varIdMec+varItemMec, Toast.LENGTH_SHORT).show();
 
@@ -112,6 +113,7 @@ public class AdapterAssetPart extends BaseAdapter implements Filterable {
                             sendAP.putExtra("xRegister", varRegister);
                             sendAP.putExtra("xReplace", varReplace);
                             sendAP.putExtra("xUpdate", varUpdate);
+                            sendAP.putExtra("xUnit", varUnit);
                             context.startActivity(sendAP);
                         }
                     }

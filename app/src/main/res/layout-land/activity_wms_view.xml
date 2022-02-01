@@ -343,7 +343,7 @@
 
         <TextView
             android:id="@+id/tv7z"
-            android:layout_width="120dp"
+            android:layout_width="90dp"
             android:layout_height="30dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="30dp"
@@ -359,7 +359,7 @@
 
         <TextView
             android:id="@+id/itemlifetime"
-            android:layout_width="160dp"
+            android:layout_width="80dp"
             android:layout_height="30dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="5dp"
@@ -371,13 +371,27 @@
             app:layout_constraintTop_toBottomOf="@+id/tv4z" />
 
         <TextView
+            android:id="@+id/unitdcsc"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:text="Days"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@+id/itemlifetime"
+            app:layout_constraintTop_toBottomOf="@+id/tv4z" />
+
+        <TextView
             android:id="@+id/tv9z"
-            android:layout_width="120dp"
+            android:layout_width="90dp"
             android:layout_height="30dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="30dp"
             android:gravity="center_vertical"
-            android:text="Lifetime (D) "
+            android:text="Lifetime"
             android:textSize="20sp"
             android:fontFamily="sans-serif"
             android:textColor="@color/black"

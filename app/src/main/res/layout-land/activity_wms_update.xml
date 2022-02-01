@@ -81,12 +81,12 @@
         <TextView
             android:id="@+id/lifetimeview"
             android:padding="5dp"
-            android:layout_width="130dp"
+            android:layout_width="100dp"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
-            android:text="Lifetime (D)"
+            android:text="Lifetime"
             android:textSize="20sp"
             android:fontFamily="sans-serif"
             android:textColor="@color/black"
@@ -107,6 +107,23 @@
             android:text="100000"
             android:textSize="20sp"
             app:layout_constraintLeft_toRightOf="@id/lifetimeview"
+            app:layout_constraintTop_toBottomOf="@+id/itempic" />
+
+        <TextView
+            android:id="@+id/lifetimeviewscs"
+            android:padding="5dp"
+            android:layout_width="80dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="220dp"
+            android:gravity="center_vertical"
+            android:text="Days"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="329dp"
+            tools:layout_editor_absoluteY="218dp"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/itempic" />
 
         <TextView

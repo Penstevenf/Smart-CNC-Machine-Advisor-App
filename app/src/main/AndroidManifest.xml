@@ -173,9 +173,6 @@
             android:name=".RepairItem"
             android:exported="true" />
         <activity
-            android:name=".ReplaceItem"
-            android:exported="true" />
-        <activity
             android:name=".RequestItem"
             android:exported="true" />
         <activity

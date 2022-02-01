@@ -92,7 +92,7 @@
 
         <TextView
             android:id="@+id/itemcatzh"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="0dp"
@@ -135,7 +135,7 @@
             android:layout_width="90dp"
             android:layout_height="50dp"
             android:layout_marginTop="0dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:text="Quantity"
             android:textSize="20sp"
@@ -160,6 +160,22 @@
             android:fontFamily="sans-serif"
             app:layout_constraintTop_toBottomOf="@+id/itemnamewzh"
             app:layout_constraintLeft_toRightOf="@+id/tv2zh"
+            tools:layout_editor_absoluteX="552dp"
+            tools:layout_editor_absoluteY="155dp" />
+
+        <TextView
+            android:id="@+id/itemunit"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="0dp"
+            android:gravity="center_vertical"
+            android:text="Unit"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            app:layout_constraintTop_toBottomOf="@+id/itemnamewzh"
+            app:layout_constraintLeft_toRightOf="@+id/itemqtyzh"
             tools:layout_editor_absoluteX="552dp"
             tools:layout_editor_absoluteY="155dp" />
 
@@ -241,7 +257,7 @@
 
         <TextView
             android:id="@+id/itemlifetimeh"
-            android:layout_width="160dp"
+            android:layout_width="80dp"
             android:layout_height="30dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="5dp"
@@ -253,13 +269,27 @@
             app:layout_constraintTop_toBottomOf="@+id/stationleft" />
 
         <TextView
+            android:id="@+id/itemlifetimehdd"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center_vertical"
+            android:text="Days"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@+id/itemlifetimeh"
+            app:layout_constraintTop_toBottomOf="@+id/stationleft" />
+
+        <TextView
             android:id="@+id/tv9zh"
             android:layout_width="130dp"
             android:layout_height="30dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="30dp"
             android:gravity="center_vertical"
-            android:text="Lifetime (D) "
+            android:text="Lifetime"
             android:textSize="20sp"
             android:fontFamily="sans-serif"
             android:textColor="@color/black"
@@ -508,7 +538,7 @@
 
         <TextView
             android:id="@+id/itemcatzg"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="0dp"
@@ -564,7 +594,7 @@
             android:layout_width="90dp"
             android:layout_height="50dp"
             android:layout_marginTop="0dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:text="Quantity"
             android:textSize="20sp"
@@ -589,6 +619,22 @@
             android:fontFamily="sans-serif"
             app:layout_constraintTop_toBottomOf="@+id/itemnamewzg"
             app:layout_constraintLeft_toRightOf="@+id/tv2zg"
+            tools:layout_editor_absoluteX="552dp"
+            tools:layout_editor_absoluteY="155dp" />
+
+        <TextView
+            android:id="@+id/itemunitq"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="0dp"
+            android:gravity="center_vertical"
+            android:text="Unit"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            app:layout_constraintTop_toBottomOf="@+id/itemnamewzg"
+            app:layout_constraintLeft_toRightOf="@+id/itemqtyzg"
             tools:layout_editor_absoluteX="552dp"
             tools:layout_editor_absoluteY="155dp" />
 
@@ -639,7 +685,7 @@
 
         <TextView
             android:id="@+id/itemlifetimeg"
-            android:layout_width="160dp"
+            android:layout_width="80dp"
             android:layout_height="30dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="5dp"
@@ -651,13 +697,27 @@
             app:layout_constraintTop_toBottomOf="@+id/itemtypeg" />
 
         <TextView
+            android:id="@+id/itemlifetimegscs"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center_vertical"
+            android:text="Days"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@+id/itemlifetimeg"
+            app:layout_constraintTop_toBottomOf="@+id/itemtypeg" />
+
+        <TextView
             android:id="@+id/tv9zg"
             android:layout_width="120dp"
             android:layout_height="30dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="30dp"
             android:gravity="center_vertical"
-            android:text="Lifetime (D) "
+            android:text="Lifetime"
             android:textSize="20sp"
             android:fontFamily="sans-serif"
             android:textColor="@color/black"
@@ -753,6 +813,21 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/horizontalline"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/reqpartnow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#4b5ea5"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="360dp"
+            app:fabSize="normal"
+            android:src="@drawable/ic_baseline_add_24"
+            app:layout_constraintLeft_toRightOf="@id/fab_send"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalline"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/enterc"

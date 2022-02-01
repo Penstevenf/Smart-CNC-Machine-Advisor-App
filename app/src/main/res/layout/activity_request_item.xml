@@ -276,6 +276,41 @@
             tools:layout_editor_absoluteX="552dp"
             tools:layout_editor_absoluteY="155dp" />
 
+        <TextView
+            android:id="@+id/tv2d"
+            android:layout_width="60dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="30dp"
+            android:gravity="center_vertical"
+            android:text="Unit"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="329dp"
+            tools:layout_editor_absoluteY="218dp"
+            app:layout_constraintLeft_toRightOf="@+id/pqty"
+            app:layout_constraintTop_toBottomOf="@+id/tv3" />
+
+        <EditText
+            android:id="@+id/unit_request"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="5dp"
+            android:layout_marginLeft="0dp"
+            android:visibility="invisible"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textSize="20sp"
+            android:background="@drawable/sp_rectangle_root"
+            android:fontFamily="sans-serif"
+            app:layout_constraintTop_toBottomOf="@+id/tv3"
+            app:layout_constraintLeft_toRightOf="@+id/tv2d"
+            tools:layout_editor_absoluteX="552dp"
+            tools:layout_editor_absoluteY="155dp" />
+
         <EditText
             android:id="@+id/itemdesc"
             android:layout_width="500dp"

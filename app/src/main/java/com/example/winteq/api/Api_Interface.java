@@ -267,7 +267,8 @@ public interface Api_Interface {
             @Field("asset_category") String asset_category,
             @Field("asset_qty") String asset_qty,
             @Field("asset_line") String asset_line,
-            @Field("asset_station") String asset_station
+            @Field("asset_station") String asset_station,
+            @Field("asset_unit") String asset_unit
     );
 
     @FormUrlEncoded

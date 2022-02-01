@@ -51,8 +51,8 @@ public class RequestItem extends AppCompatActivity implements NavigationView.OnN
 
     ImageView ipic;
     Button up;
-    EditText line,station,machine,pic,part,qty,desc;
-    FloatingActionButton riad;
+    EditText line,station,machine,pic,part,qty,desc, unit_request;
+    FloatingActionButton riad, requestpart;
     Api_Interface apiInterface;
     HistoryData historyData;
     Bitmap bitmap;
@@ -89,6 +89,7 @@ public class RequestItem extends AppCompatActivity implements NavigationView.OnN
         ipic = findViewById(R.id.itempic);
         up = findViewById(R.id.upreq);
         riad = findViewById(R.id.req);
+        unit_request = findViewById(R.id.unit_request);
 
         //Setup Header
         View header = navigationView.getHeaderView(0);
@@ -244,13 +245,14 @@ public class RequestItem extends AppCompatActivity implements NavigationView.OnN
         String pb = desc.getText().toString();
         String pa = part.getText().toString();
         String qt = qty.getText().toString();
+//        String unit = unit_request.getText().toString();
         String image = getStringImage(bitmap);
         ProgressDialog pd = new ProgressDialog(RequestItem.this);
         pd.setMessage("Loading...");
         pd.setCancelable(false);
         pd.show();
 
-        Call<HistoryData> hisaddcall = apiInterface.aiRequestData(ln,st, mc, pc, pa, qt, pb, image);
+        Call<HistoryData> hisaddcall = apiInterface.aiRequestData(ln, st, mc, pc, pa, qt, pb, image);
         hisaddcall.enqueue(new Callback<HistoryData>() {
             @Override
             public void onResponse(Call<HistoryData> call, Response<HistoryData> response) {

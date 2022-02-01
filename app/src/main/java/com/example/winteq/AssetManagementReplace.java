@@ -43,16 +43,16 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
     NavigationView navigationView;
     Toolbar toolbar;
     SharedPreferences sp;
-    FloatingActionButton fab_send;
+    FloatingActionButton fab_send, requestpart;
     Api_Interface apiInterface;
     TextView tv_asset_part, tv_line, tv_station, tv_machine_qty, tv_machine, tv_replace,
-            tv_regis, tv_update, tv_machine_lifetime, tv_machine_category, enterc_id;
+            tv_regis, tv_update, tv_machine_lifetime, tv_machine_category, enterc_id, itemunit, itemunitq;
     TextView tv_item, tv_copro, tv_type, tv_category, tv_qty, tv_date, tv_tag, tv_lifetime, tv_desc;
     EditText et_enterc;
     ImageView itempiczg;
     AssetData assetData;
 
-    private String xId, xCategory, xPart, xLine, xStation, xQty, xMachine, xLifetime, xRegister, xReplace, xUpdate;
+    private String xId, xCategory, xPart, xLine, xStation, xQty, xMachine, xLifetime, xRegister, xReplace, xUpdate, xUnit;
     private List<WmsData> listGetWms;
 
     private static final String SHARE_PREF_NAME = "mypref";
@@ -90,6 +90,7 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
         xRegister = sendAP.getStringExtra("xRegister");
         xReplace = sendAP.getStringExtra("xReplace");
         xUpdate = sendAP.getStringExtra("xUpdate");
+        xUnit = sendAP.getStringExtra("xUnit");
 
         //machine part data id
         tv_asset_part = findViewById(R.id.itemnamewzh);
@@ -102,6 +103,7 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
         tv_machine_lifetime = findViewById(R.id.itemlifetimeh);
         tv_machine_category = findViewById(R.id.itemcatzh);
         tv_update = findViewById(R.id.lastdatereplace);
+        itemunit = findViewById(R.id.itemunit);
 
         //set machine part data
         enterc_id.setText(xId);
@@ -112,6 +114,7 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
         tv_machine.setText(xMachine);
         tv_replace.setText(xReplace);
         tv_regis.setText(xRegister);
+        itemunit.setText(xUnit);
         tv_machine_lifetime.setText(xLifetime);
         tv_machine_category.setText(xCategory);
         if(xUpdate != null) {
@@ -134,6 +137,7 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
         tv_lifetime = findViewById(R.id.itemlifetimeg);
         tv_desc = findViewById(R.id.itemdesczg);
         itempiczg = findViewById(R.id.itempiczg);
+        itemunitq = findViewById(R.id.itemunitq);
 
 
         fab_send = findViewById(R.id.fab_send);
@@ -141,6 +145,15 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
             @Override
             public void onClick(View v) {
                 AssetManagementUpdate();
+            }
+        });
+
+        requestpart = findViewById(R.id.reqpartnow);
+        requestpart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AssetManagementReplace.this, RequestItem.class);
+                startActivity(intent);
             }
         });
 
@@ -251,6 +264,7 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
                     tv_date.setText(listGetWms.get(0).getDate());
                     tv_tag.setText(listGetWms.get(0).getNo_tag());
                     tv_lifetime.setText(listGetWms.get(0).getLifetime_wms());
+                    itemunitq.setText(listGetWms.get(0).getUnit());
                     if(listGetWms.get(0).getDescription() != null) {
                         tv_desc.setText(listGetWms.get(0).getDescription());
                     }
@@ -285,7 +299,7 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
             @Override
             public void onResponse(Call<AssetData> call, Response<AssetData> response) {
                 //sr untuk menampung array message dalam bentuk string
-                //loop isi data dari array message lalu di append ke dalam string sr
+                //loop isi dasta dari array message lalu di append ke dalam string sr
                 //if else untuk mencegah mengambil value awal dari string sr ("")
                 String sr = "";
                 for(int i=0 ; i<response.body().getMessage().length ; i++){
