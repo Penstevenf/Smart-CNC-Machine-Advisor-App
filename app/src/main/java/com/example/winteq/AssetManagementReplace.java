@@ -245,7 +245,7 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
 
     private void viewData(){
         Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
-        Call<WmsResponseData> getData = aiData.aiAssetWarehouseData(xPart);
+        Call<WmsResponseData> getData = aiData.aiAssetWarehouseData(xPart, xCategory, xUnit);
 
         getData.enqueue(new Callback<WmsResponseData>() {
             @Override
@@ -287,14 +287,19 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
         apiInterface = ApiClient.getClient().create(Api_Interface.class);
         String asset_part = tv_asset_part.getText().toString();
         String asset_id = enterc_id.getText().toString();
-        String copro = tv_copro.getText().toString();
         String asset_qty = tv_machine_qty.getText().toString();
+        String machine_name = tv_machine.getText().toString();
+        String line = tv_line.getText().toString();
+        String station = tv_station.getText().toString();
+        String category = tv_category.getText().toString();
+        String unit = itemunit.getText().toString();
+        String copro = et_enterc.getText().toString();
         ProgressDialog pd = new ProgressDialog(AssetManagementReplace.this);
         pd.setMessage("Loading...");
         pd.setCancelable(false);
         pd.show();
 
-        Call<AssetData> amAddCall = apiInterface.aiAssetCoproData(asset_id, asset_part, copro, asset_qty);
+        Call<AssetData> amAddCall = apiInterface.aiAssetCoproData(asset_id, asset_part, asset_qty, machine_name, line, station, category, unit, copro);
         amAddCall.enqueue(new Callback<AssetData>() {
             @Override
             public void onResponse(Call<AssetData> call, Response<AssetData> response) {
@@ -317,7 +322,7 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
                     Intent intent = new Intent(AssetManagementReplace.this, AssetManagementView.class);
                     startActivity(intent);
                     finish();
-                } else {
+                }else{
                     pd.dismiss();
                     Toast.makeText(AssetManagementReplace.this, sr, Toast.LENGTH_SHORT).show();
                 }

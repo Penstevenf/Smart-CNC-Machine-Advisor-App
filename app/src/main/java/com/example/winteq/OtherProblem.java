@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,7 +52,8 @@ public class OtherProblem extends AppCompatActivity implements NavigationView.On
 
     ImageView ipic;
     Button up;
-    EditText line,station,machine,pic,title,desc;
+    Spinner line,station;
+    EditText machine,pic,title,desc;
     FloatingActionButton riad;
     Api_Interface apiInterface;
     HistoryData historyData;
@@ -79,7 +81,7 @@ public class OtherProblem extends AppCompatActivity implements NavigationView.On
         //Call ApiInterface
         apiInterface = ApiClient.getClient().create(Api_Interface.class);
 
-        line = findViewById(R.id.pline);
+        line = findViewById(R.id.tv1);
         station = findViewById(R.id.pstation);
         machine = findViewById(R.id.pmachine);
         pic = findViewById(R.id.ppic);
@@ -236,8 +238,8 @@ public class OtherProblem extends AppCompatActivity implements NavigationView.On
     }
 
     private void otherProblem() {
-        String ln = line.getText().toString();
-        String st = station.getText().toString();
+        String ln = line.getSelectedItem().toString();
+        String st = station.getSelectedItem().toString();
         String mc = machine.getText().toString();;
         String pc = pic.getText().toString();
         String pb = desc.getText().toString();

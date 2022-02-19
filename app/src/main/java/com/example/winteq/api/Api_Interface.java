@@ -288,7 +288,9 @@ public interface Api_Interface {
     @FormUrlEncoded
     @POST("assetwarehouse.php")
     Call<WmsResponseData> aiAssetWarehouseData(
-            @Field("asset_part") String asset_part
+            @Field("asset_part") String asset_part,
+            @Field("asset_category") String asset_category,
+            @Field("asset_unit") String asset_unit
     );
 
     @FormUrlEncoded
@@ -296,8 +298,13 @@ public interface Api_Interface {
     Call<AssetData> aiAssetCoproData(
             @Field("asset_id") String asset_id,
             @Field("asset_part") String asset_part,
-            @Field("copro") String copro,
-            @Field("asset_qty") String asset_qty
+            @Field("asset_qty") String asset_qty,
+            @Field("machine_name") String machine_name,
+            @Field("asset_line") String asset_line,
+            @Field("asset_station") String asset_station,
+            @Field("asset_category") String asset_category,
+            @Field("asset_unit") String asset_unit,
+            @Field("copro") String copro
     );
 
     @FormUrlEncoded

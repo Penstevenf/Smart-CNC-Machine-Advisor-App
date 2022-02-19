@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,7 +52,8 @@ public class RequestItem extends AppCompatActivity implements NavigationView.OnN
 
     ImageView ipic;
     Button up;
-    EditText line,station,machine,pic,part,qty,desc, unit_request;
+    Spinner line,station;
+    EditText machine,pic,part,qty,desc, unit_request;
     FloatingActionButton riad, requestpart;
     Api_Interface apiInterface;
     HistoryData historyData;
@@ -78,8 +80,7 @@ public class RequestItem extends AppCompatActivity implements NavigationView.OnN
 
         //Call ApiInterface
         apiInterface = ApiClient.getClient().create(Api_Interface.class);
-
-        line = findViewById(R.id.pline);
+        
         station = findViewById(R.id.pstation);
         machine = findViewById(R.id.pmachine);
         pic = findViewById(R.id.ppic);
@@ -90,7 +91,8 @@ public class RequestItem extends AppCompatActivity implements NavigationView.OnN
         up = findViewById(R.id.upreq);
         riad = findViewById(R.id.req);
         unit_request = findViewById(R.id.unit_request);
-
+        line = findViewById(R.id.tv1);
+                
         //Setup Header
         View header = navigationView.getHeaderView(0);
 
@@ -238,8 +240,8 @@ public class RequestItem extends AppCompatActivity implements NavigationView.OnN
     }
 
     private void requestItem() {
-        String ln = line.getText().toString();
-        String st = station.getText().toString();
+        String ln = line.getSelectedItem().toString();
+        String st = station.getSelectedItem().toString();
         String mc = machine.getText().toString();;
         String pc = pic.getText().toString();
         String pb = desc.getText().toString();
