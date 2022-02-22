@@ -118,7 +118,6 @@
             android:entries="@array/stationmon"
             android:fontFamily="sans-serif"
             android:paddingLeft="5dp"
-            android:background="@drawable/sp_rectangle_root"
             android:gravity="center_vertical"
             android:text=""
             android:textSize="20sp"

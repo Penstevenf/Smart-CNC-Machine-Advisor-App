@@ -2,6 +2,7 @@ package com.example.winteq.api;
 
 import com.example.winteq.model.asset.AssetData;
 import com.example.winteq.model.asset.AssetResponseData;
+import com.example.winteq.model.copro.CoproResponseData;
 import com.example.winteq.model.help.elektrik.HelpDataElc;
 import com.example.winteq.model.help.elektrik.HelpResponseDataElc;
 import com.example.winteq.model.help.mekanik.HelpDataMec;
@@ -238,6 +239,13 @@ public interface Api_Interface {
     );
 
     @FormUrlEncoded
+    @POST("assetmonpic.php")
+    Call<MonResponseData> monviewPIC(
+            @Field("line") String line,
+            @Field("station") String station
+    );
+
+    @FormUrlEncoded
     @POST("assetstation.php")
     Call<AssetResponseData> aiAssetStationData(
             @Field("asset_line") String asset_line
@@ -347,6 +355,12 @@ public interface Api_Interface {
             @Field("id_hist") String id_hist
     );
 
+    @FormUrlEncoded
+    @POST("coprodata.php")
+    Call<CoproResponseData> aiGetCoproData(
+            @Field("asset_line") String asset_line,
+            @Field("asset_station") String asset_station
+    );
 
     @GET("warehouse.php")
     Call<WmsResponseData> aiWarehouseData();

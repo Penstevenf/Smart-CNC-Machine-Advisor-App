@@ -52,13 +52,14 @@ public class RequestItem extends AppCompatActivity implements NavigationView.OnN
 
     ImageView ipic;
     Button up;
-    Spinner line,station;
-    EditText machine,pic,part,qty,desc, unit_request;
+    Spinner line, station;
+    EditText machine, pic, part, qty, desc, unit_request;
     FloatingActionButton riad, requestpart;
     Api_Interface apiInterface;
     HistoryData historyData;
     Bitmap bitmap;
 
+    private String xPart, xLine, xStation, xQty, xMachine, xDesc, xPic, xImage;
     private static final String SHARE_PREF_NAME = "mypref";
     private static final String FULLNAME = "fullname";
     private static final String IMAGE = "image";
@@ -80,7 +81,20 @@ public class RequestItem extends AppCompatActivity implements NavigationView.OnN
 
         //Call ApiInterface
         apiInterface = ApiClient.getClient().create(Api_Interface.class);
-        
+
+        //Unpack Intent
+        Intent sendAP = getIntent();
+        xPart = sendAP.getStringExtra("xPart");
+        xLine = sendAP.getStringExtra("xLine");
+        xStation = sendAP.getStringExtra("xStation");
+        xQty = sendAP.getStringExtra("xQty");
+        xMachine = sendAP.getStringExtra("xMachine");
+        xDesc = sendAP.getStringExtra("xDesc");
+        xImage = sendAP.getStringExtra("xImage");
+        xPic = sendAP.getStringExtra("xPic");
+
+        //id
+        line = findViewById(R.id.tv1);
         station = findViewById(R.id.pstation);
         machine = findViewById(R.id.pmachine);
         pic = findViewById(R.id.ppic);
@@ -90,9 +104,61 @@ public class RequestItem extends AppCompatActivity implements NavigationView.OnN
         ipic = findViewById(R.id.itempic);
         up = findViewById(R.id.upreq);
         riad = findViewById(R.id.req);
-        unit_request = findViewById(R.id.unit_request);
-        line = findViewById(R.id.tv1);
-                
+//        unit_request = findViewById(R.id.unit_request);
+
+
+        //set data
+        pic.setText(xPic);
+        desc.setText("Unit = "+xDesc);
+        qty.setText(xQty);
+        part.setText(xPart);
+        machine.setText(xMachine);
+
+        if(xLine.equals("Line 1")){
+            line.setSelection(0);
+        }
+        if(xLine.equals("Line 2")){
+            line.setSelection(1);
+        }
+        if(xLine.equals("Line 3")){
+            line.setSelection(2);
+        }
+        if(xLine.equals("Line 4")){
+            line.setSelection(3);
+        }
+
+        if(xStation.equals("1")){
+            station.setSelection(0);
+        }
+        if(xStation.equals("2")){
+            station.setSelection(1);
+        }
+        if(xStation.equals("3")){
+            station.setSelection(2);
+        }
+        if(xStation.equals("4")){
+            station.setSelection(3);
+        }
+        if(xStation.equals("5")){
+            station.setSelection(4);
+        }
+        if(xStation.equals("6")){
+            station.setSelection(5);
+        }
+        if(xStation.equals("7")){
+            station.setSelection(6);
+        }
+        if(xStation.equals("8")){
+            station.setSelection(7);
+        }
+        if(xStation.equals("9")){
+            station.setSelection(8);
+        }
+        if(xStation.equals("10")){
+            station.setSelection(9);
+        }
+
+
         //Setup Header
         View header = navigationView.getHeaderView(0);
 
@@ -112,6 +178,12 @@ public class RequestItem extends AppCompatActivity implements NavigationView.OnN
         ImageView pfph = (ImageView) header.findViewById(R.id.pfph);
 
         String profileS = sp.getString(IMAGE, null);
+
+        if(!(xImage.isEmpty())) {
+            String imageUri = xImage;
+            ImageView Image2 = ipic;
+            Picasso.get().load(imageUri).into(Image2);
+        }
 
         if(!(profileS.isEmpty())) {
             String imageUri = profileS;

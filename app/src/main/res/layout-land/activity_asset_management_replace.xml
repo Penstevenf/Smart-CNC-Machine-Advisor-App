@@ -845,14 +845,13 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/horizontalline" />
 
-        <EditText
+        <Spinner
             android:id="@+id/et_enterc"
             android:layout_width="130dp"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="10dp"
-            android:gravity="center|center_vertical"
-            android:text=""
+            android:textAlignment="center"
             android:textSize="20sp"
             android:fontFamily="sans-serif"
             android:textColor="@color/black"

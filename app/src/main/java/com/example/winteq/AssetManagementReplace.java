@@ -10,8 +10,9 @@ import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +26,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.winteq.api.ApiClient;
 import com.example.winteq.api.Api_Interface;
 import com.example.winteq.model.asset.AssetData;
+import com.example.winteq.model.copro.CoproData;
+import com.example.winteq.model.copro.CoproResponseData;
+import com.example.winteq.model.monitoring.MonData;
+import com.example.winteq.model.monitoring.MonResponseData;
 import com.example.winteq.model.wms.WmsData;
 import com.example.winteq.model.wms.WmsResponseData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,19 +54,22 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
     TextView tv_asset_part, tv_line, tv_station, tv_machine_qty, tv_machine, tv_replace,
             tv_regis, tv_update, tv_machine_lifetime, tv_machine_category, enterc_id, itemunit, itemunitq;
     TextView tv_item, tv_copro, tv_type, tv_category, tv_qty, tv_date, tv_tag, tv_lifetime, tv_desc;
-    EditText et_enterc;
     ImageView itempiczg;
     AssetData assetData;
 
     private String xId, xCategory, xPart, xLine, xStation, xQty, xMachine, xLifetime, xRegister, xReplace, xUpdate, xUnit;
     private List<WmsData> listGetWms;
+    private List<MonData> listGetMon;
+
+    private Spinner et_enterc;
+    private ArrayList<String> listCopro = new ArrayList<>();
+    private ArrayAdapter<String> adapter;
+    CoproData coproData;
 
     private static final String SHARE_PREF_NAME = "mypref";
     private static final String FULLNAME = "fullname";
     private static final String IMAGE = "image";
-    private static final String LINE = "asset_line";
-    private static final String STATION = "asset_station";
-    private static final String MACHINE = "machine_name";
+    private static final String STATIMAGEWMS = "imagewms";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,14 +126,16 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
         itemunit.setText(xUnit);
         tv_machine_lifetime.setText(xLifetime);
         tv_machine_category.setText(xCategory);
-        if(xUpdate != null) {
+        if (xUpdate != null) {
             tv_update.setText(xUpdate);
-        }else{
+        } else {
             tv_update.setText("None");
         }
 
-        viewData();
 
+        viewData();
+        MonitoringPIC();
+        retrieveCopro();
 
         //warehouse part data id
         tv_item = findViewById(R.id.itemnamewzg);
@@ -152,8 +163,18 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
         requestpart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AssetManagementReplace.this, RequestItem.class);
-                startActivity(intent);
+                Intent sendAP = new Intent(AssetManagementReplace.this, RequestItem.class);
+                sendAP.putExtra("xPart", xPart);
+                sendAP.putExtra("xLine", xLine);
+                sendAP.putExtra("xStation", xStation);
+                sendAP.putExtra("xQty", xQty);
+                sendAP.putExtra("xMachine", xMachine);
+                sendAP.putExtra("xDesc", xUnit);
+                sendAP.putExtra("xPic", listGetMon.get(0).getMon_pic());
+                if (sp.getBoolean("imagewms", true)) {
+                    sendAP.putExtra("xImage", listGetWms.get(0).getImage());
+                }
+                startActivity(sendAP);
             }
         });
 
@@ -175,13 +196,13 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
         String profileS = sp.getString(IMAGE, null);
 
 
-        if(!(profileS.isEmpty())) {
+        if (!(profileS.isEmpty())) {
             String imageUri = profileS;
             ImageView Image2 = pfph;
             Picasso.get().load(imageUri).into(Image2);
         }
 
-        byte[] bytes = Base64.decode(profileS,Base64.DEFAULT);
+        byte[] bytes = Base64.decode(profileS, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         if (bitmap != null) {
             pfph.setImageBitmap(bitmap);
@@ -196,6 +217,7 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             Intent intent = new Intent(AssetManagementReplace.this, AssetManagementNotifPart.class);
+            listCopro.clear();
             startActivity(intent);
         }
     }
@@ -203,7 +225,7 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.nav_home:
                 Intent intent1 = new Intent(AssetManagementReplace.this, Dashboard.class);
                 startActivity(intent1);
@@ -243,7 +265,7 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
         return true;
     }
 
-    private void viewData(){
+    private void viewData() {
         Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
         Call<WmsResponseData> getData = aiData.aiAssetWarehouseData(xPart, xCategory, xUnit);
 
@@ -251,7 +273,7 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
             @Override
             public void onResponse(Call<WmsResponseData> call, Response<WmsResponseData> response) {
 
-                if(response.body() != null && response.body().isStatus()) {
+                if (response.body() != null && response.body().isStatus()) {
                     boolean status = response.body().isStatus();
                     String message = response.body().getMessage();
                     listGetWms = response.body().getData();
@@ -265,17 +287,22 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
                     tv_tag.setText(listGetWms.get(0).getNo_tag());
                     tv_lifetime.setText(listGetWms.get(0).getLifetime_wms());
                     itemunitq.setText(listGetWms.get(0).getUnit());
-                    if(listGetWms.get(0).getDescription() != null) {
+                    if (!listGetWms.get(0).getDescription().isEmpty()) {
                         tv_desc.setText(listGetWms.get(0).getDescription());
                     }
-                    if(listGetWms.get(0).getImage() != null) {
+                    if (!listGetWms.get(0).getImage().isEmpty()) {
                         String imageUri = listGetWms.get(0).getImage();
                         ImageView Image2 = itempiczg;
                         Picasso.get().load(imageUri).into(Image2);
+                        sp.edit().putBoolean("imagewms", true);
+
+                    } else {
+                        sp.edit().putBoolean("imagewms", false);
                     }
 
                 }
             }
+
             @Override
             public void onFailure(Call<WmsResponseData> call, Throwable t) {
                 Toast.makeText(AssetManagementReplace.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
@@ -293,7 +320,7 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
         String station = tv_station.getText().toString();
         String category = tv_category.getText().toString();
         String unit = itemunit.getText().toString();
-        String copro = et_enterc.getText().toString();
+        String copro = et_enterc.getSelectedItem().toString();
         ProgressDialog pd = new ProgressDialog(AssetManagementReplace.this);
         pd.setMessage("Loading...");
         pd.setCancelable(false);
@@ -307,14 +334,14 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
                 //loop isi dasta dari array message lalu di append ke dalam string sr
                 //if else untuk mencegah mengambil value awal dari string sr ("")
                 String sr = "";
-                for(int i=0 ; i<response.body().getMessage().length ; i++){
-                    if(sr.length() == 0){
+                for (int i = 0; i < response.body().getMessage().length; i++) {
+                    if (sr.length() == 0) {
                         sr = response.body().getMessage()[i];
-                    }else{
+                    } else {
                         sr = sr + "\n" + response.body().getMessage()[i];
                     }
                 }
-                if(response.body() != null && response.body().isStatus()){
+                if (response.body() != null && response.body().isStatus()) {
                     assetData = response.body();
                     pd.dismiss();
 
@@ -322,7 +349,7 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
                     Intent intent = new Intent(AssetManagementReplace.this, AssetManagementView.class);
                     startActivity(intent);
                     finish();
-                }else{
+                } else {
                     pd.dismiss();
                     Toast.makeText(AssetManagementReplace.this, sr, Toast.LENGTH_SHORT).show();
                 }
@@ -331,6 +358,58 @@ public class AssetManagementReplace extends AppCompatActivity implements Navigat
             @Override
             public void onFailure(Call<AssetData> call, Throwable t) {
                 pd.dismiss();
+                Toast.makeText(AssetManagementReplace.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void MonitoringPIC() {
+        Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
+        Call<MonResponseData> getData = aiData.monviewPIC(xLine, xStation);
+
+        getData.enqueue(new Callback<MonResponseData>() {
+            @Override
+            public void onResponse(Call<MonResponseData> call, Response<MonResponseData> response) {
+
+                if (response.body() != null && response.body().isStatus()) {
+                    boolean status = response.body().isStatus();
+                    String message = response.body().getMessage();
+                    listGetMon = response.body().getData();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MonResponseData> call, Throwable t) {
+                Toast.makeText(AssetManagementReplace.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void retrieveCopro() {
+        Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
+        Call<CoproResponseData> showData = aiData.aiGetCoproData(xLine, xStation);
+        showData.enqueue(new Callback<CoproResponseData>() {
+            @Override
+            public void onResponse(Call<CoproResponseData> call, Response<CoproResponseData> response) {
+                boolean status = response.body().isStatus();
+                String message = response.body().getMessage();
+
+                for(int i=0 ; i<response.body().getData().size() ; i++){
+                    listCopro.add(response.body().getData().get(i).getCopro_number());
+                }
+
+
+                if (listCopro != null) {
+                    adapter = new ArrayAdapter<>(AssetManagementReplace.this, android.R.layout.simple_spinner_item, listCopro);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    et_enterc.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+
+            }
+            @Override
+            public void onFailure(Call<CoproResponseData> call, Throwable t) {
                 Toast.makeText(AssetManagementReplace.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
