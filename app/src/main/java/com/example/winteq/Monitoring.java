@@ -1,9 +1,15 @@
 package com.example.winteq;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Base64;
@@ -19,6 +25,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -28,6 +36,8 @@ import com.example.winteq.adapter.monitoring.AdapterMonitoring3;
 import com.example.winteq.adapter.monitoring.AdapterMonitoring4;
 import com.example.winteq.api.ApiClient;
 import com.example.winteq.api.Api_Interface;
+import com.example.winteq.model.asset.AssetData;
+import com.example.winteq.model.asset.AssetResponseData;
 import com.example.winteq.model.monitoring.MonData;
 import com.example.winteq.model.monitoring.MonResponseData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -49,6 +59,7 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
     SharedPreferences sp;
     FloatingActionButton addmon;
     Api_Interface apiInterface;
+    String id1, id2, id3, id4, stat1, stat2, stat3, stat4, station1, station2, station3, station4;
 
     private GridView grid1, grid2, grid3, grid4;
     private AdapterMonitoring1 adapter1;
@@ -60,9 +71,21 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
     private List<MonData> listMon3 = new ArrayList<>();
     private List<MonData> listMon4 = new ArrayList<>();
 
+    private List<AssetData> listAsset1 = new ArrayList<>();
+    private List<AssetData> listAsset2 = new ArrayList<>();
+    private List<AssetData> listAsset3 = new ArrayList<>();
+    private List<AssetData> listAsset4 = new ArrayList<>();
+
     private static final String SHARE_PREF_NAME = "mypref";
     private static final String FULLNAME = "fullname";
     private static final String IMAGE = "image";
+
+    public static final String CHANNEL_2_ID = "channel2";
+    public static final String CHANNEL_3_ID = "channel3";
+    public static final String CHANNEL_4_ID = "channel4";
+    public static final String CHANNEL_5_ID = "channel5";
+    private NotificationManagerCompat notificationManager;
+    private static final String DONE2 = "done2?";
 
     private Handler mRepeatHandler;
     private Runnable mRepeatRunnable;
@@ -130,10 +153,39 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
             }
         });
 
+
+        //notif
+        createNotificationChannels();
+        createNotificationChannels2();
+        createNotificationChannels3();
+        createNotificationChannels4();
+        notificationManager = NotificationManagerCompat.from(this);
+
+        //run once only
         gridview1();
         gridview2();
         gridview3();
         gridview4();
+        statusView1();
+        statusView2();
+        statusView3();
+        statusView4();
+        if(sp.getString(DONE2, null) == null){
+            (new loading()).execute();
+            sp.edit().putString(DONE2, "1").apply();
+        }
+//        if(id1 != "None"){
+//            monaddStatus1();
+//        }
+//        if(id2 != "None"){
+//            monaddStatus2();
+//        }
+//        if(id3 != "None"){
+//            monaddStatus3();
+//        }
+//        if(id4 != "None"){
+//            monaddStatus4();
+//        }
 
         mRepeatHandler = new Handler();
         mRepeatRunnable = new Runnable() {
@@ -143,6 +195,23 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                 gridview2();
                 gridview3();
                 gridview4();
+                statusView1();
+                statusView2();
+                statusView3();
+                statusView4();
+                (new loading()).execute();
+//                if(id1 != "None"){
+//                    monaddStatus1();
+//                }
+//                if(id2 != "None"){
+//                    monaddStatus2();
+//                }
+//                if(id3 != "None"){
+//                    monaddStatus3();
+//                }
+//                if(id4 != "None"){
+//                    monaddStatus4();
+//                }
                 mRepeatHandler.postDelayed(mRepeatRunnable, 20000);
             }
         };
@@ -263,6 +332,239 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
         });
     }
 
+    public void statusView1(){
+        Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
+        Call<AssetResponseData> showData = aiData.aiStat1Data();
+
+        showData.enqueue(new Callback<AssetResponseData>() {
+            @Override
+            public void onResponse(Call<AssetResponseData> call, Response<AssetResponseData> response) {
+                boolean status = response.body().isStatus();
+                String message = response.body().getMessage();
+                listAsset1 = response.body().getData();
+                stat1 = "Working";
+                id1 = "None";
+                station1 = "None";
+                if(listAsset1 != null){
+                    id1 = response.body().getData().get(0).getAsset_id();
+                    station1 = response.body().getData().get(0).getAsset_station();
+                    if (response.body().getData().get(0).getAsset_status().equals("2")) {
+                        stat1 = "Breakdown";
+                    }
+                    if (response.body().getData().get(0).getAsset_status().equals("3")) {
+                        stat1 = "Repairing";
+                    }
+                    if (response.body().getData().get(0).getAsset_status().equals("4")) {
+                        stat1= "Finish Repair";
+                    }
+                }
+
+//                 Toast.makeText(Monitoring.this, stat1+id1, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<AssetResponseData> call, Throwable t) {
+                Toast.makeText(Monitoring.this, "Failed To Display Data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void statusView2(){
+        Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
+        Call<AssetResponseData> showData = aiData.aiStat2Data();
+
+        showData.enqueue(new Callback<AssetResponseData>() {
+            @Override
+            public void onResponse(Call<AssetResponseData> call, Response<AssetResponseData> response) {
+                boolean status = response.body().isStatus();
+                String message = response.body().getMessage();
+                listAsset2 = response.body().getData();
+                stat2 = "Working";
+                id2 = "None";
+                station2 = "None";
+                if(listAsset2 != null){
+                    id2 = response.body().getData().get(0).getAsset_id();
+                    station2 = response.body().getData().get(0).getAsset_station();
+                    if (response.body().getData().get(0).getAsset_status().equals("2")) {
+                        stat2 = "Breakdown";
+                    }
+                    if (response.body().getData().get(0).getAsset_status().equals("3")) {
+                        stat2 = "Repairing";
+                    }
+                    if (response.body().getData().get(0).getAsset_status().equals("4")) {
+                        stat2 = "Finish Repair";
+                    }
+                }
+
+//                Toast.makeText(Monitoring.this, stat2+id2, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<AssetResponseData> call, Throwable t) {
+                Toast.makeText(Monitoring.this, "Failed To Display Data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void statusView3(){
+        Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
+        Call<AssetResponseData> showData = aiData.aiStat3Data();
+
+        showData.enqueue(new Callback<AssetResponseData>() {
+            @Override
+            public void onResponse(Call<AssetResponseData> call, Response<AssetResponseData> response) {
+                boolean status = response.body().isStatus();
+                String message = response.body().getMessage();
+                listAsset3 = response.body().getData();
+                stat3 = "Working";
+                id3 = "None";
+                station3 = "None";
+                if(listAsset3 != null){
+                    id3 = response.body().getData().get(0).getAsset_id();
+                    station3 = response.body().getData().get(0).getAsset_station();
+                    if (response.body().getData().get(0).getAsset_status().equals("2")) {
+                        stat3 = "Breakdown";
+                    }
+                    if (response.body().getData().get(0).getAsset_status().equals("3")) {
+                        stat3 = "Repairing";
+                    }
+                    if (response.body().getData().get(0).getAsset_status().equals("4")) {
+                        stat3 = "Finish Repair";
+                    }
+                }
+
+//                Toast.makeText(Monitoring.this, stat3+id3, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<AssetResponseData> call, Throwable t) {
+                Toast.makeText(Monitoring.this, "Failed To Display Data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void statusView4(){
+        Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
+        Call<AssetResponseData> showData = aiData.aiStat4Data();
+
+        showData.enqueue(new Callback<AssetResponseData>() {
+            @Override
+            public void onResponse(Call<AssetResponseData> call, Response<AssetResponseData> response) {
+                boolean status = response.body().isStatus();
+                String message = response.body().getMessage();
+                listAsset4 = response.body().getData();
+                stat4 = "Working";
+                id4 = "None";
+                station4 = "None";
+                if(listAsset4 != null){
+                    id4 = response.body().getData().get(0).getAsset_id();
+                    station4 = response.body().getData().get(0).getAsset_station();
+                    if (response.body().getData().get(0).getAsset_status().equals("2")) {
+                        stat4 = "Breakdown";
+                    }
+                    if (response.body().getData().get(0).getAsset_status().equals("3")) {
+                        stat4 = "Repairing";
+                    }
+                    if (response.body().getData().get(0).getAsset_status().equals("4")) {
+                        stat4 = "Finish Repair";
+                    }
+                }
+
+//                Toast.makeText(Monitoring.this, stat4+id4, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<AssetResponseData> call, Throwable t) {
+                Toast.makeText(Monitoring.this, "Failed To Display Data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void monaddStatus1(){
+        String id = id1;
+        String status = stat1;
+
+        Call<MonData> MonitoringAddcall = apiInterface.monstatusData(id, status);
+        MonitoringAddcall.enqueue(new Callback<MonData>() {
+            @Override
+            public void onResponse(Call<MonData> call, Response<MonData> response) {
+                if(stat1 != "Working"){
+                    sendOnChannel1();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MonData> call, Throwable t) {
+//                Toast.makeText(Monitoring.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void monaddStatus2(){
+        String id = id2;
+        String status = stat2;
+
+        Call<MonData> MonitoringAddcall = apiInterface.monstatusData(id, status);
+        MonitoringAddcall.enqueue(new Callback<MonData>() {
+            @Override
+            public void onResponse(Call<MonData> call, Response<MonData> response) {
+                if(stat2 != "Working"){
+                    sendOnChannel2();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MonData> call, Throwable t) {
+//                Toast.makeText(Monitoring.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void monaddStatus3(){
+        String id = id3;
+        String status = stat3;
+
+        Call<MonData> MonitoringAddcall = apiInterface.monstatusData(id, status);
+        MonitoringAddcall.enqueue(new Callback<MonData>() {
+            @Override
+            public void onResponse(Call<MonData> call, Response<MonData> response) {
+                if(stat3 != "Working"){
+                    sendOnChannel3();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MonData> call, Throwable t) {
+//                Toast.makeText(Monitoring.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void monaddStatus4(){
+        String id = id4;
+        String status = stat4;
+
+        Call<MonData> MonitoringAddcall = apiInterface.monstatusData(id, status);
+        MonitoringAddcall.enqueue(new Callback<MonData>() {
+            @Override
+            public void onResponse(Call<MonData> call, Response<MonData> response) {
+                if(stat4 != "Working"){
+                    sendOnChannel4();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MonData> call, Throwable t) {
+//                Toast.makeText(Monitoring.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
     //Setup onBack Press
     @Override
     public void onBackPressed() {
@@ -316,6 +618,201 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void createNotificationChannels() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(
+                    CHANNEL_2_ID,
+                    "Station Notification Channel",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+
+            channel1.setDescription("Status Channel");
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            assert manager != null;
+            manager.createNotificationChannel(channel1);
+        }
+    }
+
+    private void createNotificationChannels2() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(
+                    CHANNEL_3_ID,
+                    "Station Notification Channel",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+
+            channel1.setDescription("Status Channel");
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            assert manager != null;
+            manager.createNotificationChannel(channel1);
+        }
+    }
+
+    private void createNotificationChannels3() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(
+                    CHANNEL_4_ID,
+                    "Station Notification Channel",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+
+            channel1.setDescription("Status Channel");
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            assert manager != null;
+            manager.createNotificationChannel(channel1);
+        }
+    }
+
+    private void createNotificationChannels4() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(
+                    CHANNEL_5_ID,
+                    "Station Notification Channel",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+
+            channel1.setDescription("Status Channel");
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            assert manager != null;
+            manager.createNotificationChannel(channel1);
+        }
+    }
+
+    public void sendOnChannel1() {
+        String title = "WARNING";
+        String message = "Line 1, Station "+station1+" Status Changed to "+stat1;
+        Intent activityIntent = new Intent(this, SwipeProblemMonitoring.class);
+//        String value = "CNC Machine";
+//        activityIntent.putExtra("key", value);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_2_ID)
+                .setFullScreenIntent(contentIntent, true)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setAutoCancel(true)
+                .setStyle(new NotificationCompat.BigTextStyle())
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setOnlyAlertOnce(true)
+                .addAction(R.drawable.ic_launcher_foreground, "Detail", contentIntent)
+                .build();
+
+        notificationManager.notify(2, notification);
+        notification.flags = Notification.FLAG_AUTO_CANCEL;
+    }
+
+    public void sendOnChannel2() {
+        String title = "WARNING";
+        String message = "Line 2, Station "+station2+" Status Changed to "+stat2;
+        Intent activityIntent = new Intent(this, SwipeProblemMonitoring.class);
+//        String value = "CNC Machine";
+//        activityIntent.putExtra("key", value);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_3_ID)
+                .setFullScreenIntent(contentIntent, true)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setAutoCancel(true)
+                .setStyle(new NotificationCompat.BigTextStyle())
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setOnlyAlertOnce(true)
+                .addAction(R.drawable.ic_launcher_foreground, "Detail", contentIntent)
+                .build();
+
+        notificationManager.notify(3, notification);
+        notification.flags = Notification.FLAG_AUTO_CANCEL;
+    }
+
+    public void sendOnChannel3() {
+        String title = "WARNING";
+        String message = "Line 3, Station "+station3+" Status Changed to "+stat3;
+        Intent activityIntent = new Intent(this, SwipeProblemMonitoring.class);
+//        String value = "CNC Machine";
+//        activityIntent.putExtra("key", value);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_4_ID)
+                .setFullScreenIntent(contentIntent, true)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setAutoCancel(true)
+                .setStyle(new NotificationCompat.BigTextStyle())
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setOnlyAlertOnce(true)
+                .addAction(R.drawable.ic_launcher_foreground, "Detail", contentIntent)
+                .build();
+
+        notificationManager.notify(4, notification);
+        notification.flags = Notification.FLAG_AUTO_CANCEL;
+    }
+
+    public void sendOnChannel4() {
+        String title = "WARNING";
+        String message = "Line 4, Station "+station4+" Status Changed to "+stat4;
+        Intent activityIntent = new Intent(this, SwipeProblemMonitoring.class);
+//        String value = "CNC Machine";
+//        activityIntent.putExtra("key", value);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_5_ID)
+                .setFullScreenIntent(contentIntent, true)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setAutoCancel(true)
+                .setStyle(new NotificationCompat.BigTextStyle())
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setOnlyAlertOnce(true)
+                .addAction(R.drawable.ic_launcher_foreground, "Detail", contentIntent)
+                .build();
+
+        notificationManager.notify(5, notification);
+        notification.flags = Notification.FLAG_AUTO_CANCEL;
+    }
+
+
+    public class loading extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            if(id1 != "None"){
+                monaddStatus1();
+            }
+            if(id2 != "None"){
+                monaddStatus2();
+            }
+            if(id3 != "None"){
+                monaddStatus3();
+            }
+            if(id4 != "None"){
+                monaddStatus4();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Void unused) {
+            super.onPostExecute(unused);
+        }
     }
 
 }

@@ -233,6 +233,13 @@ public interface Api_Interface {
     );
 
     @FormUrlEncoded
+    @POST("assetaddmonstatus.php")
+    Call<MonData> monstatusData(
+            @Field("asset_id") String asset_id,
+            @Field("asset_status") String asset_status
+    );
+
+    @FormUrlEncoded
     @POST("monitoringview.php")
     Call<MonResponseData> monviewData(
             @Field("mon_id") String mon_id
@@ -400,5 +407,17 @@ public interface Api_Interface {
 
     @GET("technical.php")
     Call<HistoryResponseData> aiTechnicalData();
+
+    @GET("assetstatusmachine1.php")
+    Call<AssetResponseData> aiStat1Data();
+
+    @GET("assetstatusmachine2.php")
+    Call<AssetResponseData> aiStat2Data();
+
+    @GET("assetstatusmachine3.php")
+    Call<AssetResponseData> aiStat3Data();
+
+    @GET("assetstatusmachine4.php")
+    Call<AssetResponseData> aiStat4Data();
 
 }

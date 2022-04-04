@@ -108,11 +108,22 @@ public class RequestItem extends AppCompatActivity implements NavigationView.OnN
 
 
         //set data
-        pic.setText(xPic);
-        desc.setText("Unit = "+xDesc);
-        qty.setText(xQty);
-        part.setText(xPart);
-        machine.setText(xMachine);
+        if(!(xPic.isEmpty())) {
+            pic.setText(xPic);
+        }
+        if(!(xDesc.isEmpty())) {
+            desc.setText("Unit = "+xDesc);
+        }
+        if(!(xQty.isEmpty())) {
+            qty.setText(xQty);
+        }
+        if(!(xPart.isEmpty())) {
+            part.setText(xPart);
+        }
+        if(!(xMachine.isEmpty())) {
+            machine.setText(xMachine);
+        }
+
 
         if(xLine.equals("Line 1")){
             line.setSelection(0);

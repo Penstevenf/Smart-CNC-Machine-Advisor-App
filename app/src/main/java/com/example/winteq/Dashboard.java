@@ -55,6 +55,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     Toolbar toolbar;
     ImageView profile, stats;
     Button ARCU,Mon,AstM,WMS,Ass,Tech,Sol,His;
+
     private static final String SHARE_PREF_NAME = "mypref";
     private static final String ID = "id";
     private static final String NPK = "npk";
@@ -261,8 +262,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         }
 
         return;
-
-
     }
 
     //run di background loop

@@ -32,6 +32,7 @@ import retrofit2.Response;
 public class NotificationManager extends Service{
     //notif
     public static final String CHANNEL_1_ID = "channel1";
+    public static final String CHANNEL_2_ID = "channel2";
     private NotificationManagerCompat notificationManager;
 
     //loop
@@ -45,6 +46,7 @@ public class NotificationManager extends Service{
         //notif
         context.startForegroundService(intent);
         createNotificationChannels();
+        createNotificationChannels2();
         notificationManager = NotificationManagerCompat.from(this);
 
         (new loading()).execute();
@@ -73,6 +75,22 @@ public class NotificationManager extends Service{
             android.app.NotificationManager manager = getSystemService(android.app.NotificationManager.class);
             assert manager != null;
             manager.createNotificationChannel(channel1);
+        }
+    }
+
+    private void createNotificationChannels2() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel2 = new NotificationChannel(
+                    CHANNEL_2_ID,
+                    "Machine Notification Channel",
+                    android.app.NotificationManager.IMPORTANCE_HIGH
+            );
+
+            channel2.setDescription("Problem Channel");
+
+            android.app.NotificationManager manager = getSystemService(android.app.NotificationManager.class);
+            assert manager != null;
+            manager.createNotificationChannel(channel2);
         }
     }
 

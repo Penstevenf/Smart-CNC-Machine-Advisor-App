@@ -20,14 +20,15 @@
         <activity
             android:name=".AssetAddMachine"
             android:exported="true" />
-
         <service
             android:name=".Notification.NotificationManager"
             android:enabled="true"
             android:exported="false" />
-
         <activity
             android:name=".AssetManagementCopro"
+            android:exported="true" />
+        <activity
+            android:name=".SwipeProblemMonitoring"
             android:exported="true" />
         <activity
             android:name=".AssetManagementReplace"

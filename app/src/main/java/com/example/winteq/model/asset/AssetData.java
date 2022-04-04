@@ -49,6 +49,10 @@ public class AssetData {
     private String lifetime;
 
     @Expose
+    @SerializedName("asset_status")
+    private String asset_status;
+
+    @Expose
     @SerializedName("date_replace")
     private String date_replace;
 
@@ -150,6 +154,14 @@ public class AssetData {
 
     public void setAsset_unit(String asset_unit) {
         this.asset_unit = asset_unit;
+    }
+
+    public String getAsset_status() {
+        return asset_status;
+    }
+
+    public void setAsset_status(String asset_status) {
+        this.asset_status = asset_status;
     }
 
     public String getLifetime() {
