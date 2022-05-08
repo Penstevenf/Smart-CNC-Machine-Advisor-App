@@ -18,12 +18,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar">
         <activity
+            android:name=".Sensor"
+            android:exported="true" />
+        <activity
             android:name=".AssetAddMachine"
             android:exported="true" />
+
         <service
             android:name=".Notification.NotificationManager"
             android:enabled="true"
             android:exported="false" />
+
         <activity
             android:name=".AssetManagementCopro"
             android:exported="true" />

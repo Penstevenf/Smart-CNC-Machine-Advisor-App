@@ -11,6 +11,7 @@ import com.example.winteq.model.history.HistoryData;
 import com.example.winteq.model.history.HistoryResponseData;
 import com.example.winteq.model.monitoring.MonData;
 import com.example.winteq.model.monitoring.MonResponseData;
+import com.example.winteq.model.sensor.SensorResponseData;
 import com.example.winteq.model.user.UserData;
 import com.example.winteq.model.wms.WmsData;
 import com.example.winteq.model.wms.WmsResponseData;
@@ -366,6 +367,20 @@ public interface Api_Interface {
     Call<CoproResponseData> aiGetCoproData(
             @Field("asset_line") String asset_line,
             @Field("asset_station") String asset_station
+    );
+
+    @FormUrlEncoded
+    @POST("sensorview.php")
+    Call<SensorResponseData> aiSensorViewData(
+            @Field("sen_id") String sen_id
+    );
+
+    @FormUrlEncoded
+    @POST("sensor.php")
+    Call<SensorResponseData> aiSensorData(
+            @Field("line") String line,
+            @Field("station") String station,
+            @Field("machine_name") String machine_name
     );
 
     @GET("warehouse.php")

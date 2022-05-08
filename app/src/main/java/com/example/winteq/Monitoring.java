@@ -59,7 +59,7 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
     SharedPreferences sp;
     FloatingActionButton addmon;
     Api_Interface apiInterface;
-    String id1, id2, id3, id4, stat1, stat2, stat3, stat4, station1, station2, station3, station4;
+    String id1, id2, id3, id4, line1, line2, line3, line4, stat1, stat2, stat3, stat4, station1, station2, station3, station4, machine1, machine2, machine3, machine4;
 
     private GridView grid1, grid2, grid3, grid4;
     private AdapterMonitoring1 adapter1;
@@ -344,10 +344,14 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                 listAsset1 = response.body().getData();
                 stat1 = "Working";
                 id1 = "None";
+                line1 = "None";
                 station1 = "None";
+                machine1 = "None";
                 if(listAsset1 != null){
                     id1 = response.body().getData().get(0).getAsset_id();
+                    line1 = response.body().getData().get(0).getAsset_line();
                     station1 = response.body().getData().get(0).getAsset_station();
+                    machine1 = response.body().getData().get(0).getMachine_name();
                     if (response.body().getData().get(0).getAsset_status().equals("2")) {
                         stat1 = "Breakdown";
                     }
@@ -382,10 +386,14 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                 listAsset2 = response.body().getData();
                 stat2 = "Working";
                 id2 = "None";
+                line2 = "None";
                 station2 = "None";
+                machine2 = "None";
                 if(listAsset2 != null){
                     id2 = response.body().getData().get(0).getAsset_id();
+                    line2 = response.body().getData().get(0).getAsset_line();
                     station2 = response.body().getData().get(0).getAsset_station();
+                    machine2 = response.body().getData().get(0).getMachine_name();
                     if (response.body().getData().get(0).getAsset_status().equals("2")) {
                         stat2 = "Breakdown";
                     }
@@ -420,10 +428,14 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                 listAsset3 = response.body().getData();
                 stat3 = "Working";
                 id3 = "None";
+                line3 = "None";
                 station3 = "None";
+                machine3 = "None";
                 if(listAsset3 != null){
                     id3 = response.body().getData().get(0).getAsset_id();
+                    line3 = response.body().getData().get(0).getAsset_line();
                     station3 = response.body().getData().get(0).getAsset_station();
+                    machine3 = response.body().getData().get(0).getMachine_name();
                     if (response.body().getData().get(0).getAsset_status().equals("2")) {
                         stat3 = "Breakdown";
                     }
@@ -458,10 +470,14 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                 listAsset4 = response.body().getData();
                 stat4 = "Working";
                 id4 = "None";
+                line4 = "None";
                 station4 = "None";
+                machine4 = "None";
                 if(listAsset4 != null){
                     id4 = response.body().getData().get(0).getAsset_id();
+                    line4 = response.body().getData().get(0).getAsset_line();
                     station4 = response.body().getData().get(0).getAsset_station();
+                    machine4 = response.body().getData().get(0).getMachine_name();
                     if (response.body().getData().get(0).getAsset_status().equals("2")) {
                         stat4 = "Breakdown";
                     }
@@ -688,10 +704,11 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
         String title = "WARNING";
         String message = "Line 1, Station "+station1+" Status Changed to "+stat1;
         Intent activityIntent = new Intent(this, SwipeProblemMonitoring.class);
-//        String value = "CNC Machine";
-//        activityIntent.putExtra("key", value);
+        activityIntent.putExtra("xLine", line1);
+        activityIntent.putExtra("xStation", station1);
+        activityIntent.putExtra("xMachine", machine1);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_2_ID)
                 .setFullScreenIntent(contentIntent, true)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -713,10 +730,11 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
         String title = "WARNING";
         String message = "Line 2, Station "+station2+" Status Changed to "+stat2;
         Intent activityIntent = new Intent(this, SwipeProblemMonitoring.class);
-//        String value = "CNC Machine";
-//        activityIntent.putExtra("key", value);
+        activityIntent.putExtra("xLine", line2);
+        activityIntent.putExtra("xStation", station2);
+        activityIntent.putExtra("xMachine", machine2);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_3_ID)
                 .setFullScreenIntent(contentIntent, true)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -738,10 +756,11 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
         String title = "WARNING";
         String message = "Line 3, Station "+station3+" Status Changed to "+stat3;
         Intent activityIntent = new Intent(this, SwipeProblemMonitoring.class);
-//        String value = "CNC Machine";
-//        activityIntent.putExtra("key", value);
+        activityIntent.putExtra("xLine", line3);
+        activityIntent.putExtra("xStation", station3);
+        activityIntent.putExtra("xMachine", machine3);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_4_ID)
                 .setFullScreenIntent(contentIntent, true)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -763,10 +782,11 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
         String title = "WARNING";
         String message = "Line 4, Station "+station4+" Status Changed to "+stat4;
         Intent activityIntent = new Intent(this, SwipeProblemMonitoring.class);
-//        String value = "CNC Machine";
-//        activityIntent.putExtra("key", value);
+        activityIntent.putExtra("xLine", line4);
+        activityIntent.putExtra("xStation", station4);
+        activityIntent.putExtra("xMachine", machine4);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_5_ID)
                 .setFullScreenIntent(contentIntent, true)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)

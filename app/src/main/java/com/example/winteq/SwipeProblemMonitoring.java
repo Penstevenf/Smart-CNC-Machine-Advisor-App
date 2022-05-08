@@ -17,12 +17,20 @@ import com.ebanx.swipebtn.SwipeButton;
 public class SwipeProblemMonitoring extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
     String Response_Time_Start;
+    private String xLine, xStation, xMachine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.swipe_problem_mon);
+
+        Intent activityIntent = getIntent();
+        xLine = activityIntent.getStringExtra("xLine");
+        xStation = activityIntent.getStringExtra("xStation");
+        xMachine = activityIntent.getStringExtra("xMachine");
+
+        Toast.makeText(SwipeProblemMonitoring.this, xLine, Toast.LENGTH_SHORT).show();
 
 //        Bundle extras = getIntent().getExtras();
 //        if (extras != null) {
@@ -42,11 +50,11 @@ public class SwipeProblemMonitoring extends AppCompatActivity {
             @Override
             public void onActive() {
 
-                Intent i = new Intent(getApplicationContext(), Contact.class);
-//                String value="CNC Machine";
-//                String value2 ="Line CNC";
-//                i.putExtra("key2",value2);
-//                i.putExtra("key",value);
+
+                Intent i = new Intent(getApplicationContext(), Sensor.class);
+                i.putExtra("xLine", xLine);
+                i.putExtra("xStation", xStation);
+                i.putExtra("xMachine", xMachine);
                 startActivity(i);
 
             }
