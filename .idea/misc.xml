@@ -37,7 +37,7 @@
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_asset_management_replace.xml" value="0.2" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_asset_management_station.xml" value="0.2" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_asset_management_view.xml" value="0.2" />
-        <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_dash_board.xml" value="0.2" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_dash_board.xml" value="0.264" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_dashboard.xml" value="0.28125" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_help_elc_add.xml" value="0.2" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_help_elc_update.xml" value="0.2" />
@@ -92,6 +92,7 @@
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/activity_dash_board.xml" value="0.176" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/activity_dashboard.xml" value="0.2109375" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/activity_forgot_password.xml" value="0.2" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/layout/activity_help.xml" value="0.23854166666666668" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/activity_help_elc_add.xml" value="0.23854166666666668" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/activity_help_elc_update.xml" value="0.25416666666666665" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/activity_help_elc_view.xml" value="0.16666666666666666" />

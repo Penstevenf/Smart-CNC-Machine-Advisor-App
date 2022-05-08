@@ -178,16 +178,15 @@ public class MonitoringAdd extends AppCompatActivity implements NavigationView.O
         String line = sline.getSelectedItem().toString();
         String station = sname.getSelectedItem().toString();
         String mon_image = getStringImage(bitmap);
-        String mon_status = sstat.getSelectedItem().toString();
+//        String mon_status = sstat.getSelectedItem().toString();
         String mon_pic = et_pic.getText().toString();
         String mon_desc = et_desc.getText().toString();
-//        String mon_desc = getStringImage(bitmap);
         ProgressDialog pd = new ProgressDialog(MonitoringAdd.this);
         pd.setMessage("Uploading...");
         pd.setCancelable(false);
         pd.show();
 
-        Call<MonData> MonitoringAddcall = apiInterface.aiMonAddData(line, station, mon_image, mon_status, mon_pic, mon_desc);
+        Call<MonData> MonitoringAddcall = apiInterface.aiMonAddData(line, station, mon_image, mon_pic, mon_desc);
         MonitoringAddcall.enqueue(new Callback<MonData>() {
             @Override
             public void onResponse(Call<MonData> call, Response<MonData> response) {
@@ -203,7 +202,6 @@ public class MonitoringAdd extends AppCompatActivity implements NavigationView.O
                     }
                 }
                 if(response.body() != null && response.body().isStatus()){
-                    monData = response.body();
                     pd.dismiss();
 
                     Toast.makeText(MonitoringAdd.this, sr, Toast.LENGTH_SHORT).show();

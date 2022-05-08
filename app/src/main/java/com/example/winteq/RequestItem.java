@@ -108,65 +108,68 @@ public class RequestItem extends AppCompatActivity implements NavigationView.OnN
 
 
         //set data
-        if(!(xPic.isEmpty())) {
+        if(xPic != null) {
             pic.setText(xPic);
         }
-        if(!(xDesc.isEmpty())) {
+        if(xDesc != null) {
             desc.setText("Unit = "+xDesc);
         }
-        if(!(xQty.isEmpty())) {
+        if(xQty != null) {
             qty.setText(xQty);
         }
-        if(!(xPart.isEmpty())) {
+        if(xPart != null) {
             part.setText(xPart);
         }
-        if(!(xMachine.isEmpty())) {
+        if(xMachine != null) {
             machine.setText(xMachine);
         }
 
+        if(xLine != null){
+            if(xLine.equals("Line 1")){
+                line.setSelection(0);
+            }
+            if(xLine.equals("Line 2")){
+                line.setSelection(1);
+            }
+            if(xLine.equals("Line 3")){
+                line.setSelection(2);
+            }
+            if(xLine.equals("Line 4")){
+                line.setSelection(3);
+            }
+        }
 
-        if(xLine.equals("Line 1")){
-            line.setSelection(0);
-        }
-        if(xLine.equals("Line 2")){
-            line.setSelection(1);
-        }
-        if(xLine.equals("Line 3")){
-            line.setSelection(2);
-        }
-        if(xLine.equals("Line 4")){
-            line.setSelection(3);
-        }
-
-        if(xStation.equals("1")){
-            station.setSelection(0);
-        }
-        if(xStation.equals("2")){
-            station.setSelection(1);
-        }
-        if(xStation.equals("3")){
-            station.setSelection(2);
-        }
-        if(xStation.equals("4")){
-            station.setSelection(3);
-        }
-        if(xStation.equals("5")){
-            station.setSelection(4);
-        }
-        if(xStation.equals("6")){
-            station.setSelection(5);
-        }
-        if(xStation.equals("7")){
-            station.setSelection(6);
-        }
-        if(xStation.equals("8")){
-            station.setSelection(7);
-        }
-        if(xStation.equals("9")){
-            station.setSelection(8);
-        }
-        if(xStation.equals("10")){
-            station.setSelection(9);
+        if(xStation != null) {
+            if (xStation.equals("1")) {
+                station.setSelection(0);
+            }
+            if (xStation.equals("2")) {
+                station.setSelection(1);
+            }
+            if (xStation.equals("3")) {
+                station.setSelection(2);
+            }
+            if (xStation.equals("4")) {
+                station.setSelection(3);
+            }
+            if (xStation.equals("5")) {
+                station.setSelection(4);
+            }
+            if (xStation.equals("6")) {
+                station.setSelection(5);
+            }
+            if (xStation.equals("7")) {
+                station.setSelection(6);
+            }
+            if (xStation.equals("8")) {
+                station.setSelection(7);
+            }
+            if (xStation.equals("9")) {
+                station.setSelection(8);
+            }
+            if (xStation.equals("10")) {
+                station.setSelection(9);
+            }
         }
 
 
@@ -190,10 +193,12 @@ public class RequestItem extends AppCompatActivity implements NavigationView.OnN
 
         String profileS = sp.getString(IMAGE, null);
 
-        if(!(xImage.isEmpty())) {
-            String imageUri = xImage;
-            ImageView Image2 = ipic;
-            Picasso.get().load(imageUri).into(Image2);
+        if(xImage != null){
+            if(!(xImage.isEmpty())) {
+                String imageUri = xImage;
+                ImageView Image2 = ipic;
+                Picasso.get().load(imageUri).into(Image2);
+            }
         }
 
         if(!(profileS.isEmpty())) {

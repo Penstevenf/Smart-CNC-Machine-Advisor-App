@@ -3,5 +3,6 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">192.168.100.12</domain>
         <domain includeSubdomains="true">192.168.0.124</domain>
+        <domain includeSubdomains="true">https://winteqapp.000webhostapp.com/</domain>
     </domain-config>
 </network-security-config>

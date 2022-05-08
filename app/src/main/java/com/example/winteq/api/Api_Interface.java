@@ -211,7 +211,6 @@ public interface Api_Interface {
             @Field("line") String line,
             @Field("station") String station,
             @Field("mon_image") String mon_image,
-            @Field("mon_status") String mon_status,
             @Field("mon_pic") String mon_pic,
             @Field("mon_desc") String mon_desc
     );
