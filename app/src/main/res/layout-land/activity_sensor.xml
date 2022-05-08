@@ -226,7 +226,7 @@
             app:layout_constraintTop_toBottomOf="@id/listAssetViewz"
             app:layout_constraintLeft_toRightOf="@id/machine_namez"
             app:layout_constraintRight_toLeftOf="@id/sen_line"
-            app:queryHint="Search"
+            app:queryHint="Search Status, Error &amp; Date"
             app:iconifiedByDefault="false"
             android:gravity="center"
             android:elevation="10dp"

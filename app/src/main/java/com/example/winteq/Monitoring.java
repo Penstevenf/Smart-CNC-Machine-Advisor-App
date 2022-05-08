@@ -80,6 +80,7 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
     private static final String FULLNAME = "fullname";
     private static final String IMAGE = "image";
 
+    public static final String NOTIFICATION_NO = "number";
     public static final String CHANNEL_2_ID = "channel2";
     public static final String CHANNEL_3_ID = "channel3";
     public static final String CHANNEL_4_ID = "channel4";
@@ -703,14 +704,16 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
     public void sendOnChannel1() {
         String title = "WARNING";
         String message = "Line 1, Station "+station1+" Status Changed to "+stat1;
-        Intent activityIntent = new Intent(this, SwipeProblemMonitoring.class);
-        activityIntent.putExtra("xLine", line1);
-        activityIntent.putExtra("xStation", station1);
-        activityIntent.putExtra("xMachine", machine1);
-
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent activityIntent1 = new Intent(this, SwipeProblemMonitoring.class);
+        activityIntent1.putExtra("xLine", line1);
+        activityIntent1.putExtra("xStation", station1);
+        activityIntent1.putExtra("xMachine", machine1);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(NOTIFICATION_NO, "1");
+        editor.apply();
+        PendingIntent contentIntent1 = PendingIntent.getActivity(this, 1, activityIntent1, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_2_ID)
-                .setFullScreenIntent(contentIntent, true)
+                .setFullScreenIntent(contentIntent1, true)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle(title)
                 .setContentText(message)
@@ -719,9 +722,16 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setOnlyAlertOnce(true)
-                .addAction(R.drawable.ic_launcher_foreground, "Detail", contentIntent)
+                .addAction(R.drawable.ic_launcher_foreground, "Detail", contentIntent1)
                 .build();
-
+        //check if pendingintent called or applied (when Detail clicked)
+        //purpose to differentiate each putextra data in each line when Detail clicked
+        Intent checkIntent = new Intent(getApplicationContext(), Monitoring.class);
+        if((PendingIntent.getBroadcast(getBaseContext(), 1, checkIntent, PendingIntent.FLAG_NO_CREATE) != null)) {
+            SharedPreferences.Editor editor1 = sp.edit();
+            editor1.putString(NOTIFICATION_NO, "1");
+            editor1.apply();
+        }
         notificationManager.notify(2, notification);
         notification.flags = Notification.FLAG_AUTO_CANCEL;
     }
@@ -729,14 +739,16 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
     public void sendOnChannel2() {
         String title = "WARNING";
         String message = "Line 2, Station "+station2+" Status Changed to "+stat2;
-        Intent activityIntent = new Intent(this, SwipeProblemMonitoring.class);
-        activityIntent.putExtra("xLine", line2);
-        activityIntent.putExtra("xStation", station2);
-        activityIntent.putExtra("xMachine", machine2);
-
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent activityIntent2 = new Intent(this, SwipeProblemMonitoring.class);
+        activityIntent2.putExtra("xLine", line2);
+        activityIntent2.putExtra("xStation", station2);
+        activityIntent2.putExtra("xMachine", machine2);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(NOTIFICATION_NO, "2");
+        editor.apply();
+        PendingIntent contentIntent2 = PendingIntent.getActivity(this, 2, activityIntent2, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_3_ID)
-                .setFullScreenIntent(contentIntent, true)
+                .setFullScreenIntent(contentIntent2, true)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle(title)
                 .setContentText(message)
@@ -745,9 +757,14 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setOnlyAlertOnce(true)
-                .addAction(R.drawable.ic_launcher_foreground, "Detail", contentIntent)
+                .addAction(R.drawable.ic_launcher_foreground, "Detail", contentIntent2)
                 .build();
-
+        Intent checkIntent = new Intent(getApplicationContext(), Monitoring.class);
+        if((PendingIntent.getBroadcast(getBaseContext(), 2, checkIntent, PendingIntent.FLAG_NO_CREATE) != null)) {
+            SharedPreferences.Editor editor2 = sp.edit();
+            editor2.putString(NOTIFICATION_NO, "2");
+            editor2.apply();
+        }
         notificationManager.notify(3, notification);
         notification.flags = Notification.FLAG_AUTO_CANCEL;
     }
@@ -755,14 +772,16 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
     public void sendOnChannel3() {
         String title = "WARNING";
         String message = "Line 3, Station "+station3+" Status Changed to "+stat3;
-        Intent activityIntent = new Intent(this, SwipeProblemMonitoring.class);
-        activityIntent.putExtra("xLine", line3);
-        activityIntent.putExtra("xStation", station3);
-        activityIntent.putExtra("xMachine", machine3);
-
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent activityIntent3 = new Intent(this, SwipeProblemMonitoring.class);
+        activityIntent3.putExtra("xLine", line3);
+        activityIntent3.putExtra("xStation", station3);
+        activityIntent3.putExtra("xMachine", machine3);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(NOTIFICATION_NO, "3");
+        editor.apply();
+        PendingIntent contentIntent3 = PendingIntent.getActivity(this, 3, activityIntent3, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_4_ID)
-                .setFullScreenIntent(contentIntent, true)
+                .setFullScreenIntent(contentIntent3, true)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle(title)
                 .setContentText(message)
@@ -771,9 +790,14 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setOnlyAlertOnce(true)
-                .addAction(R.drawable.ic_launcher_foreground, "Detail", contentIntent)
+                .addAction(R.drawable.ic_launcher_foreground, "Detail", contentIntent3)
                 .build();
-
+        Intent checkIntent = new Intent(getApplicationContext(), Monitoring.class);
+        if((PendingIntent.getBroadcast(getBaseContext(), 3, checkIntent, PendingIntent.FLAG_NO_CREATE) != null)) {
+            SharedPreferences.Editor editor3 = sp.edit();
+            editor3.putString(NOTIFICATION_NO, "3");
+            editor3.apply();
+        }
         notificationManager.notify(4, notification);
         notification.flags = Notification.FLAG_AUTO_CANCEL;
     }
@@ -781,14 +805,14 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
     public void sendOnChannel4() {
         String title = "WARNING";
         String message = "Line 4, Station "+station4+" Status Changed to "+stat4;
-        Intent activityIntent = new Intent(this, SwipeProblemMonitoring.class);
-        activityIntent.putExtra("xLine", line4);
-        activityIntent.putExtra("xStation", station4);
-        activityIntent.putExtra("xMachine", machine4);
+        Intent activityIntent4 = new Intent(this, SwipeProblemMonitoring.class);
+        activityIntent4.putExtra("xLine", line4);
+        activityIntent4.putExtra("xStation", station4);
+        activityIntent4.putExtra("xMachine", machine4);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent contentIntent4 = PendingIntent.getActivity(this, 4, activityIntent4, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_5_ID)
-                .setFullScreenIntent(contentIntent, true)
+                .setFullScreenIntent(contentIntent4, true)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle(title)
                 .setContentText(message)
@@ -797,9 +821,14 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setOnlyAlertOnce(true)
-                .addAction(R.drawable.ic_launcher_foreground, "Detail", contentIntent)
+                .addAction(R.drawable.ic_launcher_foreground, "Detail", contentIntent4)
                 .build();
-
+        Intent checkIntent = new Intent(getApplicationContext(), Monitoring.class);
+        if((PendingIntent.getBroadcast(getBaseContext(), 4, checkIntent, PendingIntent.FLAG_NO_CREATE) != null)) {
+            SharedPreferences.Editor editor4 = sp.edit();
+            editor4.putString(NOTIFICATION_NO, "4");
+            editor4.apply();
+        }
         notificationManager.notify(5, notification);
         notification.flags = Notification.FLAG_AUTO_CANCEL;
     }

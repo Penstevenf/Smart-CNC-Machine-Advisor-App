@@ -141,7 +141,9 @@ public class AdapterSensor extends BaseAdapter implements Filterable {
                 }else{
                     List<SensorData> listFiltereds = new ArrayList<>();
                     for (SensorData row: listSensorFiltered){
-                        if(row.getSen_status().toLowerCase().contains(Key.toLowerCase())){
+                        if(row.getSen_status().toLowerCase().contains(Key.toLowerCase()) ||
+                                row.getError_percentage().toLowerCase().contains(Key.toLowerCase()) ||
+                                row.getSen_date().toLowerCase().contains(Key.toLowerCase())){
                             listFiltereds.add(row);
                         }
                     }
