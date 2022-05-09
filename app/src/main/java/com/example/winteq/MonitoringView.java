@@ -43,7 +43,7 @@ public class MonitoringView extends AppCompatActivity implements NavigationView.
     NavigationView navigationView;
     Toolbar toolbar;
     SharedPreferences sp;
-    FloatingActionButton editdatamon, deletedatamonz;
+    FloatingActionButton editdatamon, deletedatamonz, mesindatamonz;
     Api_Interface apiInterface;
     private List<MonData> listMonData;
     MonData monData;
@@ -85,6 +85,7 @@ public class MonitoringView extends AppCompatActivity implements NavigationView.
         monpic = findViewById(R.id.monpic);
         editdatamon = findViewById(R.id.editdatamon);
         deletedatamonz = findViewById(R.id.deletedatamonz);
+        mesindatamonz = findViewById(R.id.mesindatamonz);
         monpersonincharge = findViewById(R.id.monpersonincharge);
 
         //UNPACK INTENT
@@ -267,6 +268,17 @@ public class MonitoringView extends AppCompatActivity implements NavigationView.
                         .show();
             }
         });
+
+        mesindatamonz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent m = new Intent(MonitoringView.this, SensorMachine.class);
+                m.putExtra("xLine", Xline);
+                m.putExtra("xStation", Xstation);
+                MonitoringView.this.startActivity(m);
+            }
+        });
+
     }
 
     //Setup onBack Press

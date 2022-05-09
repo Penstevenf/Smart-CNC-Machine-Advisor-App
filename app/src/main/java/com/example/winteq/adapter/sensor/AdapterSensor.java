@@ -12,6 +12,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
+
 import com.example.winteq.R;
 import com.example.winteq.Sensor;
 import com.example.winteq.api.ApiClient;
@@ -65,16 +67,40 @@ public class AdapterSensor extends BaseAdapter implements Filterable {
             itemView = LayoutInflater.from(context).inflate(R.layout.listview_sensor, parent, false);
         }
 
-        final SensorData ad1 = (SensorData) this.getItem(position);
+        final SensorData sd1 = (SensorData) this.getItem(position);
 
-        TextView id;
-        id = itemView.findViewById(R.id.tv_asset_id);
+        TextView id, error_percentage;
+        id = itemView.findViewById(R.id.sen_id);
+        error_percentage = itemView.findViewById(R.id.error_percentage);
+
+        String error = sd1.getError_percentage();
+        Float value = Float.parseFloat(error);
+
+//        Toast.makeText(context, "Data : "+value, Toast.LENGTH_SHORT).show();
+
+        if(value < 0.05 && value > 0) {
+            error_percentage.setBackground(ContextCompat.getDrawable(context, R.drawable.linetgreenforsensor));
+        }
+        else if(value >= 0.05 && value < 0.075) {
+            error_percentage.setBackground(ContextCompat.getDrawable(context, R.drawable.linetyellowforsensor));
+        }
+        else if(value >= 0.075 && value < 0.1) {
+            error_percentage.setBackground(ContextCompat.getDrawable(context, R.drawable.linetblueforsensor));
+        }
+        else if(value >= 0.1 && value <= 1) {
+            error_percentage.setBackground(ContextCompat.getDrawable(context, R.drawable.linetredforsensor));
+        }
+
+        ViewHolder viewHolder = new ViewHolder(itemView);
+
+        SensorData sd = (SensorData) getItem(position);
+        viewHolder.bind(sd);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
-                Call<SensorResponseData> getData = aiData.aiSensorViewData(ad1.getSen_id());
+                Call<SensorResponseData> getData = aiData.aiSensorViewData(sd1.getSen_id());
 
                 getData.enqueue(new Callback<SensorResponseData>() {
                     @Override
@@ -122,10 +148,7 @@ public class AdapterSensor extends BaseAdapter implements Filterable {
             }
         });
 
-        ViewHolder viewHolder = new ViewHolder(itemView);
 
-        SensorData ad = (SensorData) getItem(position);
-        viewHolder.bind(ad);
         return itemView;
     }
 

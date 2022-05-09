@@ -150,6 +150,18 @@
             app:layout_constraintTop_toBottomOf="@+id/editdatamon"
             app:layout_constraintRight_toRightOf="parent"/>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/mesindatamonz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:layout_marginRight="30dp"
+            android:backgroundTint="#4b5ea5"
+            android:src="@drawable/ic_baseline_settings_24"
+            tools:ignore="SpeakableTextPresentCheck"
+            app:layout_constraintTop_toBottomOf="@+id/deletedatamonz"
+            app:layout_constraintRight_toRightOf="parent"/>
+
         <TextView
             android:id="@+id/monnames"
             android:layout_width="130dp"

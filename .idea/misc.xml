@@ -20,8 +20,12 @@
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/linet.xml" value="0.2421875" />
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/linet2.xml" value="0.2703125" />
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/linetblue.xml" value="0.2703125" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/drawable/linetblueforsensor.xml" value="0.2546875" />
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/linetgreen.xml" value="0.2703125" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/drawable/linetgreenforsensor.xml" value="0.2546875" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/drawable/linetredforsensor.xml" value="0.2546875" />
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/linetyellow.xml" value="0.2703125" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/drawable/linetyellowforsensor.xml" value="0.2546875" />
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/rectangle_green.xml" value="0.18385416666666668" />
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/rectangle_red.xml" value="0.2703125" />
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/sp_rectangle_login.xml" value="0.14921875" />
@@ -36,7 +40,7 @@
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_asset_management_notif_part.xml" value="0.264" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_asset_management_replace.xml" value="0.2" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_asset_management_station.xml" value="0.2" />
-        <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_asset_management_view.xml" value="0.2" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_asset_management_view.xml" value="0.264" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_dash_board.xml" value="0.264" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_dashboard.xml" value="0.28125" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_help_elc_add.xml" value="0.2" />
@@ -55,6 +59,7 @@
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_pdf_mekanik.xml" value="0.3151041666666667" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_profile.xml" value="0.136" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_sensor.xml" value="0.264" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_sensor_machine.xml" value="0.2" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_splash_screen.xml" value="0.14770723104056438" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_wms.xml" value="0.264" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_wms_data.xml" value="0.264" />
@@ -70,12 +75,13 @@
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/listview_asset_notif_part.xml" value="0.264" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/listview_asset_station.xml" value="0.2" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/listview_asset_view.xml" value="0.264" />
-        <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/listview_layout_mon1.xml" value="0.2" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/listview_layout_mon1.xml" value="0.536" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/listview_layout_mon2.xml" value="0.176" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/listview_layout_mon3.xml" value="0.2986111111111111" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/listview_layout_mon4.xml" value="0.4" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/listview_layout_wms.xml" value="0.2" />
-        <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/listview_sensor.xml" value="0.264" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/listview_sensor.xml" value="0.4" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/listview_sensor_machine.xml" value="0.176" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-sw600dp/activity_help_mech.xml" value="0.2296875" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-sw600dp/activity_register.xml" value="0.130859375" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-sw600dp/activity_splash_screen.xml" value="0.130859375" />
@@ -153,6 +159,7 @@
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/listview_layout_sp.xml" value="0.264" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/listview_layout_wms.xml" value="0.4" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/listview_sensor.xml" value="0.23854166666666668" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/layout/listview_sensor_machine.xml" value="0.23854166666666668" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/spinner_copro.xml" value="0.23854166666666668" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/swipe_problem.xml" value="0.152" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/swipe_problem_mon.xml" value="0.1984375" />

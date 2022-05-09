@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AssetManagementMachine"
-    android:id="@+id/asmMachine"
+    tools:context=".SensorMachine"
+    android:id="@+id/sMachine"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         app:layout_constraintTop_toBottomOf="@id/bluebox"
         android:layout_height="360dp"
-        tools:listitem="@layout/listview_asset_machine"
+        tools:listitem="@layout/listview_sensor_machine"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -118,6 +118,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#4b5ea5"
         android:layout_marginTop="17dp"
+        android:visibility="gone"
         android:layout_marginRight="20dp"
         android:onClick="addmacasset"
         app:fabSize="normal"

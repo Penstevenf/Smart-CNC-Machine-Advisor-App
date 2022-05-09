@@ -21,6 +21,9 @@
             android:name=".Sensor"
             android:exported="true" />
         <activity
+            android:name=".SensorMachine"
+            android:exported="true" />
+        <activity
             android:name=".AssetAddMachine"
             android:exported="true" />
 

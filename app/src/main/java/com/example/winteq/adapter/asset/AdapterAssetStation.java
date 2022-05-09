@@ -10,7 +10,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.winteq.AssetManagement;
 import com.example.winteq.AssetManagementMachine;
@@ -74,7 +73,7 @@ public class AdapterAssetStation extends BaseAdapter implements Filterable {
             @Override
             public void onClick(View v) {
                 station = AD.getAsset_station();
-                Toast.makeText(context, "Station "+station+" Selected", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Station "+station+" Selected", Toast.LENGTH_SHORT).show();
                 Intent nameSends = new Intent(context, AssetManagementMachine.class);
                 nameSends.putExtra("xStation", station);
                 context.startActivity(nameSends);

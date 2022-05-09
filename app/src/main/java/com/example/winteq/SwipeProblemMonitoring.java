@@ -33,28 +33,28 @@ public class SwipeProblemMonitoring extends AppCompatActivity {
         //Setup Shared Preference
         sp = getSharedPreferences(SHARE_PREF_NAME, MODE_PRIVATE);
 
-        if(sp.getString(NOTIFICATION_NO, null) == "1"){
+        if(sp.getString(NOTIFICATION_NO, null).equals("1")){
             Intent activityIntent1 = getIntent();
             xLine = activityIntent1.getStringExtra("xLine");
             xStation = activityIntent1.getStringExtra("xStation");
             xMachine = activityIntent1.getStringExtra("xMachine");
         }
 
-        if(sp.getString(NOTIFICATION_NO, null) == "2") {
+        if(sp.getString(NOTIFICATION_NO, null).equals("2")) {
             Intent activityIntent2 = getIntent();
             xLine = activityIntent2.getStringExtra("xLine");
             xStation = activityIntent2.getStringExtra("xStation");
             xMachine = activityIntent2.getStringExtra("xMachine");
         }
 
-        if(sp.getString(NOTIFICATION_NO, null) == "3") {
+        if(sp.getString(NOTIFICATION_NO, null).equals("3")) {
             Intent activityIntent3 = getIntent();
             xLine = activityIntent3.getStringExtra("xLine");
             xStation = activityIntent3.getStringExtra("xStation");
             xMachine = activityIntent3.getStringExtra("xMachine");
         }
 
-        if(sp.getString(NOTIFICATION_NO, null) == "4") {
+        if(sp.getString(NOTIFICATION_NO, null).equals("4")) {
             Intent activityIntent4 = getIntent();
             xLine = activityIntent4.getStringExtra("xLine");
             xStation = activityIntent4.getStringExtra("xStation");

@@ -1,4 +1,4 @@
-package com.example.winteq.adapter.asset;
+package com.example.winteq.adapter.sensor;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,36 +10,36 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-import com.example.winteq.AssetManagementView;
 import com.example.winteq.R;
+import com.example.winteq.Sensor;
 import com.example.winteq.model.asset.AssetData;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterAssetMachine extends BaseAdapter implements Filterable {
+public class AdapterSensorMachine extends BaseAdapter implements Filterable {
 
     private Context context;
-    private List<AssetData> listAsset;
-    private List<AssetData> listAssetFiltered;
-    private String idAsset, machine;
+    private List<AssetData> listSensor;
+    private List<AssetData> listSensorFiltered;
+    private String line, station, machine;
     AssetData assetData;
 
-    public AdapterAssetMachine(Context context, List<AssetData> listAsset) {
+    public AdapterSensorMachine(Context context, List<AssetData> listSensor) {
         this.context = context;
-        this.listAsset = listAsset;
-        this.listAssetFiltered = listAsset;
+        this.listSensor = listSensor;
+        this.listSensorFiltered = listSensor;
     }
 
     @Override
     public int getCount() {
-        return listAssetFiltered.size();
+        return listSensorFiltered.size();
     }
 
 
     @Override
     public Object getItem(int position) {
-        return listAssetFiltered.get(position);
+        return listSensorFiltered.get(position);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class AdapterAssetMachine extends BaseAdapter implements Filterable {
         final AssetData AD = (AssetData) this.getItem(position);
 
         if (itemView == null) {
-            itemView = LayoutInflater.from(context).inflate(R.layout.listview_asset_machine, parent, false);
+            itemView = LayoutInflater.from(context).inflate(R.layout.listview_sensor_machine, parent, false);
         }
 
         TextView id;
@@ -70,10 +70,14 @@ public class AdapterAssetMachine extends BaseAdapter implements Filterable {
             @Override
             public void onClick(View v) {
                 machine = AD.getMachine_name();
+                line = AD.getAsset_line();
+                station = AD.getAsset_station();
 //                Toast.makeText(context, machine+" Machine Selected", Toast.LENGTH_SHORT).show();
-                Intent nameSendm = new Intent(context, AssetManagementView.class);
-                nameSendm.putExtra("xMachine", machine);
-                context.startActivity(nameSendm);
+                Intent m = new Intent(context, Sensor.class);
+                m.putExtra("xLine", line);
+                m.putExtra("xStation", station);
+                m.putExtra("xMachine", machine);
+                context.startActivity(m);
             }
         });
 
@@ -88,9 +92,9 @@ public class AdapterAssetMachine extends BaseAdapter implements Filterable {
             tv_machname = v.findViewById(R.id.tv_machname);
         }
 
-        void bind(AssetData ad){
+        void bind(AssetData sd){
 //            tv_asset_id.setText(ad.getAsset_id());
-            tv_machname.setText(ad.getMachine_name());
+            tv_machname.setText(sd.getMachine_name());
         }
     }
 
@@ -100,26 +104,26 @@ public class AdapterAssetMachine extends BaseAdapter implements Filterable {
             protected FilterResults performFiltering(CharSequence charSequence) {
                 String Key = charSequence.toString();
                 if(Key.isEmpty()){
-                    listAssetFiltered = listAsset;
+                    listSensorFiltered = listSensor;
                 }else{
                     List<AssetData> listFiltered = new ArrayList<>();
-                    for (AssetData row: listAsset){
+                    for (AssetData row: listSensor){
                         if(row.getMachine_name().toLowerCase().contains(Key.toLowerCase())){
                             listFiltered.add(row);
                         }
                     }
 
-                    listAssetFiltered = listFiltered;
+                    listSensorFiltered = listFiltered;
                 }
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = listAssetFiltered;
+                filterResults.values = listSensorFiltered;
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
 
-                listAssetFiltered = (List<AssetData>) filterResults.values;
+                listSensorFiltered = (List<AssetData>) filterResults.values;
                 notifyDataSetChanged();
             }
         };

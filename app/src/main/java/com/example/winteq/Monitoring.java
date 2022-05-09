@@ -708,9 +708,7 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
         activityIntent1.putExtra("xLine", line1);
         activityIntent1.putExtra("xStation", station1);
         activityIntent1.putExtra("xMachine", machine1);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString(NOTIFICATION_NO, "1");
-        editor.apply();
+
         PendingIntent contentIntent1 = PendingIntent.getActivity(this, 1, activityIntent1, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_2_ID)
                 .setFullScreenIntent(contentIntent1, true)
@@ -743,9 +741,7 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
         activityIntent2.putExtra("xLine", line2);
         activityIntent2.putExtra("xStation", station2);
         activityIntent2.putExtra("xMachine", machine2);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString(NOTIFICATION_NO, "2");
-        editor.apply();
+
         PendingIntent contentIntent2 = PendingIntent.getActivity(this, 2, activityIntent2, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_3_ID)
                 .setFullScreenIntent(contentIntent2, true)
@@ -776,9 +772,7 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
         activityIntent3.putExtra("xLine", line3);
         activityIntent3.putExtra("xStation", station3);
         activityIntent3.putExtra("xMachine", machine3);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString(NOTIFICATION_NO, "3");
-        editor.apply();
+
         PendingIntent contentIntent3 = PendingIntent.getActivity(this, 3, activityIntent3, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_4_ID)
                 .setFullScreenIntent(contentIntent3, true)

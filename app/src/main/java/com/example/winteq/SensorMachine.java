@@ -9,8 +9,9 @@ import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,11 +23,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.winteq.adapter.sensor.AdapterSensor;
+import com.example.winteq.adapter.sensor.AdapterSensorMachine;
 import com.example.winteq.api.ApiClient;
 import com.example.winteq.api.Api_Interface;
-import com.example.winteq.model.sensor.SensorData;
-import com.example.winteq.model.sensor.SensorResponseData;
+import com.example.winteq.model.asset.AssetData;
+import com.example.winteq.model.asset.AssetResponseData;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
@@ -37,66 +39,68 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Sensor extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class SensorMachine extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
     SharedPreferences sp;
     Api_Interface apiInterface;
-    SearchView search_assetz;
-    TextView machine_name, sen_line, sen_station;
+    SearchView searchView;
+    Spinner statsp;
+    AssetData assetData;
+    TextView tv_savestation, tv_savelines;
+    FloatingActionButton AddMacAsset;
 
-    private ListView listAssetViewz;
-    private AdapterSensor adapter;
-    private List<SensorData> listSensor = new ArrayList<>();
+    private GridView gridviewAMSM;
+    private AdapterSensorMachine adapter;
+    private List<AssetData> listSensor = new ArrayList<>();
 
-    private String xMachine, xLine, xStation;
+    private String  xLine, xStation;;
 
     private static final String SHARE_PREF_NAME = "mypref";
     private static final String FULLNAME = "fullname";
     private static final String IMAGE = "image";
+    private static final String SENLINE = "sen_line";
+    private static final String SENSTATION = "sen_station";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_sensor);
-
-        sp = getSharedPreferences(SHARE_PREF_NAME, MODE_PRIVATE);
+        setContentView(R.layout.activity_sensor_machine);
 
         apiInterface = ApiClient.getClient().create(Api_Interface.class);
-        drawerLayout = findViewById(R.id.amnp);
+        drawerLayout = findViewById(R.id.sMachine);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
 
+        sp = getSharedPreferences(SHARE_PREF_NAME, MODE_PRIVATE);
+
+        tv_savestation = findViewById(R.id.tv_savestation);
+        tv_savelines = findViewById(R.id.tv_savelines);
+        AddMacAsset = findViewById(R.id.AddMacAsset);
+
+        //UNPACK INTENT
         Intent m = getIntent();
-        if(m.getStringExtra("xLine") != null) {
-            xLine = m.getStringExtra("xLine");
-            xStation = m.getStringExtra("xStation");
-            xMachine = m.getStringExtra("xMachine");
-        }else{
-            Intent i = getIntent();
-            xLine = i.getStringExtra("xLine");
-            xStation = i.getStringExtra("xStation");
-            xMachine = i.getStringExtra("xMachine");
-        }
+        xLine = m.getStringExtra("xLine");
+        xStation = m.getStringExtra("xStation");
+        tv_savelines.setText(xLine);
+        tv_savestation.setText(xStation);
 
-        listAssetViewz = findViewById(R.id.listAssetViewz);
-        adapter = new AdapterSensor(this);
+//        Toast.makeText(AssetManagementMachine.this, sp.getString(LINE, null), Toast.LENGTH_SHORT).show();
 
-        search_assetz = findViewById(R.id.search_sensor);
-        machine_name = findViewById(R.id.machine_namez);
-        sen_line = findViewById(R.id.sen_line);
-        sen_station = findViewById(R.id.sen_station);
+        adapter = new AdapterSensorMachine(SensorMachine.this, listSensor);
+        gridviewAMSM = findViewById(R.id.gridviewAMSM);
+        searchView = findViewById(R.id.SearchAMSM);
 
-        sen_line.setText(xLine);
-        sen_station.setText(xStation);
-        machine_name.setText(xMachine);
+        retrieveData();
+
 
         View header = navigationView.getHeaderView(0);
 
         TextView nama = (TextView) header.findViewById(R.id.fname);
+
 
         navigationView.bringToFront();
         setSupportActionBar(toolbar);
@@ -122,16 +126,19 @@ public class Sensor extends AppCompatActivity implements NavigationView.OnNaviga
         if (bitmap != null) {
             pfph.setImageBitmap(bitmap);
         }
-
-        retrieveData();
     }
+
+//    public void addmacasset(View v){
+//        Intent assetNo = new Intent(SensorMachine.this, AssetAddMachine.class);
+//        startActivity(assetNo);
+//    }
 
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            Intent intent = new Intent(Sensor.this, Monitoring.class);
+            Intent intent = new Intent(SensorMachine.this, Monitoring.class);
             startActivity(intent);
         }
     }
@@ -141,12 +148,12 @@ public class Sensor extends AppCompatActivity implements NavigationView.OnNaviga
 
         switch (item.getItemId()){
             case R.id.nav_home:
-                Intent intent1 = new Intent(Sensor.this, Dashboard.class);
+                Intent intent1 = new Intent(SensorMachine.this, Dashboard.class);
                 startActivity(intent1);
                 break;
 
             case R.id.nav_profile:
-                Intent intent2 = new Intent(Sensor.this, Profile.class);
+                Intent intent2 = new Intent(SensorMachine.this, Profile.class);
                 startActivity(intent2);
                 break;
 
@@ -155,23 +162,23 @@ public class Sensor extends AppCompatActivity implements NavigationView.OnNaviga
                 SharedPreferences.Editor editor = sp.edit();
                 editor.clear();
                 editor.commit();
-                Toast.makeText(Sensor.this, "Log out successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Sensor.this, Login.class);
+                Toast.makeText(SensorMachine.this, "Log out successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SensorMachine.this, Login.class);
                 startActivity(intent);
                 break;
 
             case R.id.nav_grafik:
-                Intent intent3 = new Intent(Sensor.this, Graph.class);
+                Intent intent3 = new Intent(SensorMachine.this, Graph.class);
                 startActivity(intent3);
                 break;
 
             case R.id.nav_contact:
-                Intent intent4 = new Intent(Sensor.this, Contact.class);
+                Intent intent4 = new Intent(SensorMachine.this, Contact.class);
                 startActivity(intent4);
                 break;
 
             case R.id.nav_help:
-                Intent intent5 = new Intent(Sensor.this, Help.class);
+                Intent intent5 = new Intent(SensorMachine.this, Help.class);
                 startActivity(intent5);
                 break;
         }
@@ -181,33 +188,33 @@ public class Sensor extends AppCompatActivity implements NavigationView.OnNaviga
 
     public void retrieveData(){
         Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
-        Call<SensorResponseData> showData = aiData.aiSensorData(xLine, xStation, xMachine);
+        Call<AssetResponseData> showData = aiData.aiAssetMachineData(tv_savelines.getText().toString(), tv_savestation.getText().toString());
 
-        showData.enqueue(new Callback<SensorResponseData>() {
+        showData.enqueue(new Callback<AssetResponseData>() {
             @Override
-            public void onResponse(Call<SensorResponseData> call, Response<SensorResponseData> response) {
+            public void onResponse(Call<AssetResponseData> call, Response<AssetResponseData> response) {
                 boolean status = response.body().isStatus();
                 String message = response.body().getMessage();
 
                 listSensor = response.body().getData();
 
                 if(listSensor != null) {
-                    adapter = new AdapterSensor(Sensor.this, listSensor);
-                    listAssetViewz.setAdapter(adapter);
+                    adapter = new AdapterSensorMachine(SensorMachine.this, listSensor);
+                    gridviewAMSM.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 }
 
-//               Toast.makeText(AssetManagement.this, listWms.get(0).getElc_tag(), Toast.LENGTH_SHORT).show();
+//               Toast.makeText(AssetManagementMachine.this, listWms.get(0).getElc_tag(), Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
-            public void onFailure(Call<SensorResponseData> call, Throwable t) {
-                Toast.makeText(Sensor.this, "Failed To Display Data", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<AssetResponseData> call, Throwable t) {
+                Toast.makeText(SensorMachine.this, "Failed To Display Data", Toast.LENGTH_SHORT).show();
             }
         });
 
-        search_assetz.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -216,10 +223,11 @@ public class Sensor extends AppCompatActivity implements NavigationView.OnNaviga
             @Override
             public boolean onQueryTextChange(String newText) {
                 if(listSensor != null) {
-                    Sensor.this.adapter.getFilter().filter(newText);
+                    SensorMachine.this.adapter.getFilter().filter(newText);
                 }
                 return false;
             }
         });
     }
+
 }
