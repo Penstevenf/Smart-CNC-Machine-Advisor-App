@@ -93,7 +93,7 @@ public class AdapterMonitoring2 extends BaseAdapter {
 //        else if(md2.getMon_status().equals("Repairing")) {
 //            c_linet2.setBackgroundResource(R.drawable.linetyellow);
 //        }
-//        else if(md2.getMon_status().equals("Finish Repair")) {
+//        else if(md2.getMon_status().equals("Ready To Use")) {
 //            c_linet2.setBackgroundResource(R.drawable.linetblue);
 //        }
 //        else if(md2.getMon_status().equals("Breakdown")) {
@@ -106,7 +106,7 @@ public class AdapterMonitoring2 extends BaseAdapter {
         else if(md2.getMon_status().equals("Repairing")) {
             rline2.setBackgroundColor(Color.YELLOW);
         }
-        else if(md2.getMon_status().equals("Finish Repair")) {
+        else if(md2.getMon_status().equals("Ready To Use")) {
             rline2.setBackgroundColor(Color.BLUE);
         }
         else if(md2.getMon_status().equals("Breakdown")) {

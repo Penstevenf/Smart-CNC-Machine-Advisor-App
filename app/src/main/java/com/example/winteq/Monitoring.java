@@ -360,7 +360,7 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                         stat1 = "Repairing";
                     }
                     if (response.body().getData().get(0).getAsset_status().equals("4")) {
-                        stat1= "Finish Repair";
+                        stat1= "Ready To Use";
                     }
                 }
 
@@ -402,7 +402,7 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                         stat2 = "Repairing";
                     }
                     if (response.body().getData().get(0).getAsset_status().equals("4")) {
-                        stat2 = "Finish Repair";
+                        stat2 = "Ready To Use";
                     }
                 }
 
@@ -444,7 +444,7 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                         stat3 = "Repairing";
                     }
                     if (response.body().getData().get(0).getAsset_status().equals("4")) {
-                        stat3 = "Finish Repair";
+                        stat3 = "Ready To Use";
                     }
                 }
 
@@ -486,7 +486,7 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                         stat4 = "Repairing";
                     }
                     if (response.body().getData().get(0).getAsset_status().equals("4")) {
-                        stat4 = "Finish Repair";
+                        stat4 = "Ready To Use";
                     }
                 }
 

@@ -127,36 +127,89 @@ public class MonitoringAdd extends AppCompatActivity implements NavigationView.O
         btn_monimageadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 0);
+                choosefile();
             }
         });
     }
 
+    //Setup onBack Press
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        switch(requestCode){
-            case 0:
-                super.onActivityResult(requestCode, resultCode, data);
-                if (requestCode == 0 && resultCode == RESULT_OK && data != null){
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            Intent intent = new Intent(MonitoringAdd.this, Monitoring.class);
+            startActivity(intent);
+        }
+    }
 
-                    Uri filepath = data.getData();
-                    InputStream imageStream;
+    //Setup Drawer move layout
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                    try {
-                        imageStream = getContentResolver().openInputStream(filepath);
-                        bitmap = BitmapFactory.decodeStream(imageStream);
-                        this.iv_monadd.setImageBitmap(bitmap);
-                        View header = navigationView.getHeaderView(0);
-                        tv_defaultimagemon.setText("Preview Image");
-
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    }
-                }
+        switch (item.getItemId()){
+            case R.id.nav_home:
+                Intent intent = new Intent(MonitoringAdd.this, Dashboard.class);
+                startActivity(intent);
                 break;
+
+            case R.id.nav_profile:
+                Intent intent1 = new Intent(MonitoringAdd.this, Profile.class);
+                startActivity(intent1);
+                break;
+
+            case R.id.nav_logout:
+                sp.edit().putBoolean("logged", false).apply();
+                Intent intent2 = new Intent(MonitoringAdd.this, Login.class);
+                startActivity(intent2);
+                break;
+
+            case R.id.nav_grafik:
+                Intent intent3 = new Intent(MonitoringAdd.this, Graph.class);
+                startActivity(intent3);
+                break;
+
+            case R.id.nav_contact:
+                Intent intent4 = new Intent(MonitoringAdd.this, Contact.class);
+                startActivity(intent4);
+                break;
+
+            case R.id.nav_help:
+                Intent intent5 = new Intent(MonitoringAdd.this, Help.class);
+                startActivity(intent5);
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    //untuk intent ke pemilihan gambar
+    private void choosefile(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null){
+
+            Uri filepath = data.getData();
+            InputStream imageStream;
+            tv_defaultimagemon.setText("Preview Image");
+
+            try {
+                imageStream = getContentResolver().openInputStream(filepath);
+                bitmap = BitmapFactory.decodeStream(imageStream);
+//              bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filepath);
+                this.iv_monadd.setImageBitmap(bitmap);
+                View header = navigationView.getHeaderView(0);
+
+            } catch (IOException e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -220,56 +273,5 @@ public class MonitoringAdd extends AppCompatActivity implements NavigationView.O
                 Toast.makeText(MonitoringAdd.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    //Setup onBack Press
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            Intent intent = new Intent(MonitoringAdd.this, Monitoring.class);
-            startActivity(intent);
-        }
-    }
-
-    //Setup Drawer move layout
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()){
-            case R.id.nav_home:
-                Intent intent = new Intent(MonitoringAdd.this, Dashboard.class);
-                startActivity(intent);
-                break;
-
-            case R.id.nav_profile:
-                Intent intent1 = new Intent(MonitoringAdd.this, Profile.class);
-                startActivity(intent1);
-                break;
-
-            case R.id.nav_logout:
-                sp.edit().putBoolean("logged", false).apply();
-                Intent intent2 = new Intent(MonitoringAdd.this, Login.class);
-                startActivity(intent2);
-                break;
-
-            case R.id.nav_grafik:
-                Intent intent3 = new Intent(MonitoringAdd.this, Graph.class);
-                startActivity(intent3);
-                break;
-
-            case R.id.nav_contact:
-                Intent intent4 = new Intent(MonitoringAdd.this, Contact.class);
-                startActivity(intent4);
-                break;
-
-            case R.id.nav_help:
-                Intent intent5 = new Intent(MonitoringAdd.this, Help.class);
-                startActivity(intent5);
-                break;
-        }
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
     }
 }
