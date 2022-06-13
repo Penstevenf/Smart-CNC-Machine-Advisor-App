@@ -82,7 +82,7 @@ public class Contact extends AppCompatActivity implements NavigationView.OnNavig
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            Intent intent = new Intent(Contact.this, Dashboard.class);
+            Intent intent = new Intent(Contact.this, Monitoring.class);
             startActivity(intent);
         }
     }

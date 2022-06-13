@@ -129,7 +129,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
 
 //        Toast.makeText(getApplicationContext(), fullname,Toast.LENGTH_SHORT).show();
-        et_username.setText(username + " - " + npk + " - " + email);
+//        et_username.setText(username + " - " + npk + " - " + email);
+        et_username.setText(username);
         et_fullname.setText(fullname);
 
 

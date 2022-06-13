@@ -212,7 +212,7 @@
             android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@+id/rl1"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:src="@drawable/circle_green"/>
+            android:src="@drawable/circle_red"/>
 
         <TextView
             android:id="@+id/cg1"
@@ -222,7 +222,7 @@
             android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@id/rl1"
             app:layout_constraintLeft_toRightOf="@+id/cg"
-            android:text="Running"
+            android:text="Breakdown"
             android:fontFamily="sans-serif-condensed-medium"
             android:textSize="18sp"/>
 
@@ -234,7 +234,7 @@
             android:layout_marginLeft="30dp"
             app:layout_constraintTop_toBottomOf="@+id/rl1"
             app:layout_constraintLeft_toRightOf="@+id/cg1"
-            android:src="@drawable/circle_orange"/>
+            android:src="@drawable/circle_yellow"/>
 
         <TextView
             android:id="@+id/co1"
@@ -256,7 +256,7 @@
             android:layout_marginLeft="30dp"
             app:layout_constraintTop_toBottomOf="@+id/rl1"
             app:layout_constraintLeft_toRightOf="@+id/co1"
-            android:src="@drawable/circle_red"/>
+            android:src="@drawable/circle_blue"/>
 
         <TextView
             android:id="@+id/cr1"
@@ -266,7 +266,7 @@
             android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@id/rl1"
             app:layout_constraintLeft_toRightOf="@+id/cr"
-            android:text="Breakdown"
+            android:text="Ready To Use"
             android:fontFamily="sans-serif-condensed-medium"
             android:textSize="18sp"/>
 
@@ -278,7 +278,7 @@
             android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@+id/rl1"
             app:layout_constraintLeft_toRightOf="@+id/cr1"
-            android:src="@drawable/circle_blue"/>
+            android:src="@drawable/circle_green"/>
 
         <TextView
             android:id="@+id/cb1"
@@ -288,7 +288,7 @@
             android:layout_marginLeft="6dp"
             app:layout_constraintTop_toBottomOf="@id/rl1"
             app:layout_constraintLeft_toRightOf="@+id/cb"
-            android:text="Ready To Use"
+            android:text="Running"
             android:fontFamily="sans-serif-condensed-medium"
             android:textSize="18sp"/>
 

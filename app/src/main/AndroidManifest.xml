@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar">
         <activity
+            android:name=".DetailError"
+            android:exported="true" />
+        <activity
             android:name=".Sensor"
             android:exported="true" />
         <activity

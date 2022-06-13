@@ -16,7 +16,7 @@ public class SplashScreen extends AppCompatActivity {
     private static int SPLASH_SCREEN = 3000;
 
     Animation topAnim;
-    ImageView image;
+    ImageView image, image2;
     SharedPreferences sp;
     private static final String DONE = "done?";
     private static final String SHARE_PREF_NAME = "mypref";
@@ -27,17 +27,6 @@ public class SplashScreen extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
 
-        //foreground
-//        Intent intent = new Intent(this, NotificationManager.class);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-//        {
-//            startForegroundService(intent);
-//        }
-//        else
-//        {
-//            startService(intent);
-//        }
-
         topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
 
         //reset loading notification
@@ -47,6 +36,8 @@ public class SplashScreen extends AppCompatActivity {
 
         image = findViewById(R.id.imageView);
         image.setAnimation(topAnim);
+        image2 = findViewById(R.id.imageView2);
+        image2.setAnimation(topAnim);
 
         new Handler().postDelayed(new Runnable() {
             @Override

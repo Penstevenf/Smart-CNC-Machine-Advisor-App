@@ -5,6 +5,11 @@
       <map>
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/bg_window.xml" value="0.22916666666666666" />
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/circle_black.xml" value="0.1" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/drawable/circle_blue.xml" value="0.2546875" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/drawable/circle_green.xml" value="0.2546875" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/drawable/circle_orange.xml" value="0.2546875" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/drawable/circle_red.xml" value="0.2546875" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/drawable/circle_yellow.xml" value="0.2546875" />
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/ic_android.xml" value="0.25364583333333335" />
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.19375" />
         <entry key="..\:/AndoridProjects/app/src/main/res/drawable/ic_baseline_confirmation_number_24.xml" value="0.24791666666666667" />
@@ -51,7 +56,7 @@
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_help_mec_update.xml" value="0.2" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_help_mec_view.xml" value="0.176" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_help_mech.xml" value="0.2" />
-        <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_monitoring.xml" value="0.2" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_monitoring.xml" value="0.264" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_monitoring_add.xml" value="0.2" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_monitoring_update.xml" value="0.176" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_monitoring_view.xml" value="0.264" />
@@ -60,7 +65,7 @@
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_profile.xml" value="0.136" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_sensor.xml" value="0.264" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_sensor_machine.xml" value="0.2" />
-        <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_splash_screen.xml" value="0.14770723104056438" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_splash_screen.xml" value="0.2" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_wms.xml" value="0.264" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_wms_data.xml" value="0.264" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_wms_update.xml" value="0.264" />

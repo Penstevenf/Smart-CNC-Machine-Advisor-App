@@ -15,7 +15,7 @@
 
     <color name="red">#FF0000</color>
 
-    <color name="color_yellow">#D2FE20</color>
+    <color name="color_yellow">#FFFFFF00</color>
     <color name="color_Blue_Deep">#0072D4</color>
     <color name="color_Blue_Light">#20EFFE</color>
     <color name="color_White">#FFFFFF</color>
@@ -29,10 +29,10 @@
     <color name="colorBackgroundGrayLight">#E8E8E8</color>
     <color name="colorOrange">#FF3300</color>
     <color name="colorGrayText">#C3C4C8</color>
-    <color name="colorBlue">#6200EE</color>
+    <color name="colorBlue">#FF0000FF</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlacky">#3A3A3A</color>
-    <color name="colorGreen">#44BF4D</color>
+    <color name="colorGreen">#FF00FF00</color>
 
     <color name="colorLightBackground">#E8E8E8</color>
 </resources>

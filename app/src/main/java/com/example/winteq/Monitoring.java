@@ -725,7 +725,7 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
         //check if pendingintent called or applied (when Detail clicked)
         //purpose to differentiate each putextra data in each line when Detail clicked
         Intent checkIntent = new Intent(getApplicationContext(), Monitoring.class);
-        if((PendingIntent.getBroadcast(getBaseContext(), 1, checkIntent, PendingIntent.FLAG_NO_CREATE) != null)) {
+        if((PendingIntent.getBroadcast(getBaseContext(), 1, checkIntent, PendingIntent.FLAG_NO_CREATE) == null)) {
             SharedPreferences.Editor editor1 = sp.edit();
             editor1.putString(NOTIFICATION_NO, "1");
             editor1.apply();
@@ -756,7 +756,7 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                 .addAction(R.drawable.ic_launcher_foreground, "Detail", contentIntent2)
                 .build();
         Intent checkIntent = new Intent(getApplicationContext(), Monitoring.class);
-        if((PendingIntent.getBroadcast(getBaseContext(), 2, checkIntent, PendingIntent.FLAG_NO_CREATE) != null)) {
+        if((PendingIntent.getBroadcast(getBaseContext(), 2, checkIntent, PendingIntent.FLAG_NO_CREATE) == null)) {
             SharedPreferences.Editor editor2 = sp.edit();
             editor2.putString(NOTIFICATION_NO, "2");
             editor2.apply();
@@ -787,10 +787,11 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                 .addAction(R.drawable.ic_launcher_foreground, "Detail", contentIntent3)
                 .build();
         Intent checkIntent = new Intent(getApplicationContext(), Monitoring.class);
-        if((PendingIntent.getBroadcast(getBaseContext(), 3, checkIntent, PendingIntent.FLAG_NO_CREATE) != null)) {
+        if((PendingIntent.getBroadcast(getBaseContext(), 3, checkIntent, PendingIntent.FLAG_NO_CREATE) == null)) {
             SharedPreferences.Editor editor3 = sp.edit();
             editor3.putString(NOTIFICATION_NO, "3");
             editor3.apply();
+            Toast.makeText(Monitoring.this, sp.getString(NOTIFICATION_NO, null), Toast.LENGTH_SHORT).show();
         }
         notificationManager.notify(4, notification);
         notification.flags = Notification.FLAG_AUTO_CANCEL;
@@ -818,7 +819,7 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                 .addAction(R.drawable.ic_launcher_foreground, "Detail", contentIntent4)
                 .build();
         Intent checkIntent = new Intent(getApplicationContext(), Monitoring.class);
-        if((PendingIntent.getBroadcast(getBaseContext(), 4, checkIntent, PendingIntent.FLAG_NO_CREATE) != null)) {
+        if((PendingIntent.getBroadcast(getBaseContext(), 4, checkIntent, PendingIntent.FLAG_NO_CREATE) == null)) {
             SharedPreferences.Editor editor4 = sp.edit();
             editor4.putString(NOTIFICATION_NO, "4");
             editor4.apply();

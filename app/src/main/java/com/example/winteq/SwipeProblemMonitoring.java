@@ -61,6 +61,34 @@ public class SwipeProblemMonitoring extends AppCompatActivity {
             xMachine = activityIntent4.getStringExtra("xMachine");
         }
 
+//        if(sp.getString(NOTIFICATION_NO, null) == "1"){
+//            Intent activityIntent1 = getIntent();
+//            xLine = activityIntent1.getStringExtra("xLine");
+//            xStation = activityIntent1.getStringExtra("xStation");
+//            xMachine = activityIntent1.getStringExtra("xMachine");
+//        }
+//
+//        if(sp.getString(NOTIFICATION_NO, null) == "2") {
+//            Intent activityIntent2 = getIntent();
+//            xLine = activityIntent2.getStringExtra("xLine");
+//            xStation = activityIntent2.getStringExtra("xStation");
+//            xMachine = activityIntent2.getStringExtra("xMachine");
+//        }
+//
+//        if(sp.getString(NOTIFICATION_NO, null) == "3") {
+//            Intent activityIntent3 = getIntent();
+//            xLine = activityIntent3.getStringExtra("xLine");
+//            xStation = activityIntent3.getStringExtra("xStation");
+//            xMachine = activityIntent3.getStringExtra("xMachine");
+//        }
+//
+//        if(sp.getString(NOTIFICATION_NO, null) == "4") {
+//            Intent activityIntent4 = getIntent();
+//            xLine = activityIntent4.getStringExtra("xLine");
+//            xStation = activityIntent4.getStringExtra("xStation");
+//            xMachine = activityIntent4.getStringExtra("xMachine");
+//        }
+
 //        Toast.makeText(SwipeProblemMonitoring.this, xLine, Toast.LENGTH_SHORT).show();
 
 //        Bundle extras = getIntent().getExtras();
