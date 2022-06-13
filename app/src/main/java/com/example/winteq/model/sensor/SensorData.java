@@ -41,6 +41,22 @@ public class SensorData {
     private String error_percentage;
 
     @Expose
+    @SerializedName("error_cut_speed")
+    private String error_cut_speed;
+
+    @Expose
+    @SerializedName("error_rpm")
+    private String error_rpm;
+
+    @Expose
+    @SerializedName("error_feed")
+    private String error_feed;
+
+    @Expose
+    @SerializedName("error_cut_time")
+    private String error_cut_time;
+
+    @Expose
     @SerializedName("sen_status")
     private String sen_status;
 
@@ -126,6 +142,38 @@ public class SensorData {
 
     public void setError_percentage(String error_percentage) {
         this.error_percentage = error_percentage;
+    }
+
+    public String getError_cut_speed() {
+        return error_cut_speed;
+    }
+
+    public void setError_cut_speed(String error_cut_speed) {
+        this.error_cut_speed = error_cut_speed;
+    }
+
+    public String getError_rpm() {
+        return error_rpm;
+    }
+
+    public void setError_rpm(String error_rpm) {
+        this.error_rpm = error_rpm;
+    }
+
+    public String getError_feed() {
+        return error_feed;
+    }
+
+    public void setError_feed(String error_feed) {
+        this.error_feed = error_feed;
+    }
+
+    public String getError_cut_time() {
+        return error_cut_time;
+    }
+
+    public void setError_cut_time(String error_cut_time) {
+        this.error_cut_time = error_cut_time;
     }
 
     public String getSen_status() {

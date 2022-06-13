@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 
 import com.example.winteq.Contact;
+import com.example.winteq.DetailError;
 import com.example.winteq.R;
 import com.example.winteq.Sensor;
 import com.example.winteq.api.ApiClient;
@@ -82,11 +83,8 @@ public class AdapterSensor extends BaseAdapter implements Filterable {
         if(value < 0.05 && value > 0) {
             error_percentage.setBackground(ContextCompat.getDrawable(context, R.drawable.linetgreenforsensor));
         }
-        else if(value >= 0.05 && value < 0.075) {
+        else if(value >= 0.05 && value < 0.1) {
             error_percentage.setBackground(ContextCompat.getDrawable(context, R.drawable.linetyellowforsensor));
-        }
-        else if(value >= 0.075 && value < 0.1) {
-            error_percentage.setBackground(ContextCompat.getDrawable(context, R.drawable.linetblueforsensor));
         }
         else if(value >= 0.1 && value <= 1) {
             error_percentage.setBackground(ContextCompat.getDrawable(context, R.drawable.linetredforsensor));
@@ -121,6 +119,10 @@ public class AdapterSensor extends BaseAdapter implements Filterable {
                             String varFeed = listSensor.get(0).getFeed();
                             String varCutTime = listSensor.get(0).getCut_time();
                             String varError = listSensor.get(0).getError_percentage();
+                            String varErrorSpeed = listSensor.get(0).getError_cut_speed();
+                            String varErrorFeed = listSensor.get(0).getError_feed();
+                            String varErrorRpm = listSensor.get(0).getError_rpm();
+                            String varErrorTime = listSensor.get(0).getError_cut_time();
                             String varDate = listSensor.get(0).getSen_date();
                             String varLine = listSensor.get(0).getSen_line();
                             String varStation = listSensor.get(0).getSen_station();
@@ -128,7 +130,7 @@ public class AdapterSensor extends BaseAdapter implements Filterable {
 
 //                          Toast.makeText(context, "Data : "+varIdMec+varItemMec, Toast.LENGTH_SHORT).show();
 
-                            Intent sendSP = new Intent(context, Contact.class);
+                            Intent sendSP = new Intent(context, DetailError.class);
                             sendSP.putExtra("xId", varId);
                             sendSP.putExtra("xStatus", varStatus);
                             sendSP.putExtra("xCutSpeed", varCutSpeed);
@@ -136,6 +138,10 @@ public class AdapterSensor extends BaseAdapter implements Filterable {
                             sendSP.putExtra("xFeed", varFeed);
                             sendSP.putExtra("xCutTime", varCutTime);
                             sendSP.putExtra("xError", varError);
+                            sendSP.putExtra("xErrorSpeed", varErrorSpeed);
+                            sendSP.putExtra("xErrorFeed", varErrorFeed);
+                            sendSP.putExtra("xErrorRpm", varErrorRpm);
+                            sendSP.putExtra("xErrorTime", varErrorTime);
                             sendSP.putExtra("xDate", varDate);
                             sendSP.putExtra("xLine", varLine);
                             sendSP.putExtra("xStation", varStation);
