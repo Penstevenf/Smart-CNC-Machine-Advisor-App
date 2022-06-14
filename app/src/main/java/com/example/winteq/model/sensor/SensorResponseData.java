@@ -6,6 +6,7 @@ public class SensorResponseData {
     private boolean status;
     private String message;
     private List<SensorData> data;
+    private List<String> error;
 
     public boolean isStatus() {
         return status;

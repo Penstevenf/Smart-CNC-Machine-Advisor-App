@@ -81,7 +81,7 @@
             android:background="@drawable/lines"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:text="30%"
+            android:text="%"
             android:textColor="@color/black"
             android:textSize="16sp" />
 

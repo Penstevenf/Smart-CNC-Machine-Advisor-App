@@ -74,8 +74,13 @@ public class AdapterSensor extends BaseAdapter implements Filterable {
         id = itemView.findViewById(R.id.sen_id);
         error_percentage = itemView.findViewById(R.id.error_percentage);
 
+        //convert error to percentage
         String error = sd1.getError_percentage();
         Float value = Float.parseFloat(error);
+        float etotal = Float.parseFloat(error);
+        float total = etotal * 100;
+        String errortotal = Float.toString(total) + "%";
+        error_percentage.setText(errortotal);
 
 //        Toast.makeText(context, "Data : "+value, Toast.LENGTH_SHORT).show();
 
@@ -213,7 +218,6 @@ public class AdapterSensor extends BaseAdapter implements Filterable {
             sen_rpm.setText(sd.getRpm());
             sen_feed.setText(sd.getFeed());
             sen_cut_time.setText(sd.getCut_time());
-            error_percentage.setText(sd.getError_percentage());
             sen_date.setText(sd.getSen_date());
         }
     }
