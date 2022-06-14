@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
-import com.example.winteq.Contact;
 import com.example.winteq.DetailError;
 import com.example.winteq.R;
 import com.example.winteq.Sensor;
@@ -98,8 +97,6 @@ public class AdapterSensor extends BaseAdapter implements Filterable {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intents = new Intent(context, Contact.class);
-                context.startActivity(intents);
                 Api_Interface aiData = ApiClient.getClient().create(Api_Interface.class);
                 Call<SensorResponseData> getData = aiData.aiSensorViewData(sd1.getSen_id());
 
