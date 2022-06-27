@@ -66,6 +66,7 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
     private AdapterMonitoring2 adapter2;
     private AdapterMonitoring3 adapter3;
     private AdapterMonitoring4 adapter4;
+
     private List<MonData> listMon1 = new ArrayList<>();
     private List<MonData> listMon2 = new ArrayList<>();
     private List<MonData> listMon3 = new ArrayList<>();

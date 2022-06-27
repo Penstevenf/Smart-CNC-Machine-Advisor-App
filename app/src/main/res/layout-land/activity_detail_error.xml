@@ -1170,7 +1170,7 @@
             android:layout_marginTop="15dp"
             android:fontFamily="sans-serif-black"
             android:gravity="center_vertical"
-            android:text="AVG Result"
+            android:text="MAX Error"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="@id/verticalline2"
