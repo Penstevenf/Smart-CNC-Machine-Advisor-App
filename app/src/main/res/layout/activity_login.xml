@@ -113,13 +113,13 @@
         android:src="@drawable/hexagon" />
 
     <ImageView
-        android:layout_width="325dp"
-        android:layout_height="105dp"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
         android:layout_below="@id/btn_register"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="#FFFFFF"
-        android:src="@drawable/winteqlogo" />
+        android:src="@drawable/binusaso" />
 
     <Button
         android:id="@+id/btn_Forgot"

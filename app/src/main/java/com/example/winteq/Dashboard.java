@@ -162,10 +162,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             @Override
             public void run() {
                 (new loading()).execute();
-                mRepeatHandler.postDelayed(mRepeatRunnable, 20000);
+                mRepeatHandler.postDelayed(mRepeatRunnable, 60000);
             }
         };
-        mRepeatHandler.postDelayed(mRepeatRunnable,20000);
+        mRepeatHandler.postDelayed(mRepeatRunnable,60000);
 
 
         //set image

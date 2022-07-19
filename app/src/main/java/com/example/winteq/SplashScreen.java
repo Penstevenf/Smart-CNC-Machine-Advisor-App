@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +18,7 @@ public class SplashScreen extends AppCompatActivity {
 
     Animation topAnim;
     ImageView image, image2;
+    TextView judl;
     SharedPreferences sp;
     private static final String DONE = "done?";
     private static final String SHARE_PREF_NAME = "mypref";
@@ -35,9 +37,11 @@ public class SplashScreen extends AppCompatActivity {
         sp.edit().putString(DONE, null).apply();
 
         image = findViewById(R.id.imageView);
+        judl = findViewById(R.id.judl);
         image.setAnimation(topAnim);
-        image2 = findViewById(R.id.imageView2);
-        image2.setAnimation(topAnim);
+        judl.setAnimation(topAnim);
+//        image2 = findViewById(R.id.imageView2);
+//        image2.setAnimation(topAnim);
 
         new Handler().postDelayed(new Runnable() {
             @Override
