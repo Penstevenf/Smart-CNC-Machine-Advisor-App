@@ -394,31 +394,20 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 boolean status = response.body().isStatus();
                 String message = response.body().getMessage();
                 String notifdata = response.body().getNotifdata();
-//                listAsset = response.body().getData();
 
                 //get current date and change to string
                 ZoneId zoneId = ZoneId.of( "Asia/Jakarta" ) ;  // Or ZoneOffset.UTC or ZoneId.systemDefault()
                 LocalDate today = LocalDate.now( zoneId ) ;
                 String output = today.toString() ;
 
-
-//                tv_ouput.setText(output);
-//                tv_notifdate.setText(notifdata);
-
                 if(notifdata.equals(output)){
                     sendOnChannel1();
                 }
-
-//                if(notifdata.equals("None")){
-//                    Toast.makeText(Dashboard.this, "For now there is no critical part whose lifespan is running out", Toast.LENGTH_SHORT).show();
-//                }
             }
-
             @Override
             public void onFailure(Call<AssetResponseData> call, Throwable t) {
                 Toast.makeText(Dashboard.this, "Failed To Get Data", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 }

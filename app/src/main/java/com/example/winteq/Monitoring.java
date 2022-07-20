@@ -176,19 +176,8 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
             (new loading()).execute();
             sp.edit().putString(DONE2, "1").apply();
         }
-//        if(id1 != "None"){
-//            monaddStatus1();
-//        }
-//        if(id2 != "None"){
-//            monaddStatus2();
-//        }
-//        if(id3 != "None"){
-//            monaddStatus3();
-//        }
-//        if(id4 != "None"){
-//            monaddStatus4();
-//        }
 
+        //Loop every 20 sec
         mRepeatHandler = new Handler();
         mRepeatRunnable = new Runnable() {
             @Override
@@ -202,18 +191,7 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                 statusView3();
                 statusView4();
                 (new loading()).execute();
-//                if(id1 != "None"){
-//                    monaddStatus1();
-//                }
-//                if(id2 != "None"){
-//                    monaddStatus2();
-//                }
-//                if(id3 != "None"){
-//                    monaddStatus3();
-//                }
-//                if(id4 != "None"){
-//                    monaddStatus4();
-//                }
+
                 mRepeatHandler.postDelayed(mRepeatRunnable, 20000);
             }
         };
@@ -364,9 +342,6 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
                         stat1= "Ready To Use";
                     }
                 }
-
-//                 Toast.makeText(Monitoring.this, stat1+id1, Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
@@ -517,7 +492,6 @@ public class Monitoring extends AppCompatActivity implements NavigationView.OnNa
 
             @Override
             public void onFailure(Call<MonData> call, Throwable t) {
-//                Toast.makeText(Monitoring.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
