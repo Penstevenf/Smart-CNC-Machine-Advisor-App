@@ -270,7 +270,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
             android:gravity="center_vertical|right"
-            android:text="6000"
+            android:text="10000"
             android:textSize="20sp"
             app:layout_constraintLeft_toRightOf="@+id/tv9zh"
             app:layout_constraintTop_toBottomOf="@+id/stationleft" />
@@ -279,16 +279,15 @@
             android:id="@+id/itemlifetimehdd"
             android:layout_width="70dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="0dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
-            android:gravity="center_vertical"
-            android:text="Days"
-            android:visibility="invisible"
+            android:gravity="center_vertical|left"
+            android:text="mm"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintLeft_toRightOf="@+id/itemlifetimeh"
-            app:layout_constraintTop_toBottomOf="@+id/stationleft" />
+            app:layout_constraintTop_toBottomOf="@+id/itemlifetimeh" />
 
         <TextView
             android:id="@+id/tv9zh"
@@ -329,7 +328,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
             android:gravity="center_vertical|right"
-            android:text="300"
+            android:text="4"
             android:textSize="20sp"
             app:layout_constraintLeft_toRightOf="@+id/datetoregister"
             app:layout_constraintTop_toBottomOf="@+id/itemlifetimeh"/>
@@ -358,9 +357,23 @@
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
             android:gravity="center_vertical|right"
-            android:text="300"
+            android:text="39.25"
             android:textSize="20sp"
             app:layout_constraintLeft_toRightOf="@+id/datetoreplace"
+            app:layout_constraintTop_toBottomOf="@+id/datetoregister" />
+
+        <TextView
+            android:id="@+id/itemlifetimehddd"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center_vertical|left"
+            android:text="m/min"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@+id/itemlifetimeh"
             app:layout_constraintTop_toBottomOf="@+id/datetoregister" />
 
         <TextView
@@ -372,6 +385,7 @@
             android:gravity="center_vertical"
             android:text="Cut Time"
             android:textSize="20sp"
+            android:visibility="gone"
             android:fontFamily="sans-serif"
             android:textColor="@color/black"
             tools:layout_editor_absoluteX="329dp"
@@ -387,10 +401,23 @@
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
             android:gravity="center_vertical|right"
-            android:text="300"
+            android:text="10"
+            android:visibility="gone"
             android:textSize="20sp"
             app:layout_constraintLeft_toRightOf="@+id/lastreplacedate"
             app:layout_constraintTop_toBottomOf="@+id/datetoreplace" />
+
+        <Spinner
+            android:id="@+id/preset"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:elevation="10dp"
+            android:entries="@array/preset"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lastdatereplace" />
 
         <TextView
             android:id="@+id/judulkiri"
@@ -722,11 +749,11 @@
             android:id="@+id/itemlifetimegscs"
             android:layout_width="70dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="0dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
-            android:gravity="center_vertical"
-            android:text=""
+            android:gravity="center_vertical|left"
+            android:text="mm"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintLeft_toRightOf="@+id/itemlifetimeg"
@@ -791,6 +818,20 @@
             app:layout_constraintTop_toBottomOf="@+id/itemlifetimeg" />
 
         <TextView
+            android:id="@+id/itemlifetimehdddd"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center_vertical|left"
+            android:text="m/min"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@+id/itemlifetimeg2"
+            app:layout_constraintTop_toBottomOf="@+id/itemlifetimeg" />
+
+        <TextView
             android:id="@+id/tv11zg"
             android:layout_width="150dp"
             android:layout_height="30dp"
@@ -815,6 +856,20 @@
             android:text="300"
             android:textSize="20sp"
             app:layout_constraintLeft_toRightOf="@+id/tv11zg"
+            app:layout_constraintTop_toBottomOf="@+id/itemlifetimeg2" />
+
+        <TextView
+            android:id="@+id/itemlifetimehddddd"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center_vertical|left"
+            android:text="s"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@+id/itemlifetimeg2"
             app:layout_constraintTop_toBottomOf="@+id/itemlifetimeg2" />
 
         <TextView
@@ -1158,6 +1213,7 @@
             android:gravity="center_vertical"
             android:text="Cut Time"
             android:textColor="@color/black"
+            android:visibility="gone"
             android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="@id/verticalline2"
             app:layout_constraintTop_toBottomOf="@+id/tv10zg2" />
@@ -1174,7 +1230,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="@id/verticalline2"
-            app:layout_constraintTop_toBottomOf="@+id/tv11zg2" />
+            app:layout_constraintTop_toBottomOf="@+id/tv10zg2" />
 
         <TextView
             android:id="@+id/itemtypeg6"
@@ -1187,8 +1243,8 @@
             android:text="6%"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintLeft_toRightOf="@+id/tv11zg2"
-            app:layout_constraintTop_toBottomOf="@+id/tv11zg2" />
+            app:layout_constraintLeft_toRightOf="@+id/tv10zg2"
+            app:layout_constraintTop_toBottomOf="@+id/tv10zg2" />
 
         <TextView
             android:id="@+id/itemtypeg5"
@@ -1200,6 +1256,7 @@
             android:gravity="center_vertical|right"
             android:text="6%"
             android:textSize="20sp"
+            android:visibility="gone"
             app:layout_constraintLeft_toRightOf="@+id/tv11zg2"
             app:layout_constraintTop_toBottomOf="@+id/tv10zg2" />
 

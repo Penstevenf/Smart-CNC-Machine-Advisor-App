@@ -65,7 +65,7 @@
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_monitoring_view.xml" value="0.264" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_pdf_elektrik.xml" value="0.176" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_pdf_mekanik.xml" value="0.3151041666666667" />
-        <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_profile.xml" value="0.136" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_profile.xml" value="0.2" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_sensor.xml" value="0.264" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_sensor_machine.xml" value="0.2" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout-land/activity_splash_screen.xml" value="0.2" />
@@ -155,7 +155,7 @@
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/asset_management_machine.xml" value="0.25416666666666665" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/assetstation.xml" value="0.23854166666666668" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/forgot_password.xml" value="0.16944444444444445" />
-        <entry key="..\:/AndoridProjects/app/src/main/res/layout/header.xml" value="0.15703125" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/layout/header.xml" value="0.2" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/layout_custom_dialog_itemlist.xml" value="0.25416666666666665" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/list_help_elc.xml" value="0.23854166666666668" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/list_help_mec.xml" value="0.2296875" />
@@ -172,7 +172,7 @@
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/spinner_copro.xml" value="0.23854166666666668" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/swipe_problem.xml" value="0.152" />
         <entry key="..\:/AndoridProjects/app/src/main/res/layout/swipe_problem_mon.xml" value="0.1984375" />
-        <entry key="..\:/AndoridProjects/app/src/main/res/menu/main_menu.xml" value="0.264" />
+        <entry key="..\:/AndoridProjects/app/src/main/res/menu/main_menu.xml" value="0.2" />
         <entry key="..\:/AndoridProjects/app/src/main/res/menu/onlongmenu.xml" value="0.23072916666666668" />
         <entry key="..\:/AndoridProjects/app/src/main/res/menu/wms.xml" value="0.19635416666666666" />
         <entry key="..\:/AndoridProjects/app/src/main/res/xml/network_security_config.xml" value="0.157421875" />

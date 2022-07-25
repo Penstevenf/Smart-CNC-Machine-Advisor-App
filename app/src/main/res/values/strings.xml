@@ -54,5 +54,10 @@
         <item>Working</item>
     </string-array>
 
+    <string-array name="preset">
+        <item>Preset 1</item>
+        <item>Preset 2</item>
+    </string-array>
+
 </resources>
 

@@ -38,10 +38,10 @@ public class SplashScreen extends AppCompatActivity {
 
         image = findViewById(R.id.imageView);
         judl = findViewById(R.id.judl);
+        image2 = findViewById(R.id.imageView2);
         image.setAnimation(topAnim);
         judl.setAnimation(topAnim);
-//        image2 = findViewById(R.id.imageView2);
-//        image2.setAnimation(topAnim);
+        image2.setAnimation(topAnim);
 
         new Handler().postDelayed(new Runnable() {
             @Override

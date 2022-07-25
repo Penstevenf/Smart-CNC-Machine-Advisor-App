@@ -16,7 +16,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/imageView"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="130dp"
         android:gravity="center_vertical"
         android:textSize="50sp"
         android:fontFamily="sans-serif-black"
@@ -27,30 +27,25 @@
         android:id="@+id/imageView"
         android:layout_width="500dp"
         android:layout_height="400dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="40dp"
+
         android:foregroundGravity="center"
         android:src="@drawable/binusaso"
-        app:layout_constraintBottom_toTopOf="@id/imageView2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/judl"/>
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="700dp"
-        android:layout_height="500dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="100dp"
         android:foregroundGravity="center"
         android:src="@drawable/winteqlogo"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView" />
+        app:layout_constraintTop_toBottomOf="@id/judl" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

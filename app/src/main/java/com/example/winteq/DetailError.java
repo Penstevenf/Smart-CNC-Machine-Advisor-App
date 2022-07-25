@@ -9,7 +9,9 @@ import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +43,8 @@ public class DetailError extends AppCompatActivity implements NavigationView.OnN
     TextView tv_etitle, tv_erpm, tv_efeed, tv_espeed, tv_etime, tv_etotal;
     TextView tv_desc;
     TextView errorbox, errortext, errorresult;
+    Spinner preset;
+    TextView feed;
 
     private String xId, xStatus, xCutSpeed, xRpm, xFeed, xCutTime, xError, xErrorSpeed, xErrorFeed, xErrorRpm, xErrorTime, xDate, xLine, xStation, xMachine;
     private List<WmsData> listGetWms;
@@ -63,6 +67,24 @@ public class DetailError extends AppCompatActivity implements NavigationView.OnN
         drawerLayout = findViewById(R.id.derror);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
+        preset = findViewById(R.id.preset);
+        feed = findViewById(R.id.dateregisterto);
+
+        preset.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String newItem = preset.getSelectedItem().toString();
+                if(newItem.equals("Preset 2")){
+                    feed.setText("6");
+                }else{
+                    feed.setText("4");
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         Intent sendSP = getIntent();
         xId = sendSP.getStringExtra("xId");

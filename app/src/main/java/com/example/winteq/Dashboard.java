@@ -156,7 +156,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             sp.edit().putString(DONE, "1").apply();
         }
 
-        //repeat notification every 20 sec
+        //repeat notification every 60 sec
         mRepeatHandler = new Handler();
         mRepeatRunnable = new Runnable() {
             @Override
@@ -342,8 +342,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         String title = "WARNING";
         String message = "Machine Critical Part Lifetime Runs Out In 7 Days!";
         Intent activityIntent = new Intent(this, SwipeProblem.class);
-//        String value = "CNC Machine";
-//        activityIntent.putExtra("key", value);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
@@ -396,7 +394,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 String notifdata = response.body().getNotifdata();
 
                 //get current date and change to string
-                ZoneId zoneId = ZoneId.of( "Asia/Jakarta" ) ;  // Or ZoneOffset.UTC or ZoneId.systemDefault()
+                // Or ZoneOffset.UTC or ZoneId.systemDefault()
+                ZoneId zoneId = ZoneId.of( "Asia/Jakarta" ) ;
                 LocalDate today = LocalDate.now( zoneId ) ;
                 String output = today.toString() ;
 

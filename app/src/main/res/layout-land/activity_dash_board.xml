@@ -161,7 +161,7 @@
                     android:layout_height="75dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
-                    app:srcCompat="@drawable/analyticsb" />
+                    app:srcCompat="@drawable/monnew" />
 
             </androidx.cardview.widget.CardView>
 
@@ -195,11 +195,11 @@
 
                 <ImageView
                     android:id="@+id/imageViewc"
-                    android:layout_width="75dp"
+                    android:layout_width="90dp"
                     android:layout_height="75dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
-                    app:srcCompat="@drawable/suppliesb" />
+                    app:srcCompat="@drawable/assetnew" />
 
             </androidx.cardview.widget.CardView>
 
@@ -237,7 +237,7 @@
                     android:layout_height="75dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
-                    app:srcCompat="@drawable/truckb" />
+                    app:srcCompat="@drawable/wmsnew" />
 
             </androidx.cardview.widget.CardView>
 
@@ -329,7 +329,7 @@
                     android:layout_height="75dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
-                    app:srcCompat="@drawable/customersupportb" />
+                    app:srcCompat="@drawable/tecnew" />
 
             </androidx.cardview.widget.CardView>
 
@@ -363,11 +363,11 @@
 
                 <ImageView
                     android:id="@+id/imageViewe"
-                    android:layout_width="75dp"
+                    android:layout_width="70dp"
                     android:layout_height="75dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
-                    app:srcCompat="@drawable/solutionb" />
+                    app:srcCompat="@drawable/solnew" />
 
             </androidx.cardview.widget.CardView>
 
@@ -401,11 +401,11 @@
 
                 <ImageView
                     android:id="@+id/imageView3"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
-                    app:srcCompat="@drawable/fileb" />
+                    app:srcCompat="@drawable/hisnew" />
 
             </androidx.cardview.widget.CardView>
 
