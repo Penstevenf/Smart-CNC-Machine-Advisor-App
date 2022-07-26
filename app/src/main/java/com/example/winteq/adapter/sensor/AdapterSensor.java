@@ -84,13 +84,13 @@ public class AdapterSensor extends BaseAdapter implements Filterable {
 
 //        Toast.makeText(context, "Data : "+value, Toast.LENGTH_SHORT).show();
 
-        if(value < 0.05 && value > 0) {
+        if(value <= 0.10 && value > 0) {
             error_percentage.setBackground(ContextCompat.getDrawable(context, R.drawable.linetgreenforsensor));
         }
-        else if(value >= 0.05 && value < 0.1) {
+        else if(value > 0.10 && value <= 0.20) {
             error_percentage.setBackground(ContextCompat.getDrawable(context, R.drawable.linetyellowforsensor));
         }
-        else if(value >= 0.1 && value <= 1) {
+        else if(value > 0.20) {
             error_percentage.setBackground(ContextCompat.getDrawable(context, R.drawable.linetredforsensor));
         }
 

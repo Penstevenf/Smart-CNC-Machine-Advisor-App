@@ -174,19 +174,19 @@ public class DetailError extends AppCompatActivity implements NavigationView.OnN
             String Good = "Good";
             String Ok = "Ok";
             String Error = "Error!";
-            if (etotal <= 0.05 && etotal > 0) {
+            if (etotal <= 0.10 && etotal > 0) {
                 tv_etitle.setTextColor(getResources().getColor(R.color.colorGreen));
                 errorbox.setBackgroundResource(R.drawable.linetgreen);
                 errortext.setTextColor(getResources().getColor(R.color.colorGreen));
                 errorresult.setTextColor(getResources().getColor(R.color.colorGreen));
                 tv_etitle.setText(Good);
-            } else if (etotal > 0.05 && etotal <= 0.1) {
+            } else if (etotal > 0.10 && etotal <= 0.20) {
                 tv_etitle.setTextColor(getResources().getColor(R.color.color_yellow));
                 errorbox.setBackgroundResource(R.drawable.linetyellow);
                 errortext.setTextColor(getResources().getColor(R.color.color_yellow));
                 errorresult.setTextColor(getResources().getColor(R.color.color_yellow));
                 tv_etitle.setText(Ok);
-            } else if (etotal > 0.1 && etotal <= 1) {
+            } else if (etotal > 0.20) {
                 tv_etitle.setTextColor(getResources().getColor(R.color.red));
                 errorbox.setBackgroundResource(R.drawable.linetred);
                 errortext.setTextColor(getResources().getColor(R.color.red));
@@ -205,31 +205,31 @@ public class DetailError extends AppCompatActivity implements NavigationView.OnN
             String Both = "Error might be located in RPM Sensor and Feed Sensor";
             String None = "RPM Sensor and Feed Sensor working as it should be";
 
-            if(rpm > feed && feed > 5 && feed <= 10 && rpm > 5 && rpm <= 10) {
+            if(rpm > feed && feed > 10 && feed <= 20 && rpm > 10 && rpm <= 20) {
                 tv_desc.setTextColor(getResources().getColor(R.color.red));
                 tv_desc.setText(RPM);
             }
-            else if(feed > rpm && feed > 5 && feed <= 10 && rpm > 5 && rpm <= 10) {
+            else if(feed > rpm && feed > 10 && feed <= 20 && rpm > 10 && rpm <= 20) {
                 tv_desc.setTextColor(getResources().getColor(R.color.red));
                 tv_desc.setText(Feed);
             }
-            else if(feed > 10 && rpm <= 10) {
+            else if(feed > 20 && rpm <= 20) {
                 tv_desc.setTextColor(getResources().getColor(R.color.red));
                 tv_desc.setText(Feed);
             }
-            else if(rpm > 10 && feed <= 10) {
+            else if(rpm > 20 && feed <= 20) {
                 tv_desc.setTextColor(getResources().getColor(R.color.red));
                 tv_desc.setText(RPM);
             }
-            else if(feed > 10 && rpm > 10) {
+            else if(feed > 20 && rpm > 20) {
                 tv_desc.setTextColor(getResources().getColor(R.color.red));
                 tv_desc.setText(Both);
             }
-            else if(feed == rpm && feed > 10 && rpm > 10) {
+            else if(feed == rpm && feed > 20 && rpm > 20) {
                 tv_desc.setTextColor(getResources().getColor(R.color.red));
                 tv_desc.setText(Both);
             }
-            else if(feed == rpm && feed > 5 && feed <= 10 && rpm > 5 && rpm <= 10) {
+            else if(feed == rpm && feed > 10 && feed <= 20 && rpm > 10 && rpm <= 20) {
                 tv_desc.setTextColor(getResources().getColor(R.color.red));
                 tv_desc.setText(Both);
             }
