@@ -174,13 +174,13 @@ public class DetailError extends AppCompatActivity implements NavigationView.OnN
             String Good = "Good";
             String Ok = "Ok";
             String Error = "Error!";
-            if (etotal <= 0.10 && etotal > 0) {
+            if (etotal >= 0 && etotal <= 0.101) {
                 tv_etitle.setTextColor(getResources().getColor(R.color.colorGreen));
                 errorbox.setBackgroundResource(R.drawable.linetgreen);
                 errortext.setTextColor(getResources().getColor(R.color.colorGreen));
                 errorresult.setTextColor(getResources().getColor(R.color.colorGreen));
                 tv_etitle.setText(Good);
-            } else if (etotal > 0.10 && etotal <= 0.20) {
+            } else if (etotal > 0.10 && etotal <= 0.201) {
                 tv_etitle.setTextColor(getResources().getColor(R.color.color_yellow));
                 errorbox.setBackgroundResource(R.drawable.linetyellow);
                 errortext.setTextColor(getResources().getColor(R.color.color_yellow));
