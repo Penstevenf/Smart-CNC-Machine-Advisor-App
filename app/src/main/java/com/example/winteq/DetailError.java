@@ -203,6 +203,9 @@ public class DetailError extends AppCompatActivity implements NavigationView.OnN
             String RPM = "Error might be located in RPM Sensor";
             String Feed = "Error might be located in Feed Sensor";
             String Both = "Error might be located in RPM Sensor and Feed Sensor";
+            String Okai1 = "RPM Sensor should be checked";
+            String Okai2 = "Feed Sensor should be checked";
+            String Okai3 = "RPM Sensor and Feed Sensor should be checked";
             String None = "RPM Sensor and Feed Sensor working as it should be";
 
             if(rpm > feed && feed > 10 && feed <= 20 && rpm > 10 && rpm <= 20) {
@@ -232,6 +235,18 @@ public class DetailError extends AppCompatActivity implements NavigationView.OnN
             else if(feed == rpm && feed > 10 && feed <= 20 && rpm > 10 && rpm <= 20) {
                 tv_desc.setTextColor(getResources().getColor(R.color.red));
                 tv_desc.setText(Both);
+            }
+            else if(feed > 10 && feed <= 20){
+                tv_desc.setTextColor(getResources().getColor(R.color.color_yellow));
+                tv_desc.setText(Okai2);
+            }
+            else if(rpm > 10 && rpm <= 20){
+                tv_desc.setTextColor(getResources().getColor(R.color.color_yellow));
+                tv_desc.setText(Okai1);
+            }
+            else if(feed > 10 && feed <= 20 && rpm > 10 && rpm <= 20){
+                tv_desc.setTextColor(getResources().getColor(R.color.color_yellow));
+                tv_desc.setText(Okai3);
             }
             else{
                 tv_desc.setTextColor(getResources().getColor(R.color.colorGreen));
